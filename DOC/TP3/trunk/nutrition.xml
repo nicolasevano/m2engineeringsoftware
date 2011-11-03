@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE nutrition SYSTEM "nutrition.dtd">
+<nutrition>
+<plat nom="Beef Parmesan with Garlic Angel Hair Pasta" proteines="32" gras="23" calorie="1167" glucides="45" alcool=""/>
+<plat nom="Ricotta Pie" proteines="18" gras="18" calorie="349" glucides="64" alcool=""/>
+<plat nom="Linguine Pescadoro" proteines="29" gras="12" calorie="532" glucides="59" alcool=""/>
+<plat nom="Zuppa Inglese" proteines="4" gras="49" calorie="612" glucides="45" alcool="2"/>
+<plat nom="Cailles en Sarcophages" proteines="39" gras="33" calorie="8892" glucides="28" alcool=""/>
+</nutrition>
