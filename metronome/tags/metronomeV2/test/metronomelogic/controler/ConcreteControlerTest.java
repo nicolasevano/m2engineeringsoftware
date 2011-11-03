@@ -155,6 +155,7 @@ public class ConcreteControlerTest {
 		private Horloge horloge;
 	}
 	
+	//Horloge stub
 	class MonHorlogeStub implements Horloge{
 		
 		
@@ -182,6 +183,7 @@ public class ConcreteControlerTest {
 		
 	}
 	
+	//moteur stub definition
 	class MonMoteurStub implements MoteurMetronome{
 		
 		MonMoteurStub(){
@@ -363,7 +365,6 @@ public class ConcreteControlerTest {
 	public void tearDown() throws Exception {
 		
 		horlogeStub = null;
-		viewMock = null;
 		afficheurMock = null;
 		moletteMock = null;
 		emetteurSonoreMock = null;

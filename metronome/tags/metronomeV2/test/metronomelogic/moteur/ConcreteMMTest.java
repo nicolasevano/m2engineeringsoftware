@@ -7,9 +7,8 @@ import static org.junit.Assert.*;
 
 import metronome.view.View;
 import metronomelogic.Horloge;
-import metronomelogic.command.Command;
-import metronomelogic.command.lireclavier.LireClavier;
 import metronomelogic.controler.Controler;
+import metronomelogic.controler.Observateur;
 
 import org.easymock.EasyMock;
 import org.junit.After;
@@ -27,7 +26,23 @@ public class ConcreteMMTest {
 	private ConcreteMM concreteMM;
 	private View viewMock;
 	private Horloge horlogeMock;
+	private Monobserveurstub observateurStub; 
 	
+	class Monobserveurstub implements Observateur {
+		public boolean actualiseTempoCalled;
+		public boolean actualiseBpmCalled;
+
+		@Override
+		public void actualiseTempo() {
+			actualiseTempoCalled = true; 
+		}
+
+		@Override
+		public void actualiseBPM() {
+			actualiseBpmCalled = true; 
+		}
+		
+	}
 	/**
 	 * @throws java.lang.Exception
 	 */
@@ -43,7 +58,11 @@ public class ConcreteMMTest {
 		EasyMock.expect(controlerMock.getPresente()).andReturn(viewMock).anyTimes();
 		EasyMock.expect(controlerMock.getHorloge()).andReturn(horlogeMock).anyTimes();
 		EasyMock.replay(controlerMock);
+		observateurStub = new Monobserveurstub();
 		concreteMM = new ConcreteMM(controlerMock );
+		concreteMM.addBPMObs( observateurStub );
+		concreteMM.addTempoObs( observateurStub );
+		
 		
 	}
 
@@ -56,6 +75,7 @@ public class ConcreteMMTest {
 		viewMock=null;
 		controlerMock=null;
 		concreteMM=null;
+		observateurStub = null;
 	}
 
 	/**
@@ -82,9 +102,11 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testRun() {
-		assertFalse(concreteMM.isEtatMarche());
+		
+		assertFalse( concreteMM.isEtatMarche() );
 		concreteMM.run();
-		assertTrue(concreteMM.isEtatMarche());
+		assertTrue( concreteMM.isEtatMarche() );
+		
 	}
 
 	/**
@@ -92,23 +114,27 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testSetBPM() {
-		fail("Not yet implemented");
+		
+		int bpm = 100;
+		concreteMM.run();
+		concreteMM.setBPM( bpm );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseBpmCalled );
+		assertEquals( bpm, concreteMM.getBPM() );
+		
 	}
-
-	/**
-	 * Test method for {@link metronomelogic.moteur.ConcreteMM#setEtatMarche(boolean)}.
-	 */
-	@Test
-	public void testSetEtatMarche() {
-		fail("Not yet implemented");
-	}
-
+	 
 	/**
 	 * Test method for {@link metronomelogic.moteur.ConcreteMM#setTempo(int)}.
 	 */
 	@Test
 	public void testSetTempo() {
-		fail("Not yet implemented");
+		
+		int tempo = 7 ;
+		concreteMM.run();
+		concreteMM.setTempo( tempo );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseTempoCalled );
+		assertEquals( tempo, concreteMM.getTempo() );
+		
 	}
 
 	/**
@@ -128,7 +154,12 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testAddTempoObs() {
-		fail("Not yet implemented");
+		
+		int tempo = 7;
+		concreteMM.run();
+		concreteMM.setTempo( tempo );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseTempoCalled );
+		
 	}
 
 	/**
@@ -136,7 +167,12 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testNotifyTempo() {
-		fail("Not yet implemented");
+		
+		int tempo = 7;
+		concreteMM.run();
+		concreteMM.setTempo( tempo );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseTempoCalled );
+		
 	}
 
 	/**
@@ -144,7 +180,11 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testRemoveTempoObs() {
-		fail("Not yet implemented");
+		
+		int tempo = 7;
+		concreteMM.removeTempoObs( observateurStub );
+		concreteMM.run();
+		assertFalse( ( ( Monobserveurstub ) observateurStub ).actualiseTempoCalled );
 	}
 
 	/**
@@ -152,7 +192,12 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testAddBPMObs() {
-		fail("Not yet implemented");
+		
+		int bpm = 100 ;
+		concreteMM.run();
+		concreteMM.setBPM( bpm );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseBpmCalled );
+		
 	}
 
 	/**
@@ -160,7 +205,12 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testNotifyBPM() {
-		fail("Not yet implemented");
+		
+		int bpm = 100;
+		concreteMM.run();
+		concreteMM.setBPM( bpm );
+		assertTrue( ( ( Monobserveurstub ) observateurStub ).actualiseBpmCalled );
+		
 	}
 
 	/**
@@ -168,7 +218,13 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testRemoveBPMObs() {
-		fail("Not yet implemented");
+		
+		int bpm = 100;
+		concreteMM.removeBPMObs( observateurStub );
+		concreteMM.run();
+		concreteMM.setBPM( bpm );
+		assertFalse( ( ( Monobserveurstub ) observateurStub ).actualiseBpmCalled );
+		
 	}
 
 	/**
@@ -176,7 +232,9 @@ public class ConcreteMMTest {
 	 */
 	@Test
 	public void testGetCommands() {
-		fail("Not yet implemented");
+		
+		assertNotNull( concreteMM.getCommands() );
+		
 	}
 
 }
