@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="cook" default="apply-xsl" basedir=".">
+	<target name="apply-xsl">
+		<xslt in="cuisine.xml" out="cuisine.html" style="cuisine2livre.xsl">
+		</xslt>
+	</target>
+</project>
