@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="AddressBook/src"/>
+	<classpathentry kind="src" path="AddressBook/testAddressBook"/>
+	<classpathentry exported="true" kind="lib" path="AddressBook/lib/derby.jar"/>
+	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="com.windowtester.eclipse.ui.runtimeClasspathContainer"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3.8.1"/>
+	<classpathentry kind="output" path="AddressBook/bin"/>
+</classpath>
