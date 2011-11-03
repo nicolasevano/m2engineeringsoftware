@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-2.0.4.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.0.xsd">
+	
+	<!--	beginning AOP configuration -->	
+	
+	<aop:config>
+		<aop:pointcut id="servicePointcut" expression="execution(public * *(..))"/>    		
+		<aop:aspect id="loggingAspect" ref="serverLogger">
+		    <aop:before method="logServerOperationEntry"  pointcut-ref="servicePointcut"/>    		
+		    <aop:after-returning method="logServerOperationExit" returning="result" pointcut-ref="servicePointcut"/>
+	    </aop:aspect>	    
+	</aop:config>
+
+  	<beans:bean id="serverLogger" class="server.impl.ServerLogger">
+  		<beans:property name="loggerFile" value="log.txt"/>
+  	</beans:bean>    
+	<!--	endding AOP configuration -->
+		
+	<!-- beginning security definition-->
+ 
+	<!--  bean class="server.impl.AuthentificationManager" name="authenticationManager"-->
+		<!--  property name="alloweduser" -->
+			<!--  map-->
+				<!--  entry key="toto"-->
+			         <!--value>passtoto</value-->
+			    <!-- /entry-->
+			    <!-- entry key="titi"-->
+			    	<!-- value>passtiti</value-->
+			    <!-- /entry-->
+			    <!--  entry key="testuser"-->
+			    	<!-- value>testPassword</value-->
+			    <!-- /entry-->
+			<!-- /map-->
+		<!-- /property-->
+	<!-- /bean-->
+	
+	<beans:bean id="userDetailsService" class="org.springframework.security.userdetails.memory.InMemoryDaoImpl">
+		<beans:property name="userMap">
+			<beans:value>
+			<!-- passtoto MD5=20f22d4ccb9a98df4aa9393631f8addc -->
+            toto=passtoto,ROLE_USER
+            <!-- passtiti MD5=7571fd2482115bad7310b422847f014e -->
+            titi=passtiti,ROLE_USER
+            <!-- testPassword MD5=fed3b61b26081849378080b34e693d2e -->
+            testuser=testPassword,ROLE_USER
+        	</beans:value>
+		</beans:property> 
+	</beans:bean> 
+
+	<beans:bean id="daoAuthenticationProvider"
+		class="org.springframework.security.providers.dao.DaoAuthenticationProvider">
+		<beans:property name="userDetailsService" ref="userDetailsService" />
+	</beans:bean>
+	
+	<beans:bean id="authenticationManager" class="org.springframework.security.providers.ProviderManager">
+		<beans:property name="providers">
+			<beans:list>
+				<beans:ref local="daoAuthenticationProvider" />
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- ending security definition -->
+
+
+	<!-- business definition --> 
+	<beans:bean class="server.impl.PostManager" name="postManager">
+		<beans:property name="server">
+			<beans:ref bean="userManager"/>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean class="server.impl.UserManager" name="userManager">
+		<beans:property name="post">
+			<beans:ref bean="postManager"/>
+		</beans:property>
+		<beans:property name="users" >
+			<beans:map/>
+		</beans:property>
+	</beans:bean>
+	
+	<beans:bean id="rmiProvider" class="server.impl.ChatRoomImpl" name="server">
+		<beans:property name="authManager">
+			<beans:ref bean="authenticationManager"/>
+		</beans:property>
+		<beans:property name="postmanager">
+			<beans:ref bean="postManager"/>
+		</beans:property>
+		<beans:property name="usermanager">
+			<beans:ref bean="userManager"/>
+		</beans:property>
+	</beans:bean>
+	
+	<!-- end business definition -->
+	
+    <beans:bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <beans:property name="serviceName" value="rmi-Provider"/>
+        <beans:property name="service" ref="rmiProvider"/>
+        <beans:property name="serviceInterface" value="server.impl.ChatRoom"/>
+        <beans:property name="registryPort" value="1099"/>
+    </beans:bean>
+    
+</beans:beans>

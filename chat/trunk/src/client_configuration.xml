@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<bean id="rmiProvider" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1099/rmi-Provider"/>
+		<property name="serviceInterface" value="server.impl.ChatRoom"/>
+	</bean>
+	
+	<bean class="javax.security.auth.Subject" name="subject" >
+	</bean>
+	
+	<bean class="com.sun.security.auth.callback.DialogCallbackHandler" name="callbackHandler">
+	</bean>
+	
+	<bean class="java.util.HashMap" name="shareState">
+	</bean>
+	
+	<bean class="java.util.HashMap" name="options">
+	</bean>
+	
+	<bean class="java.lang.String" name="title">
+		<constructor-arg type="java.lang.String" value="Logiciel de discussion en ligne" />
+	</bean>
+		
+	<bean class="client.impl.SampleLoginModule" name="sampleLoginModule">
+		<constructor-arg type="server.impl.ChatRoom" ref="rmiProvider" />
+		<property name="subject" ref="subject" />
+		<property name="callbackHandler" ref="callbackHandler" />
+		<property name="sharedState" ref="shareState" />
+		<property name="options" ref="options" />
+	</bean>
+
+	<bean class="client.impl.ChatUserImpl" name="chatUserImpl">
+		<constructor-arg type="java.lang.String" value="essai1"/>
+		<property name="room" ref="rmiProvider"/>
+		<property name="lc" ref="sampleLoginModule"/>
+	</bean>
+
+	<bean class="client.impl.CommandPost" name="commandPost">
+		<property name="room" ref="rmiProvider"/>
+	</bean>
+	
+	<bean class="client.impl.CommandeUnregister" name="commandUnregister">
+		<property name="room" ref="rmiProvider"/>
+	</bean>
+	
+	<bean class="javax.swing.JFrame" name="window">
+		<constructor-arg type="java.lang.String" ref="title"/>
+	</bean>
+	
+	<bean class="javax.swing.JTextArea" name="txtOutput"/>
+	
+	<bean class="javax.swing.JTextField" name="txtMessage"/>
+	
+	<bean class="javax.swing.JButton" name="btnSend">
+		<constructor-arg type="java.lang.String" value="Envoyer"/> 
+	</bean>
+	
+	<bean class="client.impl.ChatUI" name="chatUI">
+		<constructor-arg type="client.ICommande" ref="commandPost"/>
+		<constructor-arg type="client.ICommande" ref="commandUnregister"/>
+		<property name="title" ref="title"/>
+		<property name="window" ref="window"/>
+		<property name="txtOutput" ref="txtOutput"/>
+		<property name="txtMessage" ref="txtMessage"/>
+		<property name="btnSend" ref="btnSend"/>
+	</bean>
+	
+	
+	
+	<bean class="java.lang.Thread" name="executor">
+		<constructor-arg type="java.lang.Runnable" ref="chatUserImpl" />
+	</bean>
+		
+</beans>
