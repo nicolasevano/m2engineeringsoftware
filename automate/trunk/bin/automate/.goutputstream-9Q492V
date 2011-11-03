@@ -1,0 +1,82 @@
+package automate;
+
+public class Automate2 extends Automate {
+	
+	public Automate2(){
+		creertables_vides(15); // rappel : 4 est ici le nombre d'etats (1 etat initial ; 0 etat puit)
+		initialiser_tables();
+			
+	}
+	
+	public void initialiser_tables(){
+		
+		arcsPourLettres(1,2,0);
+		arcsPourChiffresSans0A(1,6);
+		arcsPour0A(1,5);
+		
+		arcsPourLettres(2,3,0);
+		
+		arcsPourLettres(3,3,0);
+		arcsPourBoolean(3,4);
+		unArc(3,c_charEspace,15,0);
+		unArc(3,'.',1,0);
+		
+		arcsPourBoolean(4,4);
+		arcsPourChiffresSans0A(4, 6);
+		arcsPourChiffres(4,5,0);
+		
+	}
+	
+	/**
+	 * Pose une action  pour tous les chiffres
+	 * @param P : etat source
+	 * @param A : action
+	 */
+	protected void arcsPourChiffresSans0A(int P, int A){
+		arcsPourIntervalleA(P,'1','9',A);
+	}
+	
+	/**
+	 * Pose une action  pour tous les chiffres
+	 * @param P : etat source
+	 * @param A : action
+	 */
+	protected void arcsPour0A(int P, int A){
+		arcsPourIntervalleA(P,'0','0',A);
+	}
+	
+	/**
+	 * Pose une action  pour tous les chiffres
+	 * @param P : etat source
+	 * @param A : action
+	 */
+	protected void arcsPourBoolean(int P, int A){
+		//TODO
+		arcsPourIntervalleA(P,'0','0',A);
+	}
+	
+	protected boolean fini(){
+		return ( ( char ) tete == '.' );
+	};
+	
+	protected void actionFinale(){
+ 		actionFinale2();
+ 		System.out.println("Cumul en secondes : "+cumul);
+ 	}
+	
+	protected void executeraction(int A, int tete){
+		switch (A) {
+		case 1 : valent=tete- Automate.c_code0; break;
+		case 2 : valent =  valent*10 + tete - Automate.c_code0; break;
+		case 3 : cumul=cumul +3600*valent; break;
+		case 4 : cumul=cumul +valent; break;
+		case 5 : cumul=cumul +60*valent; break; 
+		default :   break;
+		
+		}
+		
+	}
+	
+	private String valent;
+	private String cumul;
+}

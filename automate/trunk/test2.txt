@@ -1,0 +1,5 @@
+vala 10 h 05 mn
+valb  4 h 10 mn.5 h 15 mn
+valc
+vald   10 h 05 mn.2 h 20 mn
+4 h 10 mn.5 h 00 mn.

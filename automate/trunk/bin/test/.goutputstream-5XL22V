@@ -1,0 +1,37 @@
+package test;
+import automate.*;
+
+import es.*;
+
+public class testauto {
+
+	/**
+	 * @param args
+	 */
+	
+	public static void main(String[] args) {
+		// 
+		
+		Automate1 monauto;
+		
+		
+		
+		
+		
+		monauto = new Automate1();
+		monauto.trace_on();   // demande la trace des transitions
+		
+		//monauto.affiche_tables();   // afficher le contenu des tables
+		
+		monauto.initTete("test1.txt");
+		
+		monauto.lancer(); // arret sur '.' ici
+		monauto.forcerTete(); // pour paser le point
+		monauto.lancer();
+		
+		
+		
+
+	}
+
+}
