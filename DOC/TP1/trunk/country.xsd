@@ -1,0 +1,3680 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XML Spy v4.0 NT (http://www.xmlspy.com) by Raymond E. Reeves (Sprint) -->
+<schema 
+targetNamespace="http://www.itu.int/tML/tML-ISO-3166" 
+xmlns="http://www.w3.org/2001/XMLSchema" 
+xmlns:tML-ISO-3166="http://www.itu.int/tML/tML-ISO-3166" 
+
+elementFormDefault="qualified"
+attributeFormDefault="unqualified" 
+
+version="1.2 2001/08/25 16:25:12"
+id="tML-ISO-3166.xsd"
+>
+	<annotation>
+		<documentation>
+			Based on ISO-3166.
+			This list is complete and up-to-date as of 2001-02-26. 
+			It lists official short English names and code elements.
+		</documentation>
+	</annotation>
+
+	<!--
+2.1.3.1 countryCodeAlpha2Type
+	-->
+	<simpleType name="countryCodeAlpha2Type">
+		<annotation>
+			<documentation>
+				See http://www.din.de/gremien/nas/nabd/iso3166ma/codlistp1/en_listp1.html
+			</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="AF">
+				<annotation>
+					<documentation>AFGHANISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AL">
+				<annotation>
+					<documentation>ALBANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DZ">
+				<annotation>
+					<documentation>ALGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AS">
+				<annotation>
+					<documentation>AMERICAN SAMOA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AD">
+				<annotation>
+					<documentation>ANDORRA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AO">
+				<annotation>
+					<documentation>ANGOLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AI">
+				<annotation>
+					<documentation>ANGUILLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AQ">
+				<annotation>
+					<documentation>ANTARCTICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AG">
+				<annotation>
+					<documentation>ANTIGUA AND BARBUDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AR">
+				<annotation>
+					<documentation>ARGENTINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AM">
+				<annotation>
+					<documentation>ARMENIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AW">
+				<annotation>
+					<documentation>ARUBA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AU">
+				<annotation>
+					<documentation>AUSTRALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AT">
+				<annotation>
+					<documentation>AUSTRIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AZ">
+				<annotation>
+					<documentation>AZERBAIJAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BS">
+				<annotation>
+					<documentation>BAHAMAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BH">
+				<annotation>
+					<documentation>BAHRAIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BD">
+				<annotation>
+					<documentation>BANGLADESH</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BB">
+				<annotation>
+					<documentation>BARBADOS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BY">
+				<annotation>
+					<documentation>BELARUS</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="BE">
+				<annotation>
+					<documentation>BELGIUM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BZ">
+				<annotation>
+					<documentation>BELIZE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BJ">
+				<annotation>
+					<documentation>BENIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BM">
+				<annotation>
+					<documentation>BERMUDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BT">
+				<annotation>
+					<documentation>BHUTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BO">
+				<annotation>
+					<documentation>BOLIVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BA">
+				<annotation>
+					<documentation>BOSNIA AND HERZEGOWINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BW">
+				<annotation>
+					<documentation>BOTSWANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BV">
+				<annotation>
+					<documentation>BOUVET ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BR">
+				<annotation>
+					<documentation>BRAZIL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IO">
+				<annotation>
+					<documentation>BRITISH INDIAN OCEAN TERRITORY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BN">
+				<annotation>
+					<documentation>BRUNEI DARUSSALAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BG">
+				<annotation>
+					<documentation>BULGARIA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="BF">
+				<annotation>
+					<documentation>BURKINA FASO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BI">
+				<annotation>
+					<documentation>BURUNDI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KH">
+				<annotation>
+					<documentation>CAMBODIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CM">
+				<annotation>
+					<documentation>CAMEROON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CA">
+				<annotation>
+					<documentation>CANADA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CV">
+				<annotation>
+					<documentation>CAPE VERDE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KY">
+				<annotation>
+					<documentation>CAYMAN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CF">
+				<annotation>
+					<documentation>CENTRAL AFRICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TD">
+				<annotation>
+					<documentation>CHAD</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CL">
+				<annotation>
+					<documentation>CHILE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CN">
+				<annotation>
+					<documentation>CHINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CX">
+				<annotation>
+					<documentation>CHRISTMAS ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CC">
+				<annotation>
+					<documentation>COCOS (KEELING) ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="CO">
+				<annotation>
+					<documentation>COLOMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KM">
+				<annotation>
+					<documentation>COMOROS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CG">
+				<annotation>
+					<documentation>CONGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CK">
+				<annotation>
+					<documentation>COOK ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CR">
+				<annotation>
+					<documentation>COSTA RICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CI">
+				<annotation>
+					<documentation>COTE D'IVOIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HR">
+				<annotation>
+					<documentation>CROATIA (local name: Hrvatska)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CU">
+				<annotation>
+					<documentation>CUBA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CY">
+				<annotation>
+					<documentation>CYPRUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CZ">
+				<annotation>
+					<documentation>CZECH REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DK">
+				<annotation>
+					<documentation>DENMARK</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DJ">
+				<annotation>
+					<documentation>DJIBOUTI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DM">
+				<annotation>
+					<documentation>DOMINICA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="DO">
+				<annotation>
+					<documentation>DOMINICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TP">
+				<annotation>
+					<documentation>EAST TIMOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EC">
+				<annotation>
+					<documentation>ECUADOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EG">
+				<annotation>
+					<documentation>EGYPT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SV">
+				<annotation>
+					<documentation>EL SALVADOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GQ">
+				<annotation>
+					<documentation>EQUATORIAL GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ER">
+				<annotation>
+					<documentation>ERITREA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EE">
+				<annotation>
+					<documentation>ESTONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ET">
+				<annotation>
+					<documentation>ETHIOPIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FK">
+				<annotation>
+					<documentation>FALKLAND ISLANDS (MALVINAS)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FO">
+				<annotation>
+					<documentation>FAROE ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FJ">
+				<annotation>
+					<documentation>FIJI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FI">
+				<annotation>
+					<documentation>FINLAND</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="FR">
+				<annotation>
+					<documentation>FRANCE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FX">
+				<annotation>
+					<documentation>"FRANCE, METROPOLITAN"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GF">
+				<annotation>
+					<documentation>FRENCH GUIANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PF">
+				<annotation>
+					<documentation>FRENCH POLYNESIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TF">
+				<annotation>
+					<documentation>FRENCH SOUTHERN TERRITORIES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GA">
+				<annotation>
+					<documentation>GABON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GM">
+				<annotation>
+					<documentation>GAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GE">
+				<annotation>
+					<documentation>GEORGIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DE">
+				<annotation>
+					<documentation>GERMANY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GH">
+				<annotation>
+					<documentation>GHANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GI">
+				<annotation>
+					<documentation>GIBRALTAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GR">
+				<annotation>
+					<documentation>GREECE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GL">
+				<annotation>
+					<documentation>GREENLAND</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="GD">
+				<annotation>
+					<documentation>GRENADA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GP">
+				<annotation>
+					<documentation>GUADELOUPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GU">
+				<annotation>
+					<documentation>GUAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GT">
+				<annotation>
+					<documentation>GUATEMALA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GN">
+				<annotation>
+					<documentation>GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GW">
+				<annotation>
+					<documentation>GUINEA-BISSAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GY">
+				<annotation>
+					<documentation>GUYANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HT">
+				<annotation>
+					<documentation>HAITI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HM">
+				<annotation>
+					<documentation>HEARD AND MC DONALD ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HN">
+				<annotation>
+					<documentation>HONDURAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HK">
+				<annotation>
+					<documentation>HONG KONG</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HU">
+				<annotation>
+					<documentation>HUNGARY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IS">
+				<annotation>
+					<documentation>ICELAND</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="IN">
+				<annotation>
+					<documentation>INDIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ID">
+				<annotation>
+					<documentation>INDONESIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IR">
+				<annotation>
+					<documentation>IRAN (ISLAMIC REPUBLIC OF)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IQ">
+				<annotation>
+					<documentation>IRAQ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IE">
+				<annotation>
+					<documentation>IRELAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IL">
+				<annotation>
+					<documentation>ISRAEL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IT">
+				<annotation>
+					<documentation>ITALY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JM">
+				<annotation>
+					<documentation>JAMAICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JP">
+				<annotation>
+					<documentation>JAPAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JO">
+				<annotation>
+					<documentation>JORDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KZ">
+				<annotation>
+					<documentation>KAZAKHSTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KE">
+				<annotation>
+					<documentation>KENYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KI">
+				<annotation>
+					<documentation>KIRIBATI</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="KP">
+				<annotation>
+					<documentation>"KOREA, DEMOCRATIC PEOPLES REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KR">
+				<annotation>
+					<documentation>"KOREA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KW">
+				<annotation>
+					<documentation>KUWAIT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KG">
+				<annotation>
+					<documentation>KYRGYZSTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LA">
+				<annotation>
+					<documentation>LAO PEOPLE'S DEMOCRATIC REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LV">
+				<annotation>
+					<documentation>LATVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LB">
+				<annotation>
+					<documentation>LEBANON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LS">
+				<annotation>
+					<documentation>LESOTHO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LR">
+				<annotation>
+					<documentation>LIBERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LY">
+				<annotation>
+					<documentation>LIBYAN ARAB JAMAHIRIYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LI">
+				<annotation>
+					<documentation>LIECHTENSTEIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LT">
+				<annotation>
+					<documentation>LITHUANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LU">
+				<annotation>
+					<documentation>LUXEMBOURG</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="MO">
+				<annotation>
+					<documentation>MACAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MK">
+				<annotation>
+					<documentation>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MG">
+				<annotation>
+					<documentation>MADAGASCAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MW">
+				<annotation>
+					<documentation>MALAWI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MY">
+				<annotation>
+					<documentation>MALAYSIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MV">
+				<annotation>
+					<documentation>MALDIVES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ML">
+				<annotation>
+					<documentation>MALI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MT">
+				<annotation>
+					<documentation>MALTA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MH">
+				<annotation>
+					<documentation>MARSHALL ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MQ">
+				<annotation>
+					<documentation>MARTINIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MR">
+				<annotation>
+					<documentation>MAURITANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MU">
+				<annotation>
+					<documentation>MAURITIUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="YT">
+				<annotation>
+					<documentation>MAYOTTE</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="MX">
+				<annotation>
+					<documentation>MEXICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FM">
+				<annotation>
+					<documentation>MICRONESIA, FEDERATED STATES OF</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MD">
+				<annotation>
+					<documentation>"MOLDOVA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MC">
+				<annotation>
+					<documentation>MONACO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MN">
+				<annotation>
+					<documentation>MONGOLIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MS">
+				<annotation>
+					<documentation>MONTSERRAT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MA">
+				<annotation>
+					<documentation>MOROCCO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MZ">
+				<annotation>
+					<documentation>MOZAMBIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MM">
+				<annotation>
+					<documentation>MYANMAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NA">
+				<annotation>
+					<documentation>NAMIBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NR">
+				<annotation>
+					<documentation>NAURU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NP">
+				<annotation>
+					<documentation>NEPAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NL">
+				<annotation>
+					<documentation>NETHERLANDS</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="AN">
+				<annotation>
+					<documentation>NETHERLANDS ANTILLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NC">
+				<annotation>
+					<documentation>NEW CALEDONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NZ">
+				<annotation>
+					<documentation>NEW ZEALAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NI">
+				<annotation>
+					<documentation>NICARAGUA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NE">
+				<annotation>
+					<documentation>NIGER</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NG">
+				<annotation>
+					<documentation>NIGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NU">
+				<annotation>
+					<documentation>NIUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NF">
+				<annotation>
+					<documentation>NORFOLK ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MP">
+				<annotation>
+					<documentation>NORTHERN MARIANA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NO">
+				<annotation>
+					<documentation>NORWAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="OM">
+				<annotation>
+					<documentation>OMAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PK">
+				<annotation>
+					<documentation>PAKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PW">
+				<annotation>
+					<documentation>PALAU</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="PA">
+				<annotation>
+					<documentation>PANAMA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PG">
+				<annotation>
+					<documentation>PAPUA NEW GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PY">
+				<annotation>
+					<documentation>PARAGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PE">
+				<annotation>
+					<documentation>PERU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PH">
+				<annotation>
+					<documentation>PHILIPPINES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PN">
+				<annotation>
+					<documentation>PITCAIRN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PL">
+				<annotation>
+					<documentation>POLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PT">
+				<annotation>
+					<documentation>PORTUGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PR">
+				<annotation>
+					<documentation>PUERTO RICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="QA">
+				<annotation>
+					<documentation>QATAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="RE">
+				<annotation>
+					<documentation>REUNION</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="RO">
+				<annotation>
+					<documentation>ROMANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="RU">
+				<annotation>
+					<documentation>RUSSIAN FEDERATION</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="RW">
+				<annotation>
+					<documentation>RWANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KN">
+				<annotation>
+					<documentation>SAINT KITTS AND NEVIS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LC">
+				<annotation>
+					<documentation>SAINT LUCIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VC">
+				<annotation>
+					<documentation>SAINT VINCENT AND THE GRENADINES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="WS">
+				<annotation>
+					<documentation>SAMOA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SM">
+				<annotation>
+					<documentation>SAN MARINO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ST">
+				<annotation>
+					<documentation>SAO TOME AND PRINCIPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SA">
+				<annotation>
+					<documentation>SAUDI ARABIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SN">
+				<annotation>
+					<documentation>SENEGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SC">
+				<annotation>
+					<documentation>SEYCHELLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SL">
+				<annotation>
+					<documentation>SIERRA LEONE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SG">
+				<annotation>
+					<documentation>SINGAPORE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SK">
+				<annotation>
+					<documentation>SLOVAKIA (Slovak Republic)</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="SI">
+				<annotation>
+					<documentation>SLOVENIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SB">
+				<annotation>
+					<documentation>SOLOMON ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SO">
+				<annotation>
+					<documentation>SOMALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZA">
+				<annotation>
+					<documentation>SOUTH AFRICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ES">
+				<annotation>
+					<documentation>SPAIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LK">
+				<annotation>
+					<documentation>SRI LANKA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SH">
+				<annotation>
+					<documentation>ST. HELENA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PM">
+				<annotation>
+					<documentation>ST. PIERRE AND MIQUELON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SD">
+				<annotation>
+					<documentation>SUDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SR">
+				<annotation>
+					<documentation>SURINAME</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SJ">
+				<annotation>
+					<documentation>SVALBARD AND JAN MAYEN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SZ">
+				<annotation>
+					<documentation>SWAZILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SE">
+				<annotation>
+					<documentation>SWEDEN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="CH">
+				<annotation>
+					<documentation>SWITZERLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SY">
+				<annotation>
+					<documentation>SYRIAN ARAB REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TW">
+				<annotation>
+					<documentation>"TAIWAN, PROVINCE OF CHINA"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TJ">
+				<annotation>
+					<documentation>TAJIKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TZ">
+				<annotation>
+					<documentation>"TANZANIA, UNITED REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TH">
+				<annotation>
+					<documentation>THAILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TG">
+				<annotation>
+					<documentation>TOGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TK">
+				<annotation>
+					<documentation>TOKELAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TO">
+				<annotation>
+					<documentation>TONGA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TT">
+				<annotation>
+					<documentation>TRINIDAD AND TOBAGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TN">
+				<annotation>
+					<documentation>TUNISIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TR">
+				<annotation>
+					<documentation>TURKEY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TM">
+				<annotation>
+					<documentation>TURKMENISTAN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="TC">
+				<annotation>
+					<documentation>TURKS AND CAICOS ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TV">
+				<annotation>
+					<documentation>TUVALU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UG">
+				<annotation>
+					<documentation>UGANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UA">
+				<annotation>
+					<documentation>UKRAINE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AE">
+				<annotation>
+					<documentation>UNITED ARAB EMIRATES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GB">
+				<annotation>
+					<documentation>UNITED KINGDOM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="US">
+				<annotation>
+					<documentation>UNITED STATES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UM">
+				<annotation>
+					<documentation>UNITED STATES MINOR OUTLYING ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UY">
+				<annotation>
+					<documentation>URUGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UZ">
+				<annotation>
+					<documentation>UZBEKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VU">
+				<annotation>
+					<documentation>VANUATU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VA">
+				<annotation>
+					<documentation>VATICAN CITY STATE (HOLY SEE)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VE">
+				<annotation>
+					<documentation>VENEZUELA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="VN">
+				<annotation>
+					<documentation>VIET NAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VG">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (BRITISH)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VI">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (U.S.)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="WF">
+				<annotation>
+					<documentation>WALLIS AND FUTUNA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EH">
+				<annotation>
+					<documentation>WESTERN SAHARA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="YE">
+				<annotation>
+					<documentation>YEMEN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="YU">
+				<annotation>
+					<documentation>YUGOSLAVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZR">
+				<annotation>
+					<documentation>ZAIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZM">
+				<annotation>
+					<documentation>ZAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZW">
+				<annotation>
+					<documentation>ZIMBABWE</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+ 
+	<!--
+2.1.3.2 countryCodeAlpha3Type
+	-->
+	<simpleType name="countryCodeAlpha3Type">
+		<annotation>
+			<documentation>See http://www.un.org/Depts/unsd/methods/m49alpha.htm</documentation>
+		</annotation>
+		<restriction base="string">
+			<enumeration value="AFG">
+				<annotation>
+					<documentation>AFGHANISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ALB">
+				<annotation>
+					<documentation>ALBANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DZA">
+				<annotation>
+					<documentation>ALGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ASM">
+				<annotation>
+					<documentation>AMERICAN SAMOA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AND">
+				<annotation>
+					<documentation>ANDORRA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AGO">
+				<annotation>
+					<documentation>ANGOLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AIA">
+				<annotation>
+					<documentation>ANGUILLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ATA">
+				<annotation>
+					<documentation>ANTARCTICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ATG">
+				<annotation>
+					<documentation>ANTIGUA AND BARBUDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ARG">
+				<annotation>
+					<documentation>ARGENTINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ARM">
+				<annotation>
+					<documentation>ARMENIA</documentation>
+				</annotation>
+			</enumeration>
+
+
+
+			<enumeration value="ABW">
+				<annotation>
+					<documentation>ARUBA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AUS">
+				<annotation>
+					<documentation>AUSTRALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AUT">
+				<annotation>
+					<documentation>AUSTRIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="AZE">
+				<annotation>
+					<documentation>AZERBAIJAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BHS">
+				<annotation>
+					<documentation>BAHAMAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BHR">
+				<annotation>
+					<documentation>BAHRAIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BGD">
+				<annotation>
+					<documentation>BANGLADESH</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BRB">
+				<annotation>
+					<documentation>BARBADOS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BLR">
+				<annotation>
+					<documentation>BELARUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BEL">
+				<annotation>
+					<documentation>BELGIUM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BLZ">
+				<annotation>
+					<documentation>BELIZE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BEN">
+				<annotation>
+					<documentation>BENIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BMU">
+				<annotation>
+					<documentation>BERMUDA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="BTN">
+				<annotation>
+					<documentation>BHUTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BOL">
+				<annotation>
+					<documentation>BOLIVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BIH">
+				<annotation>
+					<documentation>BOSNIA AND HERZEGOWINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BWA">
+				<annotation>
+					<documentation>BOTSWANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BVT">
+				<annotation>
+					<documentation>BOUVET ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BRA">
+				<annotation>
+					<documentation>BRAZIL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IOT">
+				<annotation>
+					<documentation>BRITISH INDIAN OCEAN TERRITORY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BRN">
+				<annotation>
+					<documentation>BRUNEI DARUSSALAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BGR">
+				<annotation>
+					<documentation>BULGARIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BFA">
+				<annotation>
+					<documentation>BURKINA FASO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="BDI">
+				<annotation>
+					<documentation>BURUNDI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KHM">
+				<annotation>
+					<documentation>CAMBODIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CMR">
+				<annotation>
+					<documentation>CAMEROON</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="CAN">
+				<annotation>
+					<documentation>CANADA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CPV">
+				<annotation>
+					<documentation>CAPE VERDE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CYM">
+				<annotation>
+					<documentation>CAYMAN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CAF">
+				<annotation>
+					<documentation>CENTRAL AFRICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TCD">
+				<annotation>
+					<documentation>CHAD</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CHL">
+				<annotation>
+					<documentation>CHILE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CHN">
+				<annotation>
+					<documentation>CHINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CXR">
+				<annotation>
+					<documentation>CHRISTMAS ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CCK">
+				<annotation>
+					<documentation>COCOS (KEELING) ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="COL">
+				<annotation>
+					<documentation>COLOMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="COM">
+				<annotation>
+					<documentation>COMOROS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="COG">
+				<annotation>
+					<documentation>CONGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="COK">
+				<annotation>
+					<documentation>COOK ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="CRI">
+				<annotation>
+					<documentation>COSTA RICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CIV">
+				<annotation>
+					<documentation>COTE D'IVOIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HRV">
+				<annotation>
+					<documentation>CROATIA (local name: Hrvatska)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CUB">
+				<annotation>
+					<documentation>CUBA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CYP">
+				<annotation>
+					<documentation>CYPRUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CZE">
+				<annotation>
+					<documentation>CZECH REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DNK">
+				<annotation>
+					<documentation>DENMARK</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DJI">
+				<annotation>
+					<documentation>DJIBOUTI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DMA">
+				<annotation>
+					<documentation>DOMINICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DOM">
+				<annotation>
+					<documentation>DOMINICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TMP">
+				<annotation>
+					<documentation>EAST TIMOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ECU">
+				<annotation>
+					<documentation>ECUADOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EGY">
+				<annotation>
+					<documentation>EGYPT</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="SLV">
+				<annotation>
+					<documentation>EL SALVADOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GNQ">
+				<annotation>
+					<documentation>EQUATORIAL GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ERI">
+				<annotation>
+					<documentation>ERITREA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="EST">
+				<annotation>
+					<documentation>ESTONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ETH">
+				<annotation>
+					<documentation>ETHIOPIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FLK">
+				<annotation>
+					<documentation>FALKLAND ISLANDS (MALVINAS)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FRO">
+				<annotation>
+					<documentation>FAROE ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FJI">
+				<annotation>
+					<documentation>FIJI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FIN">
+				<annotation>
+					<documentation>FINLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FRA">
+				<annotation>
+					<documentation>FRANCE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FXX">
+				<annotation>
+					<documentation>"FRANCE, METROPOLITAN"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GUF">
+				<annotation>
+					<documentation>FRENCH GUIANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PYF">
+				<annotation>
+					<documentation>FRENCH POLYNESIA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="ATF">
+				<annotation>
+					<documentation>FRENCH SOUTHERN TERRITORIES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GAB">
+				<annotation>
+					<documentation>GABON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GMB">
+				<annotation>
+					<documentation>GAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GEO">
+				<annotation>
+					<documentation>GEORGIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="DEU">
+				<annotation>
+					<documentation>GERMANY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GHA">
+				<annotation>
+					<documentation>GHANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GIB">
+				<annotation>
+					<documentation>GIBRALTAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GRC">
+				<annotation>
+					<documentation>GREECE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GRL">
+				<annotation>
+					<documentation>GREENLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GRD">
+				<annotation>
+					<documentation>GRENADA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GLP">
+				<annotation>
+					<documentation>GUADELOUPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GUM">
+				<annotation>
+					<documentation>GUAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GTM">
+				<annotation>
+					<documentation>GUATEMALA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="GIN">
+				<annotation>
+					<documentation>GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GNB">
+				<annotation>
+					<documentation>GUINEA-BISSAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GUY">
+				<annotation>
+					<documentation>GUYANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HTI">
+				<annotation>
+					<documentation>HAITI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HMD">
+				<annotation>
+					<documentation>HEARD AND MC DONALD ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HND">
+				<annotation>
+					<documentation>HONDURAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HKG">
+				<annotation>
+					<documentation>HONG KONG</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="HUN">
+				<annotation>
+					<documentation>HUNGARY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ISL">
+				<annotation>
+					<documentation>ICELAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IND">
+				<annotation>
+					<documentation>INDIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IDN">
+				<annotation>
+					<documentation>INDONESIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IRN">
+				<annotation>
+					<documentation>IRAN (ISLAMIC REPUBLIC OF)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="IRQ">
+				<annotation>
+					<documentation>IRAQ</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="IRL">
+				<annotation>
+					<documentation>IRELAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ISR">
+				<annotation>
+					<documentation>ISRAEL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ITA">
+				<annotation>
+					<documentation>ITALY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JAM">
+				<annotation>
+					<documentation>JAMAICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JPN">
+				<annotation>
+					<documentation>JAPAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="JOR">
+				<annotation>
+					<documentation>JORDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KAZ">
+				<annotation>
+					<documentation>KAZAKHSTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KEN">
+				<annotation>
+					<documentation>KENYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KIR">
+				<annotation>
+					<documentation>KIRIBATI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PRK">
+				<annotation>
+					<documentation>"KOREA, DEMOCRATIC PEOPLES REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KOR">
+				<annotation>
+					<documentation>"KOREA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KWT">
+				<annotation>
+					<documentation>KUWAIT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KGZ">
+				<annotation>
+					<documentation>KYRGYZSTAN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="LAO">
+				<annotation>
+					<documentation>LAO PEOPLE'S DEMOCRATIC REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LVA">
+				<annotation>
+					<documentation>LATVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LBN">
+				<annotation>
+					<documentation>LEBANON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LSO">
+				<annotation>
+					<documentation>LESOTHO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LBR">
+				<annotation>
+					<documentation>LIBERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LBY">
+				<annotation>
+					<documentation>LIBYAN ARAB JAMAHIRIYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LIE">
+				<annotation>
+					<documentation>LIECHTENSTEIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LTU">
+				<annotation>
+					<documentation>LITHUANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LUX">
+				<annotation>
+					<documentation>LUXEMBOURG</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MAC">
+				<annotation>
+					<documentation>MACAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MKD">
+				<annotation>
+					<documentation>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MDG">
+				<annotation>
+					<documentation>MADAGASCAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MWI">
+				<annotation>
+					<documentation>MALAWI</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="MYS">
+				<annotation>
+					<documentation>MALAYSIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MDV">
+				<annotation>
+					<documentation>MALDIVES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MLI">
+				<annotation>
+					<documentation>MALI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MLT">
+				<annotation>
+					<documentation>MALTA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MHL">
+				<annotation>
+					<documentation>MARSHALL ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MTQ">
+				<annotation>
+					<documentation>MARTINIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MRT">
+				<annotation>
+					<documentation>MAURITANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MUS">
+				<annotation>
+					<documentation>MAURITIUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MYT">
+				<annotation>
+					<documentation>MAYOTTE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MEX">
+				<annotation>
+					<documentation>MEXICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="FSM">
+				<annotation>
+					<documentation>"MICRONESIA, FEDERATED STATES OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MDA">
+				<annotation>
+					<documentation>"MOLDOVA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MCO">
+				<annotation>
+					<documentation>MONACO</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="MNG">
+				<annotation>
+					<documentation>MONGOLIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MSR">
+				<annotation>
+					<documentation>MONTSERRAT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MAR">
+				<annotation>
+					<documentation>MOROCCO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MOZ">
+				<annotation>
+					<documentation>MOZAMBIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MMR">
+				<annotation>
+					<documentation>MYANMAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NAM">
+				<annotation>
+					<documentation>NAMIBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NRU">
+				<annotation>
+					<documentation>NAURU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NPL">
+				<annotation>
+					<documentation>NEPAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NLD">
+				<annotation>
+					<documentation>NETHERLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ANT">
+				<annotation>
+					<documentation>NETHERLANDS ANTILLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NCL">
+				<annotation>
+					<documentation>NEW CALEDONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NZL">
+				<annotation>
+					<documentation>NEW ZEALAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NIC">
+				<annotation>
+					<documentation>NICARAGUA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="NER">
+				<annotation>
+					<documentation>NIGER</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NGA">
+				<annotation>
+					<documentation>NIGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NIU">
+				<annotation>
+					<documentation>NIUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NFK">
+				<annotation>
+					<documentation>NORFOLK ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="MNP">
+				<annotation>
+					<documentation>NORTHERN MARIANA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="NOR">
+				<annotation>
+					<documentation>NORWAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="OMN">
+				<annotation>
+					<documentation>OMAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PAK">
+				<annotation>
+					<documentation>PAKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PLW">
+				<annotation>
+					<documentation>PALAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PAN">
+				<annotation>
+					<documentation>PANAMA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PNG">
+				<annotation>
+					<documentation>PAPUA NEW GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PRY">
+				<annotation>
+					<documentation>PARAGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PER">
+				<annotation>
+					<documentation>PERU</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="PHL">
+				<annotation>
+					<documentation>PHILIPPINES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PCN">
+				<annotation>
+					<documentation>PITCAIRN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="POL">
+				<annotation>
+					<documentation>POLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PRT">
+				<annotation>
+					<documentation>PORTUGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="PRI">
+				<annotation>
+					<documentation>PUERTO RICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="QAT">
+				<annotation>
+					<documentation>QATAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="REU">
+				<annotation>
+					<documentation>REUNION</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ROM">
+				<annotation>
+					<documentation>ROMANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="RUS">
+				<annotation>
+					<documentation>RUSSIAN FEDERATION</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="RWA">
+				<annotation>
+					<documentation>RWANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="KNA">
+				<annotation>
+					<documentation>SAINT KITTS AND NEVIS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LCA">
+				<annotation>
+					<documentation>SAINT LUCIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VCT">
+				<annotation>
+					<documentation>SAINT VINCENT AND THE GRENADINES</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="WSM">
+				<annotation>
+					<documentation>SAMOA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SMR">
+				<annotation>
+					<documentation>SAN MARINO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="STP">
+				<annotation>
+					<documentation>SAO TOME AND PRINCIPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SAU">
+				<annotation>
+					<documentation>SAUDI ARABIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SEN">
+				<annotation>
+					<documentation>SENEGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SYC">
+				<annotation>
+					<documentation>SEYCHELLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SLE">
+				<annotation>
+					<documentation>SIERRA LEONE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SGP">
+				<annotation>
+					<documentation>SINGAPORE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SVK">
+				<annotation>
+					<documentation>SLOVAKIA (Slovak Republic)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SVN">
+				<annotation>
+					<documentation>SLOVENIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SLB">
+				<annotation>
+					<documentation>SOLOMON ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SOM">
+				<annotation>
+					<documentation>SOMALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZAF">
+				<annotation>
+					<documentation>SOUTH AFRICA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="ESP">
+				<annotation>
+					<documentation>SPAIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="LKA">
+				<annotation>
+					<documentation>SRI LANKA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SHN">
+				<annotation>
+					<documentation>ST. HELENA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SPM">
+				<annotation>
+					<documentation>ST. PIERRE AND MIQUELON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SDN">
+				<annotation>
+					<documentation>SUDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SUR">
+				<annotation>
+					<documentation>SURINAME</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SJM">
+				<annotation>
+					<documentation>SVALBARD AND JAN MAYEN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SWZ">
+				<annotation>
+					<documentation>SWAZILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SWE">
+				<annotation>
+					<documentation>SWEDEN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="CHE">
+				<annotation>
+					<documentation>SWITZERLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="SYR">
+				<annotation>
+					<documentation>SYRIAN ARAB REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TWN">
+				<annotation>
+					<documentation>"TAIWAN, PROVINCE OF CHINA"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TJK">
+				<annotation>
+					<documentation>TAJIKISTAN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="TZA">
+				<annotation>
+					<documentation>"TANZANIA, UNITED REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="THA">
+				<annotation>
+					<documentation>THAILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TGO">
+				<annotation>
+					<documentation>TOGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TKL">
+				<annotation>
+					<documentation>TOKELAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TON">
+				<annotation>
+					<documentation>TONGA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TTO">
+				<annotation>
+					<documentation>TRINIDAD AND TOBAGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TUN">
+				<annotation>
+					<documentation>TUNISIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TUR">
+				<annotation>
+					<documentation>TURKEY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TKM">
+				<annotation>
+					<documentation>TURKMENISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TCA">
+				<annotation>
+					<documentation>TURKS AND CAICOS ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="TUV">
+				<annotation>
+					<documentation>TUVALU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UGA">
+				<annotation>
+					<documentation>UGANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UKR">
+				<annotation>
+					<documentation>UKRAINE</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="ARE">
+				<annotation>
+					<documentation>UNITED ARAB EMIRATES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="GBR">
+				<annotation>
+					<documentation>UNITED KINGDOM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="USA">
+				<annotation>
+					<documentation>UNITED STATES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UMI">
+				<annotation>
+					<documentation>UNITED STATES MINOR OUTLYING ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="URY">
+				<annotation>
+					<documentation>URUGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="UZB">
+				<annotation>
+					<documentation>UZBEKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VUT">
+				<annotation>
+					<documentation>VANUATU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VAT">
+				<annotation>
+					<documentation>VATICAN CITY STATE (HOLY SEE)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VEN">
+				<annotation>
+					<documentation>VENEZUELA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VNM">
+				<annotation>
+					<documentation>VIET NAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VGB">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (BRITISH)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="VIR">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (U.S.)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="WLF">
+				<annotation>
+					<documentation>WALLIS AND FUTUNA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="ESH">
+				<annotation>
+					<documentation>WESTERN SAHARA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="YEM">
+				<annotation>
+					<documentation>YEMEN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="YUG">
+				<annotation>
+					<documentation>YUGOSLAVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZAR">
+				<annotation>
+					<documentation>ZAIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZMB">
+				<annotation>
+					<documentation>ZAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="ZWE">
+				<annotation>
+					<documentation>ZIMBABWE</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+
+ 
+	<!--
+2.1.3.3 countryCodeNumeric3Type
+	-->
+	<simpleType name="countryCodeNumeric3Type">
+		<restriction base="string">
+			<enumeration value="004">
+				<annotation>
+					<documentation>AFGHANISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="008">
+				<annotation>
+					<documentation>ALBANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="012">
+				<annotation>
+					<documentation>ALGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="016">
+				<annotation>
+					<documentation>AMERICAN SAMOA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="020">
+				<annotation>
+					<documentation>ANDORRA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="024">
+				<annotation>
+					<documentation>ANGOLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="660">
+				<annotation>
+					<documentation>ANGUILLA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="010">
+				<annotation>
+					<documentation>ANTARCTICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="028">
+				<annotation>
+					<documentation>ANTIGUA AND BARBUDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="032">
+				<annotation>
+					<documentation>ARGENTINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="051">
+				<annotation>
+					<documentation>ARMENIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="533">
+				<annotation>
+					<documentation>ARUBA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="036">
+				<annotation>
+					<documentation>AUSTRALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="040">
+				<annotation>
+					<documentation>AUSTRIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="031">
+				<annotation>
+					<documentation>AZERBAIJAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="044">
+				<annotation>
+					<documentation>BAHAMAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="048">
+				<annotation>
+					<documentation>BAHRAIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="050">
+				<annotation>
+					<documentation>BANGLADESH</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="052">
+				<annotation>
+					<documentation>BARBADOS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="112">
+				<annotation>
+					<documentation>BELARUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="056">
+				<annotation>
+					<documentation>BELGIUM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="084">
+				<annotation>
+					<documentation>BELIZE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="204">
+				<annotation>
+					<documentation>BENIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="060">
+				<annotation>
+					<documentation>BERMUDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="064">
+				<annotation>
+					<documentation>BHUTAN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="068">
+				<annotation>
+					<documentation>BOLIVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="070">
+				<annotation>
+					<documentation>BOSNIA AND HERZEGOWINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="072">
+				<annotation>
+					<documentation>BOTSWANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="074">
+				<annotation>
+					<documentation>BOUVET ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="076">
+				<annotation>
+					<documentation>BRAZIL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="086">
+				<annotation>
+					<documentation>BRITISH INDIAN OCEAN TERRITORY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="096">
+				<annotation>
+					<documentation>BRUNEI DARUSSALAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="100">
+				<annotation>
+					<documentation>BULGARIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="854">
+				<annotation>
+					<documentation>BURKINA FASO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="108">
+				<annotation>
+					<documentation>BURUNDI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="116">
+				<annotation>
+					<documentation>CAMBODIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="120">
+				<annotation>
+					<documentation>CAMEROON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="124">
+				<annotation>
+					<documentation>CANADA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="132">
+				<annotation>
+					<documentation>CAPE VERDE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="136">
+				<annotation>
+					<documentation>CAYMAN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="140">
+				<annotation>
+					<documentation>CENTRAL AFRICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="148">
+				<annotation>
+					<documentation>CHAD</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="152">
+				<annotation>
+					<documentation>CHILE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="156">
+				<annotation>
+					<documentation>CHINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="162">
+				<annotation>
+					<documentation>CHRISTMAS ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="166">
+				<annotation>
+					<documentation>COCOS (KEELING) ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="170">
+				<annotation>
+					<documentation>COLOMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="174">
+				<annotation>
+					<documentation>COMOROS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="178">
+				<annotation>
+					<documentation>CONGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="184">
+				<annotation>
+					<documentation>COOK ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="188">
+				<annotation>
+					<documentation>COSTA RICA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="384">
+				<annotation>
+					<documentation>COTE D'IVOIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="191">
+				<annotation>
+					<documentation>CROATIA (local name: Hrvatska)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="192">
+				<annotation>
+					<documentation>CUBA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="196">
+				<annotation>
+					<documentation>CYPRUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="203">
+				<annotation>
+					<documentation>CZECH REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="208">
+				<annotation>
+					<documentation>DENMARK</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="262">
+				<annotation>
+					<documentation>DJIBOUTI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="212">
+				<annotation>
+					<documentation>DOMINICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="214">
+				<annotation>
+					<documentation>DOMINICAN REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="626">
+				<annotation>
+					<documentation>EAST TIMOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="218">
+				<annotation>
+					<documentation>ECUADOR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="818">
+				<annotation>
+					<documentation>EGYPT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="222">
+				<annotation>
+					<documentation>EL SALVADOR</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="226">
+				<annotation>
+					<documentation>EQUATORIAL GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="032">
+				<annotation>
+					<documentation>ERITREA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="233">
+				<annotation>
+					<documentation>ESTONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="210">
+				<annotation>
+					<documentation>ETHIOPIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="238">
+				<annotation>
+					<documentation>FALKLAND ISLANDS (MALVINAS)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="234">
+				<annotation>
+					<documentation>FAROE ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="242">
+				<annotation>
+					<documentation>FIJI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="246">
+				<annotation>
+					<documentation>FINLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="250">
+				<annotation>
+					<documentation>FRANCE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="249">
+				<annotation>
+					<documentation>"FRANCE, METROPOLITAN"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="254">
+				<annotation>
+					<documentation>FRENCH GUIANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="258">
+				<annotation>
+					<documentation>FRENCH POLYNESIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="260">
+				<annotation>
+					<documentation>FRENCH SOUTHERN TERRITORIES</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="266">
+				<annotation>
+					<documentation>GABON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="270">
+				<annotation>
+					<documentation>GAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="268">
+				<annotation>
+					<documentation>GEORGIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="276">
+				<annotation>
+					<documentation>GERMANY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="288">
+				<annotation>
+					<documentation>GHANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="292">
+				<annotation>
+					<documentation>GIBRALTAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="300">
+				<annotation>
+					<documentation>GREECE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="304">
+				<annotation>
+					<documentation>GREENLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="308">
+				<annotation>
+					<documentation>GRENADA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="312">
+				<annotation>
+					<documentation>GUADELOUPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="316">
+				<annotation>
+					<documentation>GUAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="320">
+				<annotation>
+					<documentation>GUATEMALA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="324">
+				<annotation>
+					<documentation>GUINEA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="624">
+				<annotation>
+					<documentation>GUINEA-BISSAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="328">
+				<annotation>
+					<documentation>GUYANA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="332">
+				<annotation>
+					<documentation>HAITI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="334">
+				<annotation>
+					<documentation>HEARD AND MC DONALD ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="340">
+				<annotation>
+					<documentation>HONDURAS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="344">
+				<annotation>
+					<documentation>HONG KONG</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="348">
+				<annotation>
+					<documentation>HUNGARY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="352">
+				<annotation>
+					<documentation>ICELAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="356">
+				<annotation>
+					<documentation>INDIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="360">
+				<annotation>
+					<documentation>INDONESIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="364">
+				<annotation>
+					<documentation>IRAN (ISLAMIC REPUBLIC OF)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="368">
+				<annotation>
+					<documentation>IRAQ</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="372">
+				<annotation>
+					<documentation>IRELAND</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="376">
+				<annotation>
+					<documentation>ISRAEL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="380">
+				<annotation>
+					<documentation>ITALY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="388">
+				<annotation>
+					<documentation>JAMAICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="392">
+				<annotation>
+					<documentation>JAPAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="400">
+				<annotation>
+					<documentation>JORDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="398">
+				<annotation>
+					<documentation>KAZAKHSTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="404">
+				<annotation>
+					<documentation>KENYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="296">
+				<annotation>
+					<documentation>KIRIBATI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="408">
+				<annotation>
+					<documentation>"KOREA, DEMOCRATIC PEOPLES REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="410">
+				<annotation>
+					<documentation>"KOREA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="414">
+				<annotation>
+					<documentation>KUWAIT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="417">
+				<annotation>
+					<documentation>KYRGYZSTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="418">
+				<annotation>
+					<documentation>LAO PEOPLE'S DEMOCRATIC REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="428">
+				<annotation>
+					<documentation>LATVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="422">
+				<annotation>
+					<documentation>LEBANON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="426">
+				<annotation>
+					<documentation>LESOTHO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="430">
+				<annotation>
+					<documentation>LIBERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="434">
+				<annotation>
+					<documentation>LIBYAN ARAB JAMAHIRIYA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="438">
+				<annotation>
+					<documentation>LIECHTENSTEIN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="440">
+				<annotation>
+					<documentation>LITHUANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="442">
+				<annotation>
+					<documentation>LUXEMBOURG</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="446">
+				<annotation>
+					<documentation>MACAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="807">
+				<annotation>
+					<documentation>MACEDONIA, THE FORMER YUGOSLAV REPUBLIC OF</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="450">
+				<annotation>
+					<documentation>MADAGASCAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="454">
+				<annotation>
+					<documentation>MALAWI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="458">
+				<annotation>
+					<documentation>MALAYSIA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="462">
+				<annotation>
+					<documentation>MALDIVES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="466">
+				<annotation>
+					<documentation>MALI</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="470">
+				<annotation>
+					<documentation>MALTA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="584">
+				<annotation>
+					<documentation>MARSHALL ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="474">
+				<annotation>
+					<documentation>MARTINIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="478">
+				<annotation>
+					<documentation>MAURITANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="480">
+				<annotation>
+					<documentation>MAURITIUS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="175">
+				<annotation>
+					<documentation>MAYOTTE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="484">
+				<annotation>
+					<documentation>MEXICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="583">
+				<annotation>
+					<documentation>"MICRONESIA, FEDERATED STATES OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="498">
+				<annotation>
+					<documentation>"MOLDOVA, REPUBLIC OF"</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="492">
+				<annotation>
+					<documentation>MONACO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="496">
+				<annotation>
+					<documentation>MONGOLIA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="500">
+				<annotation>
+					<documentation>MONTSERRAT</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="504">
+				<annotation>
+					<documentation>MOROCCO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="508">
+				<annotation>
+					<documentation>MOZAMBIQUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="104">
+				<annotation>
+					<documentation>MYANMAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="516">
+				<annotation>
+					<documentation>NAMIBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="520">
+				<annotation>
+					<documentation>NAURU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="524">
+				<annotation>
+					<documentation>NEPAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="528">
+				<annotation>
+					<documentation>NETHERLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="530">
+				<annotation>
+					<documentation>NETHERLANDS ANTILLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="540">
+				<annotation>
+					<documentation>NEW CALEDONIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="554">
+				<annotation>
+					<documentation>NEW ZEALAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="558">
+				<annotation>
+					<documentation>NICARAGUA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="562">
+				<annotation>
+					<documentation>NIGER</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="566">
+				<annotation>
+					<documentation>NIGERIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="570">
+				<annotation>
+					<documentation>NIUE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="574">
+				<annotation>
+					<documentation>NORFOLK ISLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="580">
+				<annotation>
+					<documentation>NORTHERN MARIANA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="578">
+				<annotation>
+					<documentation>NORWAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="512">
+				<annotation>
+					<documentation>OMAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="586">
+				<annotation>
+					<documentation>PAKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="585">
+				<annotation>
+					<documentation>PALAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="591">
+				<annotation>
+					<documentation>PANAMA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="598">
+				<annotation>
+					<documentation>PAPUA NEW GUINEA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="600">
+				<annotation>
+					<documentation>PARAGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="604">
+				<annotation>
+					<documentation>PERU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="608">
+				<annotation>
+					<documentation>PHILIPPINES</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="612">
+				<annotation>
+					<documentation>PITCAIRN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="616">
+				<annotation>
+					<documentation>POLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="620">
+				<annotation>
+					<documentation>PORTUGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="630">
+				<annotation>
+					<documentation>PUERTO RICO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="634">
+				<annotation>
+					<documentation>QATAR</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="638">
+				<annotation>
+					<documentation>REUNION</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="642">
+				<annotation>
+					<documentation>ROMANIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="643">
+				<annotation>
+					<documentation>RUSSIAN FEDERATION</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="646">
+				<annotation>
+					<documentation>RWANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="659">
+				<annotation>
+					<documentation>SAINT KITTS AND NEVIS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="662">
+				<annotation>
+					<documentation>SAINT LUCIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="670">
+				<annotation>
+					<documentation>SAINT VINCENT AND THE GRENADINES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="882">
+				<annotation>
+					<documentation>SAMOA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="674">
+				<annotation>
+					<documentation>SAN MARINO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="678">
+				<annotation>
+					<documentation>SAO TOME AND PRINCIPE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="682">
+				<annotation>
+					<documentation>SAUDI ARABIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="686">
+				<annotation>
+					<documentation>SENEGAL</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="690">
+				<annotation>
+					<documentation>SEYCHELLES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="694">
+				<annotation>
+					<documentation>SIERRA LEONE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="702">
+				<annotation>
+					<documentation>SINGAPORE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="703">
+				<annotation>
+					<documentation>SLOVAKIA (Slovak Republic)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="705">
+				<annotation>
+					<documentation>SLOVENIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="090">
+				<annotation>
+					<documentation>SOLOMON ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="706">
+				<annotation>
+					<documentation>SOMALIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="710">
+				<annotation>
+					<documentation>SOUTH AFRICA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="724">
+				<annotation>
+					<documentation>SPAIN</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="144">
+				<annotation>
+					<documentation>SRI LANKA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="654">
+				<annotation>
+					<documentation>ST. HELENA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="666">
+				<annotation>
+					<documentation>ST. PIERRE AND MIQUELON</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="736">
+				<annotation>
+					<documentation>SUDAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="740">
+				<annotation>
+					<documentation>SURINAME</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="744">
+				<annotation>
+					<documentation>SVALBARD AND JAN MAYEN ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="748">
+				<annotation>
+					<documentation>SWAZILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="752">
+				<annotation>
+					<documentation>SWEDEN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="756">
+				<annotation>
+					<documentation>SWITZERLAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="760">
+				<annotation>
+					<documentation>SYRIAN ARAB REPUBLIC</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="158">
+				<annotation>
+					<documentation>TAIWAN, PROVINCE OF CHINA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="762">
+				<annotation>
+					<documentation>TAJIKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="834">
+				<annotation>
+					<documentation>TANZANIA, UNITED REPUBLIC OF</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="764">
+				<annotation>
+					<documentation>THAILAND</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="768">
+				<annotation>
+					<documentation>TOGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="772">
+				<annotation>
+					<documentation>TOKELAU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="776">
+				<annotation>
+					<documentation>TONGA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="780">
+				<annotation>
+					<documentation>TRINIDAD AND TOBAGO</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="788">
+				<annotation>
+					<documentation>TUNISIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="792">
+				<annotation>
+					<documentation>TURKEY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="795">
+				<annotation>
+					<documentation>TURKMENISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="796">
+				<annotation>
+					<documentation>TURKS AND CAICOS ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="798">
+				<annotation>
+					<documentation>TUVALU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="800">
+				<annotation>
+					<documentation>UGANDA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="804">
+				<annotation>
+					<documentation>UKRAINE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="784">
+				<annotation>
+					<documentation>UNITED ARAB EMIRATES</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="826">
+				<annotation>
+					<documentation>UNITED KINGDOM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="840">
+				<annotation>
+					<documentation>UNITED STATES</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="581">
+				<annotation>
+					<documentation>UNITED STATES MINOR OUTLYING ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="858">
+				<annotation>
+					<documentation>URUGUAY</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="860">
+				<annotation>
+					<documentation>UZBEKISTAN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="548">
+				<annotation>
+					<documentation>VANUATU</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="336">
+				<annotation>
+					<documentation>VATICAN CITY STATE (HOLY SEE)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="862">
+				<annotation>
+					<documentation>VENEZUELA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="704">
+				<annotation>
+					<documentation>VIET NAM</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="092">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (BRITISH)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="850">
+				<annotation>
+					<documentation>VIRGIN ISLANDS (U.S.)</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="876">
+				<annotation>
+					<documentation>WALLIS AND FUTUNA ISLANDS</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="732">
+				<annotation>
+					<documentation>WESTERN SAHARA</documentation>
+				</annotation>
+			</enumeration>
+
+			<enumeration value="887">
+				<annotation>
+					<documentation>YEMEN</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="891">
+				<annotation>
+					<documentation>YUGOSLAVIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="180">
+				<annotation>
+					<documentation>ZAIRE</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="894">
+				<annotation>
+					<documentation>ZAMBIA</documentation>
+				</annotation>
+			</enumeration>
+			<enumeration value="716">
+				<annotation>
+					<documentation>ZIMBABWE</documentation>
+				</annotation>
+			</enumeration>
+		</restriction>
+	</simpleType>
+</schema>
+

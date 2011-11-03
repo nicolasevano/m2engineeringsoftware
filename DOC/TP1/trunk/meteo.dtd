@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT pays (#PCDATA)>
+<!ELEMENT METEO (pays, nom)>
+<!ATTLIST METEO
+	latitude CDATA #REQUIRED
+	longitude CDATA #REQUIRED
+>
