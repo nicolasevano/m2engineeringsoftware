@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="fr.ifsic.diic3.tql.auction4student/src"/>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="H:/windows/eclipse3.4.2/workspace/VV_TP2/easymock-3.0/easymock-3.0.jar"/>
+	<classpathentry kind="lib" path="H:/windows/eclipse3.4.2/workspace/VV_TP2/easymock-3.0/easymock-3.0-tests.jar"/>
+	<classpathentry kind="lib" path="H:/windows/eclipse3.4.2/workspace/VV_TP2/easymock-3.0/asm-3.3.jar"/>
+	<classpathentry kind="lib" path="H:/windows/eclipse3.4.2/workspace/VV_TP2/easymock-3.0/objenesis-tck-1.2.jar"/>
+	<classpathentry kind="lib" path="H:/windows/eclipse3.4.2/workspace/VV_TP2/easymock-3.0/cglib-2.2.2.jar"/>
+	<classpathentry kind="output" path="fr.ifsic.diic3.tql.auction4student/bin"/>
+</classpath>
