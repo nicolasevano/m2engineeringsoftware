@@ -1,0 +1,21 @@
+<!ELEMENT description ANY>
+<!ELEMENT ingredient (ingredient*, preparation?)>
+<!ATTLIST ingredient
+	nom CDATA #REQUIRED
+	qte CDATA #IMPLIED
+	unit (can | cup | jar | ounce | package | pound | ribs | tablespoon | teaspoon) #IMPLIED
+>
+<!ELEMENT nom (#PCDATA)>
+<!ELEMENT note (#PCDATA)>
+<!ELEMENT nutrition EMPTY>
+<!ATTLIST nutrition
+	calories CDATA #REQUIRED
+	gras  CDATA #REQUIRED
+	glucides CDATA #IMPLIED
+	proteines CDATA #REQUIRED
+	alcool CDATA #IMPLIED
+>
+<!ELEMENT pas (#PCDATA)>
+<!ELEMENT preparation (pas+)>
+<!ELEMENT recette (nom, ingredient+, preparation, note?, nutrition)>
+<!ELEMENT recettes (description, recette*)>

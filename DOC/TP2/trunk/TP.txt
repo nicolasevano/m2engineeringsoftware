@@ -1,0 +1,77 @@
+Sylvie AUNEAU & Nicolas EVANO
+Question 1
+Voici les questions abordées:
+DOC TP2 XPATH
+1.1.
+/recettes/recette//ingredient[@nom="flour"]/@qte
+
+1.2
+sum( "/recettes/recette//ingredient[contains(@nom,"egg")]/@qte" )
+
+1.3
+/recettes/recette//ingredient[contains(@unit,"spoon")][@qte=0.5]/@nom
+
+1.4
+/recettes/recette[nom="Cailles en Sarcophages"]/ingredient/preparation/pas[2]
+
+1.5
+distinct("/recettes/recette//ingredient/@unit")
+
+Cordialement;
+Nicolas
+
+1.5
+//recette/ingredient[not(@unit=preceding-sibling::ingredient/@unit)]/@unit
+
+1.6 with ceiling in case of impair element of recette
+//recette[ceiling(count(//recette) div 2)]
+with floor in case of pair element
+//recette[floor(count(//recette) div 2)]
+
+1.7
+//recette[count(ingredient)>6]
+
+1.8
+(/recettes/recette//ingredient[contains(@nom,"egg") and not(./@qte < ../ingredient/@qte)]/@qte)[1]/ancestor-or-self::recette/nom
+
+Question 2
+
+1
+<xsl:for-each select="//top500:site[contains(top500:computer/text(),'Infiniband')]">
+	<xsl:value-of select="concat( top500:rank,',')"/>
+</xsl:for-each>
+
+2
+<xsl:for-each select="//top500:site[ (contains(./top500:manufacturer/text(),'Fujitsu') 
+											  or contains(./top500:manufacturer/text(),'Nec') 
+											  or contains(./top500:manufacturer/text(),'Hitachi'))  
+										   ][not(top500:country=preceding-sibling::top500:site[ (contains(./top500:manufacturer/text(),'Fujitsu') 
+											  or contains(./top500:manufacturer/text(),'Nec') 
+											  or contains(./top500:manufacturer/text(),'Hitachi'))  
+										   ]/top500:country)]/top500:country
+										   ">
+	<xsl:value-of select="concat(.,',')"/>
+</xsl:for-each>
+
+3
+<xsl:variable name="test" >
+	<xsl:value-of select="count(//top500:site[contains(./top500:country/text(),'China')])"/>
+</xsl:variable>
+
+4 doesn't work
+<xsl:variable name="test" >
+		<xsl:if test="count( //top500:site[contains( ./top500:country,'United States')] ) &gt; number( 20 )">
+			<xsl:value-of select="string('Plus de vinght machines')"/> 
+		</xsl:if>
+		<xsl:if test="count( //top500:site[contains( ./top500:country,'United States')] ) &lt; number( 20 )">
+			<xsl:value-of select="string('Moins de 20')"/> 
+		</xsl:if>
+</xsl:variable>
+
+5 doesn't work
+<xsl:variable name="test" >
+	<xsl:select-values select="if(every $date in 
+				//top500:site[contains(./top500:country/text(),'China')]/year 
+				satisfies ($date gt 2005)) then 'true' else 'false'"/>
+</xsl:variable>
+
