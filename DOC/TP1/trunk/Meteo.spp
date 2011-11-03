@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Project>
+	<Folder FolderName="XML Files" ExtStr="xml;cml;math;mtx;rdf;smil;svg;wml">
+		<File FilePath=".\test.xml" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="XSL Files" ExtStr="xsl;xslt"/>
+	<Folder FolderName="HTML Files" ExtStr="html;htm;xhtml;asp"/>
+	<Folder FolderName="DTD/Schemas" ExtStr="dtd;dcd;xdr;biz;xsd">
+		<File FilePath=".\country.xsd" HomeFolder="Yes"/>
+		<File FilePath=".\iso3166-country-code.xsd" HomeFolder="Yes"/>
+		<File FilePath=".\meteo.dtd" HomeFolder="Yes"/>
+		<File FilePath=".\meteo1.xsd" HomeFolder="Yes"/>
+		<File FilePath=".\meteo2.xsd" HomeFolder="Yes"/>
+		<File FilePath=".\meteo31.xsd" HomeFolder="Yes"/>
+	</Folder>
+	<Folder FolderName="Entities" ExtStr="ent"/>
+</Project>

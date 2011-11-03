@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- listStationMeteo xmlns:xsd="http://www.w3.org/2001/XMLSchema" schemaLocation="meteo31.xsd"-->
+<station:listStationMeteo xmlns:station=".\DOC_TP1" 
+				  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+				  xsi:schemaLocation=".\DOC_TP1 meteo31.xsd">
+	<station:METEO>
+		<!--  xsd:element name="metar" type="codemetar"/-->
+		<!--  xsd:element name="paysref" type="pays" /-->
+		<!--  xsd:element name="addressref" cpy:type="adresse" minOccurs="0" maxOccurs="1" /-->
+		<!--  xsd:element name="nom" type="xsd:string" /-->
+		<!--  xsd:element name="realLatitude" cpy:type="latitude" /-->
+		<!--  xsd:element name="realLongitude" cpy:type="longitude" /-->
+		<!--  xsd:element name="altidute" type="xsd:string" /-->
+		<station:metar>
+			LFLG
+		</station:metar>
+		<station:paysref>
+			FR
+		</station:paysref>
+		<station:addressref>
+			<!--  xsd:element name="no" type="xsd:integer" minOccurs="1" maxOccurs="1" /-->
+			<!--  xsd:element name="rue" type="xsd:string" minOccurs="1" maxOccurs="2" /-->
+			<!--  xsd:element name="ville" type="xsd:string" minOccurs="1" maxOccurs="1" /-->
+			<!-- TODO apply facettes restriction to codepostal -->
+			<!--  xsd:element name="codepostal" type="xsd:string" minOccurs="1" maxOccurs="1" /-->
+			<!-- TODO apply facettes restriction to téléphone -->
+			<!--  xsd:element name="téléphone" type="xsd:string" minOccurs="0" maxOccurs="1" /-->
+			<station:no>
+			5
+			</station:no>
+			<station:rue>
+				pegaze
+			</station:rue>
+			<station:ville>
+				Lannion
+			</station:ville>
+			<station:codepostal>
+				22300
+			</station:codepostal>
+			<station:téléphone>
+				0296643200
+			</station:téléphone>
+		</station:addressref>
+		<station:nom>
+				cnet
+		</station:nom>
+		<station:realLatitude>
+		<!-- xsd:element name="realPosition" type="positionAbsice" /-->
+		<!-- xsd:element name="realAbsice" type="absice" /-->
+			<station:realPosition>
+			<!-- hopefully... -->
+				90
+			</station:realPosition>
+			<station:realAbsice>sud</station:realAbsice>
+		</station:realLatitude>
+		<station:realLongitude>
+		<!--  xsd:element name="realPosition" type="positionOrdonnée" /-->
+		<!--  xsd:element name="realOrdonnée" type="ordonnée" /-->
+			<station:realPosition>
+			<!-- hopefully... -->
+				120
+			</station:realPosition>
+			<station:realOrdonnée>ouest</station:realOrdonnée>
+		</station:realLongitude>
+		<station:altitude>40</station:altitude>
+	</station:METEO>
+	<station:METEO>
+		<!--  xsd:element name="metar" type="codemetar"/-->
+		<!--  xsd:element name="paysref" type="pays" /-->
+		<!--  xsd:element name="addressref" cpy:type="adresse" minOccurs="0" maxOccurs="1" /-->
+		<!--  xsd:element name="nom" type="xsd:string" /-->
+		<!--  xsd:element name="realLatitude" type="latitude" /-->
+		<!--  xsd:element name="realLongitude" type="longitude" /-->
+		<!--  xsd:element name="altidute" type="xsd:string" /-->
+		<station:metar>
+			LFRG
+		</station:metar>
+		<station:paysref>
+			FR
+		</station:paysref>
+		<station:addressref>
+			<!--  xsd:element name="no" type="xsd:integer" minOccurs="1" maxOccurs="1" /-->
+			<!--  xsd:element name="rue" type="xsd:string" minOccurs="1" maxOccurs="2" /-->
+			<!--  xsd:element name="ville" type="xsd:string" minOccurs="1" maxOccurs="1" /-->
+			<!-- TODO apply facettes restriction to codepostal -->
+			<!--  xsd:element name="codepostal" type="xsd:string" minOccurs="1" maxOccurs="1" /-->
+			<!-- TODO apply facettes restriction to téléphone -->
+			<!--  xsd:element name="téléphone" type="xsd:string" minOccurs="0" maxOccurs="1" /-->
+			<station:no>
+			5
+			</station:no>
+			<station:rue>
+				de la coquille
+			</station:rue>
+			<station:ville>
+				St Jacques
+			</station:ville>
+			<station:codepostal>
+				35100
+			</station:codepostal>
+			<station:téléphone>
+				0297643200
+			</station:téléphone>
+		</station:addressref>
+		<station:nom>
+				la noie
+		</station:nom>
+		<station:realLatitude>
+		<!-- xsd:element name="realPosition" type="positionAbsice" /-->
+		<!-- xsd:element name="realAbsice" type="absice" /-->
+			<station:realPosition>
+				<!-- hopefully... -->
+				80
+			</station:realPosition>
+			<station:realAbsice>nord</station:realAbsice>
+		</station:realLatitude>
+		<station:realLongitude>
+			<!--  xsd:element name="realPosition" type="positionOrdonnée" /-->
+			<!--  xsd:element name="realOrdonnée" type="ordonnée" /-->
+			<station:realPosition>
+				<!-- hopefully... -->
+				110
+			</station:realPosition>
+			<station:realOrdonnée>ouest</station:realOrdonnée>
+		</station:realLongitude>
+		<station:altitude>40</station:altitude>
+	</station:METEO>
+</station:listStationMeteo>

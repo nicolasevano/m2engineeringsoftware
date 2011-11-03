@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<releve:relevéJournalier xmlns:releve=".\DOC_TP1" 
+						 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+						 xsi:schemaLocation=".\DOC_TP1 meteo32.xsd ">
+  <!--Auto generate and updated with eclipse and plug in Rinzo xml editor 
+  free work better and cost less-->						 
+  <releve:relevéSimple>
+  	<!-- releve:relevéMetéo dtemperature="12 °C"-->
+  	<!-- releve:relevéMetéo dtemperature="12 °T"-->
+    <releve:relevéMetéo dtemperature="12°C">
+      <releve:dateRelevé>2001-01-01</releve:dateRelevé>
+      <releve:heurRelevé>12:00:00+00:00</releve:heurRelevé>
+      <!-- releve:heurRelevé>12:00:00+00:00</releve:heurRelevé-->
+      <releve:pression>0</releve:pression>
+      <!--  releve:humidité>1000</releve:humidité-->
+      <!--  releve:humidité>-3</releve:humidité-->
+      <releve:humidité>50</releve:humidité>
+      <releve:vent>
+        <!--<releve:force>13tkm/s</releve:force>  -->
+        <!-- releve:force>13</releve:force -->
+        <releve:force>11</releve:force>
+        <!-- releve:direction>EN</releve:direction -->
+        <releve:direction>NE</releve:direction>
+      </releve:vent>
+    </releve:relevéMetéo>
+  </releve:relevéSimple>
+  <releve:relevéSimple>
+    <releve:relevéMetéo dtemperature="21°C">
+      <releve:dateRelevé>2001-01-01</releve:dateRelevé>
+      <releve:heurRelevé>18:00:00+00:00</releve:heurRelevé>
+      <releve:pression>0</releve:pression>
+      <releve:humidité>50</releve:humidité>
+      <releve:vent>
+        <releve:force>50 km/s</releve:force>
+        <releve:direction>NE</releve:direction>
+      </releve:vent>
+    </releve:relevéMetéo>
+  </releve:relevéSimple>
+  <releve:relevéSimple>
+    <releve:relevéMetéo dtemperature="19°C">
+      <releve:dateRelevé>2001-01-01</releve:dateRelevé>
+      <releve:heurRelevé>20:00:00+00:00</releve:heurRelevé>
+      <releve:pression>0</releve:pression>
+      <releve:humidité>100</releve:humidité>
+      <releve:vent>
+        <releve:force>11</releve:force>
+        <releve:direction>NE</releve:direction>
+      </releve:vent>
+    </releve:relevéMetéo>
+  </releve:relevéSimple>
+  <releve:cumulPrécipitation>10 mm</releve:cumulPrécipitation>
+  <releve:jour>2001-01-01</releve:jour>
+</releve:relevéJournalier>
