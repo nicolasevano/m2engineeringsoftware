@@ -1,5 +1,3 @@
-import lexical.constlex;
-import automate.Analex1;
 import automate.Analex2;
 
 
