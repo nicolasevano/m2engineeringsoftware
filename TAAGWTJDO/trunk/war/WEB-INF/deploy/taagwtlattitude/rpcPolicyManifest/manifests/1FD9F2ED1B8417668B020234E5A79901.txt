@@ -1,0 +1,2 @@
+serviceClass: org.istic.m2softwareengineering.client.RTestService
+path: 60261F4B352B6772F96A22DBA1C9B2C8.gwt.rpc

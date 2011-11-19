@@ -1,0 +1,2 @@
+serviceClass: org.istic.m2softwareengineering.client.RLatitudeService
+path: 6B3C4505F2E6B730C2081763D22AD791.gwt.rpc
