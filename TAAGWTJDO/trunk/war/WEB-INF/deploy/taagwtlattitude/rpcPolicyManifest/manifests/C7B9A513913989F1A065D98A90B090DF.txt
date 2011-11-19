@@ -1,0 +1,2 @@
+serviceClass: org.istic.m2softwareengineering.client.GreetingService
+path: E3FCE090DDFAED36DB09FF409E1A741B.gwt.rpc
