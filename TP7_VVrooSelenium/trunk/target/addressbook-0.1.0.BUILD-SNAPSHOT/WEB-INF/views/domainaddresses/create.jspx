@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:c="http://java.sun.com/jsp/jstl/core" xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:form="urn:jsptagdir:/WEB-INF/tags/form" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:spring="http://www.springframework.org/tags" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <form:create id="fc_com_sun_demo_addressbook_DomainAddress" modelAttribute="domainAddress" path="/domainaddresses" render="${empty dependencies}" z="B1s93A8FJ6qRuy+wJI7phRDOq4M=">
+        <field:input field="lastname" id="c_com_sun_demo_addressbook_DomainAddress_lastname" z="TlvuQrgoavscqvF7oVkv3JmcnpU="/>
+        <field:input field="firstname" id="c_com_sun_demo_addressbook_DomainAddress_firstname" z="/EOSnqfQyuD8EgFRodSHORdju24="/>
+        <field:input field="middlename" id="c_com_sun_demo_addressbook_DomainAddress_middlename" z="xGvLcNzEaq22euNxn4XLwilkGs8="/>
+        <field:input field="phone" id="c_com_sun_demo_addressbook_DomainAddress_phone" z="znSsQ9UptlpsH1xGriCYjtvyfeE="/>
+        <field:input field="email" id="c_com_sun_demo_addressbook_DomainAddress_email" validationMessageCode="field_invalid_email" z="pG+DfQlprQ4X7XUDkl80dIedwyk="/>
+        <field:input field="address1" id="c_com_sun_demo_addressbook_DomainAddress_address1" z="+nRIiV5BpdC1Ms7RyRSjHaIYSCI="/>
+        <field:input field="address2" id="c_com_sun_demo_addressbook_DomainAddress_address2" z="RXzCHgTW3+gsQa/gTB/pASzSrMM="/>
+        <field:input field="city" id="c_com_sun_demo_addressbook_DomainAddress_city" z="Zq9OuGWot0sVpWY/fJZML7itu0M="/>
+        <field:input field="addressState" id="c_com_sun_demo_addressbook_DomainAddress_addressState" z="250iRcdskZs7X+r5SbiFuNGYHys="/>
+        <field:input field="postalCode" id="c_com_sun_demo_addressbook_DomainAddress_postalCode" z="pHJhhsLh7T6WYUolxqHg0JneR0M="/>
+        <field:input field="country" id="c_com_sun_demo_addressbook_DomainAddress_country" z="WLw9KyzqwF8ZfzWXV6fVToMlfp0="/>
+    </form:create>
+    <form:dependency dependencies="${dependencies}" id="d_com_sun_demo_addressbook_DomainAddress" render="${not empty dependencies}" z="hMXkJXqt8rJyLlwsOgzEXqpDh7Y="/>
+</div>
