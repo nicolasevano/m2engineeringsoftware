@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:field="urn:jsptagdir:/WEB-INF/tags/form/fields" xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:show id="ps_com_sun_demo_addressbook_DomainAddress" object="${domainaddress}" path="/domainaddresses" z="LwN/wtovQ8sRvEnv3Bmvpii8XcY=">
+        <field:display field="lastname" id="s_com_sun_demo_addressbook_DomainAddress_lastname" object="${domainaddress}" z="5/ic4Vk+APNB4P3c4K00JTKIgn0="/>
+        <field:display field="firstname" id="s_com_sun_demo_addressbook_DomainAddress_firstname" object="${domainaddress}" z="IzbYMj6HwmGVGaUS7OE06hmUkSI="/>
+        <field:display field="middlename" id="s_com_sun_demo_addressbook_DomainAddress_middlename" object="${domainaddress}" z="wXUVcmS8oa/sVjBbBSdozlUYjJc="/>
+        <field:display field="phone" id="s_com_sun_demo_addressbook_DomainAddress_phone" object="${domainaddress}" z="ygPISmnrD7E2/EDTCqgsdsICd1A="/>
+        <field:display field="email" id="s_com_sun_demo_addressbook_DomainAddress_email" object="${domainaddress}" z="sSKGtH0PiZwvYto569zkC0H6NA0="/>
+        <field:display field="address1" id="s_com_sun_demo_addressbook_DomainAddress_address1" object="${domainaddress}" z="TeoZZwi601GsN66n6Swf3BF2Rv4="/>
+        <field:display field="address2" id="s_com_sun_demo_addressbook_DomainAddress_address2" object="${domainaddress}" z="sG6vAJAw4i+BlH5IaTVUyKZHvWA="/>
+        <field:display field="city" id="s_com_sun_demo_addressbook_DomainAddress_city" object="${domainaddress}" z="Lhi/f7rh1v9WYj5ObBKdYBQ+iCA="/>
+        <field:display field="addressState" id="s_com_sun_demo_addressbook_DomainAddress_addressState" object="${domainaddress}" z="YgeVTISfg6ZvesSI/7gtjBEQH6k="/>
+        <field:display field="postalCode" id="s_com_sun_demo_addressbook_DomainAddress_postalCode" object="${domainaddress}" z="naAxYyvfTxz3PMJNvSeEXsp9NpA="/>
+        <field:display field="country" id="s_com_sun_demo_addressbook_DomainAddress_country" object="${domainaddress}" z="ArketErvakZaVcQlOoZsD9DkLLo="/>
+    </page:show>
+</div>

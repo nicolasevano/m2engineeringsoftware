@@ -1,0 +1,33 @@
+// Spring Roo UNKNOWN VERSION log opened at 2011-11-20 14:09:24
+// Spring Roo UNKNOWN VERSION log opened at 2011-11-20 14:38:22
+// Spring Roo UNKNOWN VERSION log opened at 2011-11-20 15:23:33
+// Spring Roo UNKNOWN VERSION log opened at 2011-11-20 15:59:38
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log opened at 2011-11-20 16:31:03
+hint
+project --topLevelPackage com.sun.demo.addressbook
+persistence setup --provider HIBERNATE --database DERBY
+ent --class ~.domainAddress
+field string --fieldName lastname
+field string --fieldName firstname
+field string --fieldName middlename
+field string --fieldName phone
+field string --fieldName email
+field string --fieldName address1
+field string --fieldName address2
+field string --fieldName city
+field string --fieldName addressState
+field string --fieldName postalCode
+field string --fieldName country
+controller scaff --class ~.web.Controller --entity Addr
+controller scaff --class ~.web.Controller --entity Address
+perform tests
+perform tests
+perform eclipse
+perform clean
+perform package
+web mvc all --package ~.web
+perform clean
+perform package
+perform package
+exit
+// Spring Roo 1.1.5.RELEASE [rev d3a68c3] log closed at 2011-11-20 17:32:58

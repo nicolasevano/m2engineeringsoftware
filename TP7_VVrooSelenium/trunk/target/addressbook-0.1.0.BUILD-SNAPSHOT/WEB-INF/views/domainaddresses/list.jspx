@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<div xmlns:jsp="http://java.sun.com/JSP/Page" xmlns:page="urn:jsptagdir:/WEB-INF/tags/form" xmlns:table="urn:jsptagdir:/WEB-INF/tags/form/fields" version="2.0">
+    <jsp:directive.page contentType="text/html;charset=UTF-8"/>
+    <jsp:output omit-xml-declaration="yes"/>
+    <page:list id="pl_com_sun_demo_addressbook_DomainAddress" items="${domainaddresses}" z="K+D64GGEdp3Zxg4RLxk3BXY27Ac=">
+        <table:table data="${domainaddresses}" id="l_com_sun_demo_addressbook_DomainAddress" path="/domainaddresses" z="lxl+EB9jsLEdzihPuWxxWfTyAAg=">
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_lastname" property="lastname" z="dX/JfCgZNIIw8L3ke0Smseb6Mz8="/>
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_firstname" property="firstname" z="I/ZMXUklob4DTZm+RffbxPrwAUM="/>
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_middlename" property="middlename" z="Ucsn9AIMAyVKGpJ5ayWUgwFGHhU="/>
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_phone" property="phone" z="KxmHLCWy75xbKwXRS95nlYOeDKk="/>
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_email" property="email" z="hBmALzsc7VKX5D1o2LdfwKae6Ro="/>
+            <table:column id="c_com_sun_demo_addressbook_DomainAddress_address1" property="address1" z="A7Gb6Ft4t8ep00kLhDjrJ/sDuX0="/>
+        </table:table>
+    </page:list>
+</div>
