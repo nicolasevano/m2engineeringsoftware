@@ -3,14 +3,12 @@ package org.istic.m2softwareengineering.server;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import javax.jdo.PersistenceManager;
 import javax.jdo.annotations.Transactional;
 
-import org.datanucleus.exceptions.NucleusUserException;
 import org.istic.m2softwareengineering.client.Position;
 import org.istic.m2softwareengineering.client.RLatitudeService;
 import org.istic.m2softwareengineering.client.ResolvedContact;
@@ -22,7 +20,6 @@ import com.google.appengine.api.datastore.Entity;
 import com.google.appengine.api.datastore.PreparedQuery;
 import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.FilterOperator;
-import com.google.gwt.dev.js.rhino.ObjToIntMap.Iterator;
 import com.google.gwt.user.server.rpc.RemoteServiceServlet;
 
 public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatitudeService {
@@ -70,8 +67,11 @@ public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatit
 	    		right.setConnected(false);
 	    		right.setVisible(false);
 	    		u.setCurrentRight(right);
+	    		MaPosition currentPosition = new MaPosition();
+	    		u.setCurrentPosition( currentPosition );
 	    		pm.makePersistent( u );
 	    		pm.makePersistent( right );
+	    		pm.makePersistent( currentPosition );
 	    		u = pm.detachCopy( u );
 	    		result = u.getId();
 	    	} catch (ParseException e) {
@@ -134,16 +134,16 @@ public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatit
 						  );
 		pm = PMF.get().getPersistenceManager();
 		ds = DatastoreServiceFactory.getDatastoreService();
-		Query query = new Query("User");
-		query.addFilter("name", FilterOperator.EQUAL, login);
-		query.addFilter("firstName", FilterOperator.EQUAL, password);
+		Query query = new Query( "User" );
+		query.addFilter( "name", FilterOperator.EQUAL, login );
+		query.addFilter( "firstName", FilterOperator.EQUAL, password );
 		PreparedQuery pq = ds.prepare( query );
 		//allow to store a login password couple only if unik.
 		if( pq != null ){
 			result = true;
 		}
 		pm.close();
-		System.err.println("result: " + result);
+		System.err.println( "result: " + result);
 		return result;
 		
 	}
@@ -272,6 +272,7 @@ public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatit
 			currentUser.getCurrentPosition().setX( position.getX() );
 			currentUser.getCurrentPosition().setY( position.getY() );
 			currentUser.getCurrentPosition().setZ( position.getZ() );
+			currentUser.getCurrentPosition().setDate( new Date() );
 			Historique currentUserHistorique = new Historique();
 			currentUserHistorique.setPosition( toAdd );
 			currentUserHistorique.setDate( toAdd.getDate() );
@@ -292,6 +293,7 @@ public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatit
 	 * @param uidContact primary key user that become a contact
 	 */
 	@Override
+	@Transactional
 	public void addContact( String uidUser, String uidContact ){
 		pm = PMF.get().getPersistenceManager();
 		ds = DatastoreServiceFactory.getDatastoreService();
@@ -324,6 +326,7 @@ public class RLatitudeServiceImpl extends RemoteServiceServlet implements RLatit
 	 * @return list<ResolvedContact> contact list requested.
 	 */
 	@Override
+	@Transactional
 	public List<ResolvedContact> getContact( String uid ){
 		ResolvedUser owner = null;
 		ResolvedUser userContact = null;

@@ -190,7 +190,6 @@ public class TAAGWTLattitude implements EntryPoint {
 					if( !result.isEmpty() ){
 						loginDialog.setText( "login success" );
 						uid = result;
-						connected = true;
 						connectedState();
 						loadContact();
 						loginDialog.hide();
@@ -283,7 +282,6 @@ public class TAAGWTLattitude implements EntryPoint {
 				public void onSuccess(Boolean result) {
 					// TODO Auto-generated method stub
 					setUid( "" );
-					connected = false;
 					disconnectedState();
 					removeContact();
 				}
@@ -344,6 +342,7 @@ public class TAAGWTLattitude implements EntryPoint {
 		@Override
 		public void onClick(ClickEvent event) {
 			// TODO Auto-generated method stub
+			createUserDialog.setText( "Remote Procedure Call" );
 			nameUser.setText( "" );
 			passwordUser.setText( "" );
 			loginUser.setText( "" );
@@ -423,6 +422,8 @@ public class TAAGWTLattitude implements EntryPoint {
 							// TODO Auto-generated method stub
 							newContactDialog.setText( "AddContactSuccess" );
 							newContactDialog.hide();
+							removeContact();
+							loadContact();
 						}
 						
 					});
@@ -437,7 +438,7 @@ public class TAAGWTLattitude implements EntryPoint {
 	
 	/**
 	 * design build login dialog box
-	 * @return
+	 * @return DialogBox current login dialogBox
 	 */
 	private DialogBox BuildDialogLogin(){
 		
@@ -688,7 +689,7 @@ public class TAAGWTLattitude implements EntryPoint {
 	 * display position load map api and ask to design and display map of current connected user
 	 */
 	void displayPosition(){
-		Maps.loadMapsApi("", "2", false, new Runnable() {
+		Maps.loadMapsApi("ABQIAAAAhGdLEiyfLUfiaoLx_P8L0BSg-lsXJHMfsiEhWR0S_V6Yw_w53hQUFHMSg1ARUGBYct1r1GlHhRkfMA", "2", false, new Runnable() {
 		      public void run() {
 		    	  //TODO update it with user real given position
 		    	  getPosition( uid );
@@ -716,7 +717,7 @@ public class TAAGWTLattitude implements EntryPoint {
 	 * @param id
 	 * @return
 	 */
-	private Position getPosition( String id){
+	private Position getPosition( String id ){
 
 		GetPosition result = new GetPosition( new Position());
 		test.getPosition( id, result );
@@ -853,6 +854,7 @@ public class TAAGWTLattitude implements EntryPoint {
 		
 		public GetVisibleContactRight(MapWidget map, int contactIndex){
 			this.map = map;
+			this.contactIndex = contactIndex;
 		}
 		
 		@Override
@@ -909,15 +911,6 @@ public class TAAGWTLattitude implements EntryPoint {
 		
 	}
 	
-	/**
-	 * display visibility right of the current connected user
-	 *  
-	 */
-	private void displayVisibleRight(){
-		
-		test.getVisibility( uid, new GetVisibleRight() );
-		
-	}
 	
 	/**
 	 * checkLoginPasswordValidity AsyncCallback< Boolean > implementation
@@ -994,7 +987,6 @@ public class TAAGWTLattitude implements EntryPoint {
 	}
 	
 	
-	private boolean connected = false;
 	private String uid;
 	
 	//element used to login a user
