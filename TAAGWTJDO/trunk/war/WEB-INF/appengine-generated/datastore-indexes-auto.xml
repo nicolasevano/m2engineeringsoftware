@@ -1,4 +1,15 @@
-<!-- Indices written at Sat, 19 Nov 2011 22:32:38 UTC -->
+<!-- Indices written at Wed, 23 Nov 2011 19:09:19 UTC -->
 
-<datastore-indexes/>
+<datastore-indexes>
 
+    <!-- Used 3 times in query history -->
+    <datastore-index kind="Contact" ancestor="true" source="auto">
+        <property name="contacts_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+    <!-- Used 2 times in query history -->
+    <datastore-index kind="Historique" ancestor="true" source="auto">
+        <property name="positions_INTEGER_IDX" direction="asc"/>
+    </datastore-index>
+
+</datastore-indexes>
