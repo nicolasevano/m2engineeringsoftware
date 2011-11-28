@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>TAA Google Web Toolkit</title><link rel="stylesheet" type="text/css" href="style.css"/><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"/></head><body><div xml:lang="fr-FR" class="article" title="TAA Google Web Toolkit"><div class="titlepage"><div><div><h2 class="title"><a id="d0e1"/>TAA Google Web Toolkit</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Nicolas</span> <span class="surname">Evano</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Sylvie</span> <span class="surname">Auneau</span></h3></div></div></div><hr/></div><div class="toc"><p><strong>Table des matières</strong></p><dl><dt><span class="section"><a href="#d0e19">1.0. Objectif:</a></span></dt><dt><span class="section"><a href="#d0e27">2.0. Les choix de conception:</a></span></dt><dt><span class="section"><a href="#d0e61">3.0. L’aspect client:</a></span></dt><dt><span class="section"><a href="#d0e82">4.0. Les fonctionnalités de l’application:</a></span></dt><dt><span class="section"><a href="#d0e103">5.0. ce que propose la base de données de l’application actuellement:</a></span></dt><dt><span class="section"><a href="#d0e108">6.0. conclusion:</a></span></dt><dt><span class="bibliography"><a href="#d0e116">Bibliographie</a></span></dt></dl></div><div class="section" title="Objectif:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e19"/>Objectif:</h2></div></div></div><p>
+		Développer un projet en <a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> déployé sur Google App Engine. l’idée est d’afficher la position courante d’un utilisateur grâce à l’api lattitude de Google.
+		</p></div><div class="section" title="Les choix de conception:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e27"/>Les choix de conception:</h2></div></div></div><p>
+		<a class="link" href="#datastore" title="Construire un Datastore opérationel">Google App Engine offre le choix entre JPA et JDO pour gérer la persistence</a>. Nous avons choisi JDO parce qu’il offre plus de fonctionnalités et est plus stable sur la plate forme de Google.
+		</p><p>
+		JDO permet d’utiliser des filtres pour s’abstraire complètement des requêtes SQL.
+		</p><p>
+		JDO souffre pourtant d’un manque de maturité. Pour exemple il est recommandé pour les relations un à plusieurs d’utiliser des clefs primaires de type KEY d’une façon générale les long sont à proscrire. Le type String peut également être employé sous réserve d’utiliser l’annotation suivante:
+		</p><p>
+		@Extension( vendorName="datanucleus", key="gae.encoded-pk", value="true" )
+		</p><p>
+		Dans le modèle métier utilisé, la table User utilise comme clef primaire un String:
+		</p><div class="mediaobject"><img src="./../image/TAAGWTModelMetier.gif"/></div><p>
+		une fois le service RLattitudeService<sup>[<a id="d0e55" href="#ftn.d0e55" class="footnote">2</a>]</sup> implémenté nous avons commencé la conception du client.
+		</p></div><div class="section" title="L’aspect client:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e61"/>L’aspect client:</h2></div></div></div><p> 
+			<a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> est en fait du code java traduit en java script par un compilateur il est donc important de bien comprendre que le résultat sera du javascript et non du “byte code” executé par le moteur javascript du navigateur du client.
+		</p><p>
+			Il faut également comprendre le mécanisme de callback employé par <a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> pour dialoguer avec des services distants à savoir: nous sommes en mesure de prévoir quand on invoque une opération du service sur le serveur distant mais l’on ne sais pas quand le retour de l’opération nous parviendra.
+		</p><p>
+		L’api Maps de <a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> a également été intégrée au client (api latitude en alpha pour <a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> actuellement risquée).
+		</p></div><div class="section" title="Les fonctionnalités de l’application:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e82"/>Les fonctionnalités de l’application:</h2></div></div></div><p>
+		Quand un utilisateur accède à l’IMH il peut:
+		</p><p>
+		-Se connecter en rentrant: un login et password grâce au bouton Login.
+		</p><p>
+		-Il peut créer un nouvelle utilisateur grâce au bouton créer un utilisateur,bouton Create User.
+		</p><p>
+		Quand l’utilisateur est connecté la liste de ses contacts est affichée sur le bord gauche de l’écran ainsi que son nom et prénom, il est par défaut caché des autres utilisateurs. dans cet état il peut:
+		</p><p>
+		-Se déconnecter, bouton Disconnect.
+		</p><p>
+		-Publier sa position, bouton Publish Position.
+		</p><p>
+		-Afficher sa position sur une carte ainsi que celle de l’ensemble de ses autres contacts si ces derniers se sont rendus visibles aux autres, bouton Display Position.
+		</p><p>
+		-Ajouter un contact, bouton Add Contact.
+		</p><p>
+		-Il peut se rendre visible des autres utilisateurs qui l’on ajoutés en contact en changeant son droit de visibilité, bouton Show Me/Hide Me.
+		</p></div><div class="section" title="ce que propose la base de données de l’application actuellement:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e103"/>ce que propose la base de données de l’application actuellement:</h2></div></div></div><p>
+		Dans la base de données actuellement il y a deux utilisateurs tmp1 (login: tmp1/pasword: tmp1) ainsi que tmp2 (login: tmp2/password: tmp2) et tmp3(login: tmp3/password: tmp3). tmp2 et tmp3 sont contacts de tmp1.
+		</p></div><div class="section" title="conclusion:"><div class="titlepage"><div><div><h2 class="title"><a id="d0e108"/>conclusion:</h2></div></div></div><p>
+			<a class="link" href="#GWT" title="Programmation GWT 2">GWT</a> est puissant une fois compris le mécanisme de callback utilisé avec le client pour dialoguer avec les services distants. Le choix du concept de la persistence utilisé avec GAE manque de souplesse beaucoup de limitations avec JPA. JDO reste perfectible pourtant il est plus stable et offre plus de fonctionnalités que JPA (restrint à la version 1) avec GAE.
+Google propose une plate-forme commode d’emploi, bien documentée.  
+		</p></div><div class="bibliography" title="Bibliographie"><div class="titlepage"><div><div><h2 class="title"><a id="d0e116"/>Bibliographie</h2></div></div></div><p>Cette bibliographie donne des références vers des livres.</p><div class="biblioentry" title="Programmation GWT 2"><a id="GWT"/><p>[GWT] <span class="author"><span class="firstname">Sami</span> <span class="surname">Jaber</span>. </span><span class="title"><em>Programmation GWT 2</em>. </span></p></div><div class="biblioentry" title="Construire un Datastore opérationel"><a id="datastore"/><p>[datastore] <span class="author"><span class="firstname">William</span> <span class="surname">H. Inmon</span>. </span><span class="title"><em>Construire un Datastore opérationel</em>. </span></p></div></div><div class="footnotes"><br/><hr/><div class="footnote"><p><sup>[<a id="ftn.d0e49" href="#d0e49" class="para">1</a>] </sup>Utilisé pour le TP1 et TP4</p></div><div class="footnote"><p><sup>[<a id="ftn.d0e55" href="#d0e55" class="para">2</a>] </sup>Service définit pour notre application <a class="link" href="#GWT" title="Programmation GWT 2">GWT</a></p></div></div></div></body></html>

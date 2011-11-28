@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:date="http://exslt.org/dates-and-times" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<fo:layout-master-set>
+<fo:simple-page-master master-name="A4">
+<fo:region-body margin-top="15mm" margin-bottom="15mm"/>
+<fo:region-before extent="20mm"/>
+<fo:region-after extent="10mm"/>
+</fo:simple-page-master>
+</fo:layout-master-set>
+<fo:page-sequence master-reference="A4">
+<fo:static-content flow-name="xsl-region-before" font-size="12pt">
+<fo:block text-align="center" font-size="12pt" space-after="30pt" padding="10pt" padding-left="30pt" padding-right="30pt">
+<fo:table text-align="center" table-layout="fixed" width="100%" border="1pt solid black" space-after="10pt" space-before="10pt">
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block>
+<fo:inline font-style="normal" font-size="8pt">Auteurs: -/Lars-Vogel</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="italic">DocBook Intro</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="3" border="1pt solid black">
+<fo:block font-style="normal">28/11/2011</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+</fo:static-content>
+<fo:static-content flow-name="xsl-region-after" font-size="12pt">
+<fo:block text-align="right">page <fo:page-number/>
+</fo:block>
+</fo:static-content>
+<fo:flow flow-name="xsl-region-body" font-size="20pt">
+<fo:block padding-left="30pt" padding-right="30pt">
+<fo:block text-align="center" font-size="25pt" font-weight="bold" space-before="14pt" space-after="25pt">
+<fo:inline font-style="normal" text-transform="uppercase">DocBook Intro</fo:inline>
+</fo:block>
+<fo:block text-align="center" font-size="12pt" font-weight="bold" space-before="14pt" space-after="12pt">
+<fo:inline font-style="normal">Auteurs: -/Lars-Vogel</fo:inline>
+</fo:block>
+<fo:block color="blue" padding-left="30pt" padding-right="30pt">
+<fo:inline font-style="normal" font-size="12pt" space-after="12pt">sommaire: </fo:inline>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">1.0-An introduction to TAA GWT </fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">1.1-Subsection</fo:inline>
+</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">1.0-An introduction to TAA GWT </fo:inline>
+</fo:block>
+<fo:block text-align="justify"/>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">1.1-Subsection</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt"> 
+				This model used with TP TAA <fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> for persistence in <fo:basic-link internal-destination="datastore" color="blue">datastore</fo:basic-link>.
+			</fo:block>
+<fo:block text-align="center" font-style="normal" font-size="10pt" space-after="14pt">
+<fo:inline font-style="normal" color="blue">
+<fo:external-graphic src="./../image/TAAGWTModelMetier.gif"/>
+</fo:inline>
+</fo:block>
+<fo:block text-align="center" font-style="normal" font-size="10pt" space-after="14pt">
+<fo:inline font-style="normal" color="blue">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+    					modéle métier employé en TAA<fo:footnote>
+<fo:inline baseline-shift="super" color="red" font-size="5pt">1</fo:inline>
+<fo:footnote-body>
+<fo:block text-align="center" font-style="normal" font-size="8pt" color="red">1.Utilisé pour le TP1 et TP4</fo:block>
+</fo:footnote-body>
+</fo:footnote>.
+  					</fo:block>
+</fo:inline>
+</fo:block>
+</fo:block>
+<fo:block text-align="center" font-size="12pt" space-after="30pt" keep-together="always" break-before="page">
+<fo:inline text-align="left" font-size="15pt" font-weight="bold" space-after="15pt" color="blue">Bibliographie</fo:inline>
+<fo:inline>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">Cette bibliographie donne des références vers des livres.</fo:block>
+</fo:inline>
+<fo:table text-align="center" table-layout="fixed" width="100%" border="1pt solid black" space-after="10pt" space-before="10pt">
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-header>
+<fo:table-cell border="1pt solid black">
+<fo:block font-weight="bold">Auteur</fo:block>
+</fo:table-cell>
+<fo:table-cell border="1pt solid black">
+<fo:block font-weight="bold">Titre</fo:block>
+</fo:table-cell>
+</fo:table-header>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block id="GWT">
+<fo:inline font-style="normal">Sami-Jaber</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="normal" font-weight="bold">Programmation GWT 2</fo:block>
+</fo:table-cell>
+</fo:table-row>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block id="datastore">
+<fo:inline font-style="normal">William-H. Inmon</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="normal" font-weight="bold">Construire un Datastore opérationel</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+</fo:block>
+</fo:flow>
+</fo:page-sequence>
+</fo:root>

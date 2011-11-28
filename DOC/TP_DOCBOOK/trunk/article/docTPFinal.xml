@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                         "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+<article lang="fr-FR">
+	<articleinfo>
+		<title>DOC TP FINAL DOCBOOK</title>
+		<author>
+			<firstname>Nicolas</firstname>
+			<surname>Evano</surname>
+		</author>
+		<author>
+			<firstname>Sylvie</firstname>
+			<surname>Auneau</surname>
+		</author>
+	</articleinfo>
+	<section label="1.0">
+		<title>Introduction:</title>
+		<para>
+		L’objectif est d’utiliser le format <link linkend="docbook">docbook</link> pour générer des documents finaux aux formats PDF et générer des documents <link linkend="XHTML">XHTML</link>. Les documents seront produits à partir de feuille de style XSLT et seront conformes à la DTD de la <link linkend="docbook">docbook</link>.
+		</para>
+	</section>
+	<section label="2.0">
+		<title >Définition de la docbook:</title>
+		<para>
+			La <link linkend="docbook">docbook</link> est à l’origine une définition de type de document DTD développée par l’éditeur  O’Reilly .Elle a depuis été portée sous forme de schéma XML ainsi que de régles relax NG pour la version 5. <link linkend="docbook">Docbook</link> est standardisée et maintenue par le DocBook Technical Comittee du consortium OASIS. Le format <link linkend="docbook">docbook</link> peut être utilisé pour tout type de documentation technique.
+		</para>
+	</section>
+	<section label="3.0">
+		<title>Les outils utilisés pour le TP:</title>
+		<para>
+		Pour la mise en oeuvre nous avons utilisé les outils suivants:
+		</para>
+		<para>
+		-<link linkend="ant">Ant</link> version 1.7.1 pour exécuter les commandes de transformation de document à partir de feuille xslt.
+		</para>
+		<para>
+		-Fop0.95 pour générer des documents pdf à partir de de fichier fo.
+		</para>
+		<para>
+		-Le processeur xslt de la version standart de java1.6.
+		</para>
+		<para>
+		-Le processeur xslt de <link linkend="saxon">saxon6-5-5</link>.
+		</para>
+		<para>
+		-Le package docbook-xsl-1.76.1 contient les feuilles de styles utilisées pour effectuer la transformation de document <link linkend="docbook">docbook</link> vers <link linkend="XHTML">XHTML-1.1</link>.
+		</para>
+		<para>
+		-L’IDE <link linkend="saxon">eclipse galileo 3.5</link>.
+		</para>
+		<para>
+		-Adobe reader9.3.4 pour visualiser le résultat en PDF.
+		</para>
+		<para>
+		-Chrome 15.0.874.121 pour visualisé le résultat <link linkend="XHTML">XHTML-1.1</link>.		
+		</para>
+		<para>
+		-La DTD 4.5 de la <link linkend="docbook">docbook</link>
+		</para>
+		<para>
+		-Svn 1.6.0 pour versionner le projet sur la platforme code.google.com.
+		</para>
+	</section>
+	<section label="4.0">
+		<title>Le choix de la méthode de génération des documents finaux:</title>
+		<para>
+		Nous avons choisi d’utiliser le processeur FO plutôt que LaTeX pour la génération des document finaux.
+		</para>
+		<para>
+		<link linkend="XSL-FO">XSL-FO</link> est un outil puissant pour générer des documents imprimable d’autre part le format s’adapte bien avec la <link linkend="docbook">docbook</link> et les feuilles de style XSLT existe déjà.
+		</para>
+		<para>
+		De plus nous avions déjà eu l’opportunité d’utiliser <link linkend="XSL-FO">XSL-FO</link> lors d’un TP précédent aussi il nous a paru intéressant d’explorer certaines des possibilités du format non exploitées durant le TP. Donc nous avons développé notre propre feuille de style pour générer un fichier fo à partir d’un document xml <link linkend="docbook">docbook</link>.
+		</para>
+	</section>
+	<section label="5.0">
+		<title>La méthode de travail utilisée:</title>
+		<para>
+		Nous avons étudié la documentation de la <link linkend="docbook">docbook</link> et déterminé quels sont les éléments disponibles et exploitables pour le compte-rendu.
+		</para>
+		<para>
+		la <link linkend="docbook">docbook</link> définit deux format de document:
+		</para>
+		<para>
+		-book pour les grands documents destinés aux livres.
+		</para>
+		<para>
+		-article pour les docment plus concis; celui utilisé dans notre cas.
+		</para>
+		<para>
+		Il est possible de générer un document <link linkend="XHTML">XHTML</link> avec un document <link linkend="docbook">docbook</link> par l’emploi du package docbook-xsl, conjointement avec le processeur xslt de <link linkend="saxon">saxon</link>. Ainsi nous générons des documents au format <link linkend="XHTML">XHTML-1.1</link>.
+		</para>
+		<para>
+		Pour les fichier PDF Nous avons décidé de développer notre propre feuille de style XSLT<footnote label="1"><para>Feuille de style xslt à la racine du projet testdoc.xsl.</para></footnote> plutôt que d’utiliser les modèles déjà disponibles dans le package docbook-xsl. Ce choix se justifie surtout car nous voulions mieux comprendre les mécanismes syntaxiques de <link linkend="XSL-FO">XSL-FO</link>. Enfin cela nous offre un résultat correspondant mieux à nos attentes.
+		</para>
+		<para>
+		La structure du projet a été travaillée et présente l’arborescence de répertoire suivante:
+		</para>
+		<para>
+		-article: qui contient l’ensemble des articles <link linkend="docbook">docbook</link> que nous avons rédigé<footnote label="2"><para>Les articles rédigés sont disponibles dans le répertoire article du projet.</para></footnote>.
+		</para>
+		<para>
+		-docbook-xsl: package des modéles de feuille de style xslt définit pour la <link linkend="docbook">docbook</link>.
+		</para>
+		<para>
+		-fo: contient les fichiers fo générés
+		</para>
+		<para>
+		-html: contient les fichiers <link linkend="XHTML">xhtml-1.1</link> générés.
+		</para>
+		<para>
+		-pdf: contient les fichiers pdf générés.
+		</para>
+		<para>
+		-image contient les images importées dans les documents
+		</para>
+		<para>
+		-lib: héberge les librairies nécessaires pour utiliser <link linkend="saxon">saxon</link> ainsi que le processeur fop.
+		</para>
+		<para>
+		-pdf: utilisé pour stocker les fichiers finaux PDF.
+		</para>
+	</section>
+	<section label="6.0">
+		<title>Rappel du fonctionnement XSL-FO</title>
+		<para>
+		Le <link linkend="XSL-FO">XSL-FO</link> permet de créer des documents finaux à partir de fichier xml et de feuille de style XSLT.
+		</para>
+		<mediaobject>
+			<imageobject>
+				<imagedata fileref="./../image/xslfoTransformation.gif" format="GIF"/>
+			</imageobject>
+			<textobject>
+  				<para>
+    				processus de génération PDF utilisé avec <link linkend="XSL-FO">XSL-FO</link>.
+  				</para>
+			</textobject>
+		</mediaobject>
+		<para>
+		1 Un ou plusieurs documents xml et XSLT sont fournis à un processeur xslt
+		</para>
+		<para>
+		2 en utilisant les règles définies dans les document XSLT le processeur génère un fichier fo à partir du ou des fichiers xml.
+		</para>
+		<para>
+		3 le document fo est fourni au processeur fo.
+		</para>
+		<para>
+		4 le processeur fo applique les régles de formatage définies dans le document fo pour générer un fichier final au format PDF.
+		</para>
+	</section>
+	<section label="7.0">
+		<title>Le processus de construction des documents:</title>
+		<para>
+		Le processus de construction des document est défini dans le fichier <link linkend="ant">ant</link> build.xml situé à la racine du projet <link linkend="eclipse">eclipse</link>.
+		</para>
+		<para>
+		Deux cibles<footnote label="3"><para>ant doit être installé pour pouvoir les utiliser.</para></footnote> sont à retenir:
+		</para>
+		<para>
+		-clean qui vide les répertoires html, fo, pdf.
+		</para>
+		<para>
+		-newPDF qui génére les fichiers PDF dans le répertoire PDF, les fichiers fo utilisés sont stockés dans le répertoire fo, enfin cette cible génére également les fichiers résultat html dans le répertoire html en appelant la cible build-html.
+		</para>
+	</section>
+	<section label="8.0">
+		<title>Conclusion:</title>
+		<para>
+		La <link linkend="docbook">docbook</link> est un format de document riche et complet il s’intégre particulierement bien avec le processeur fo pour générer des fichiers imprimables et autorise simplement des transformations vers divers formats comme le <link linkend="XHTML">xhtml-1.1</link> il est mêmes possible de générer des slides pour une présentation. D’autre par la <link linkend="docbook">docbook</link> est un format xml il offre donc un bien meilleur niveau d’interopérabilité que LaTeX.
+		</para>
+	</section>
+	<bibliography>
+  		<title>Bibliographie</title>
+  		<para>Cette bibliographie donne des références vers des livres.</para>
+  		<biblioentry id="XSL-FO">
+    		<author>
+      			<surname>Pawson</surname>
+      			<firstname>Dave</firstname>
+    		</author>
+    		<title>XSL-FO</title>
+  		</biblioentry>
+  		<biblioentry id="ant">
+    		<author>
+      			<surname>Edlich</surname>
+      			<firstname>Stephen</firstname>
+    		</author>
+    		<title>Ant Précis et concis</title>
+  		</biblioentry>
+  		<biblioentry id="saxon">
+    		<author>
+      			<surname>H. Kay</surname>
+      			<firstname>Michael</firstname>
+    		</author>
+    		<title>XSLT: Programmer's Reference, Second Edition</title>
+  		</biblioentry>
+  		<biblioentry id="eclipse">
+    		<author>
+      			<surname>Djaafar</surname>
+      			<firstname>Karim</firstname>
+    		</author>
+    		<title>Développement JEE 5 avec Eclipse Europa</title>
+  		</biblioentry>
+  		<biblioentry id="docbook">
+    		<author>
+      			<surname>Walsh</surname>
+      			<firstname>Norman</firstname>
+    		</author>
+    		<title>DocBook 5: The Definitive Guide</title>
+  		</biblioentry>
+  		<biblioentry id="XHTML">
+    		<author>
+      			<surname>Goetter</surname>
+      			<firstname>Raphaël</firstname>
+    		</author>
+    		<title>XHTML mémento</title>
+  		</biblioentry>
+	</bibliography>
+</article>

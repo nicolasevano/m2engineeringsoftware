@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                         "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article lang="fr-FR">
+	<articleinfo>
+		<title>DocBook Intro</title>
+		<author>
+			<firstname>Lars</firstname>
+			<surname>Vogel</surname>
+		</author>
+	</articleinfo>
+	<section label="1.0">
+		<title>An introduction to TAA GWT </title>
+		<section label="1.1">
+			<title>Subsection</title>
+			<para> 
+				This model used with TP TAA <link linkend="GWT">GWT</link> for persistence in <link linkend="datastore">datastore</link>.
+			</para>
+			<mediaobject>
+				<imageobject>
+					<imagedata fileref="./../image/TAAGWTModelMetier.gif" format="GIF"/>
+				</imageobject>
+				<textobject>
+  					<para>
+    					modéle métier employé en TAA<footnote label="1"><para>Utilisé pour le TP1 et TP4</para></footnote>.
+  					</para>
+				</textobject>
+			</mediaobject>
+		</section>
+	</section>
+	<bibliography>
+  		<title>Bibliographie</title>
+  		<para>Cette bibliographie donne des références vers des livres.</para>
+  		<biblioentry id="GWT">
+    		<author>
+      			<surname>Jaber</surname>
+      			<firstname>Sami</firstname>
+    		</author>
+    		<title>Programmation GWT 2</title>
+  		</biblioentry>
+  		<biblioentry id="datastore">
+    		<author>
+      			<surname>H. Inmon</surname>
+      			<firstname>William</firstname>
+    		</author>
+    		<title>Construire un Datastore opérationel</title>
+  		</biblioentry>
+	</bibliography>
+</article>
