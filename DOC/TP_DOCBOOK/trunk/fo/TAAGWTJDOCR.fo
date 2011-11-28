@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fo:root xmlns:date="http://exslt.org/dates-and-times" xmlns:fo="http://www.w3.org/1999/XSL/Format">
+<fo:layout-master-set>
+<fo:simple-page-master master-name="A4">
+<fo:region-body margin-top="15mm" margin-bottom="15mm"/>
+<fo:region-before extent="20mm"/>
+<fo:region-after extent="10mm"/>
+</fo:simple-page-master>
+</fo:layout-master-set>
+<fo:page-sequence master-reference="A4">
+<fo:static-content flow-name="xsl-region-before" font-size="12pt">
+<fo:block text-align="center" font-size="12pt" space-after="30pt" padding="10pt" padding-left="30pt" padding-right="30pt">
+<fo:table text-align="center" table-layout="fixed" width="100%" border="1pt solid black" space-after="10pt" space-before="10pt">
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block>
+<fo:inline font-style="normal" font-size="8pt">Auteurs: Sylvie-Auneau/Nicolas-Evano</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="italic">TAA Google Web Toolkit</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="3" border="1pt solid black">
+<fo:block font-style="normal">28/11/2011</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+</fo:static-content>
+<fo:static-content flow-name="xsl-region-after" font-size="12pt">
+<fo:block text-align="right">page <fo:page-number/>
+</fo:block>
+</fo:static-content>
+<fo:flow flow-name="xsl-region-body" font-size="20pt">
+<fo:block padding-left="30pt" padding-right="30pt">
+<fo:block text-align="center" font-size="25pt" font-weight="bold" space-before="14pt" space-after="25pt">
+<fo:inline font-style="normal" text-transform="uppercase">TAA Google Web Toolkit</fo:inline>
+</fo:block>
+<fo:block text-align="center" font-size="12pt" font-weight="bold" space-before="14pt" space-after="12pt">
+<fo:inline font-style="normal">Auteurs: Sylvie-Auneau/Nicolas-Evano</fo:inline>
+</fo:block>
+<fo:block color="blue" padding-left="30pt" padding-right="30pt">
+<fo:inline font-style="normal" font-size="12pt" space-after="12pt">sommaire: </fo:inline>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">1.0-Objectif:</fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">2.0-Les choix de conception:</fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">3.0-L’aspect client:</fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">4.0-Les fonctionnalités de l’application:</fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">5.0-ce que propose la base de données de l’application actuellement:</fo:inline>
+</fo:block>
+<fo:block text-align="justify" font-style="normal" font-size="12pt" space-after="12pt">
+<fo:inline font-style="normal" color="blue">6.0-conclusion:</fo:inline>
+</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">1.0-Objectif:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		Développer un projet en <fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> déployé sur Google App Engine. l’idée est d’afficher la position courante d’un utilisateur grâce à l’api lattitude de Google.
+		</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">2.0-Les choix de conception:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		<fo:basic-link internal-destination="datastore" color="blue">Google App Engine offre le choix entre JPA et JDO pour gérer la persistence</fo:basic-link>. Nous avons choisi JDO parce qu’il offre plus de fonctionnalités et est plus stable sur la plate forme de Google.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		JDO permet d’utiliser des filtres pour s’abstraire complètement des requêtes SQL.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		JDO souffre pourtant d’un manque de maturité. Pour exemple il est recommandé pour les relations un à plusieurs d’utiliser des clefs primaires de type KEY d’une façon générale les long sont à proscrire. Le type String peut également être employé sous réserve d’utiliser l’annotation suivante:
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		@Extension( vendorName="datanucleus", key="gae.encoded-pk", value="true" )
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		Dans le modèle métier utilisé, la table User utilise comme clef primaire un String:
+		</fo:block>
+<fo:block text-align="center" font-style="normal" font-size="10pt" space-after="14pt">
+<fo:inline font-style="normal" color="blue">
+<fo:external-graphic src="./../image/TAAGWTModelMetier.gif"/>
+</fo:inline>
+</fo:block>
+<fo:block text-align="center" font-style="normal" font-size="10pt" space-after="14pt">
+<fo:inline font-style="normal" color="blue">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+    				modéle métier employé en TAA<fo:footnote>
+<fo:inline baseline-shift="super" color="red" font-size="5pt">1</fo:inline>
+<fo:footnote-body>
+<fo:block text-align="center" font-style="normal" font-size="8pt" color="red">1.Utilisé pour le TP1 et TP4</fo:block>
+</fo:footnote-body>
+</fo:footnote>.
+  				</fo:block>
+</fo:inline>
+</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		une fois le service RLattitudeService<fo:footnote>
+<fo:inline baseline-shift="super" color="red" font-size="5pt">2</fo:inline>
+<fo:footnote-body>
+<fo:block text-align="center" font-style="normal" font-size="8pt" color="red">2.Service définit pour notre application </fo:block>
+</fo:footnote-body>
+</fo:footnote> implémenté nous avons commencé la conception du client.
+		</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">3.0-L’aspect client:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt"> 
+			<fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> est en fait du code java traduit en java script par un compilateur il est donc important de bien comprendre que le résultat sera du javascript et non du “byte code” executé par le moteur javascript du navigateur du client.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+			Il faut également comprendre le mécanisme de callback employé par <fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> pour dialoguer avec des services distants à savoir: nous sommes en mesure de prévoir quand on invoque une opération du service sur le serveur distant mais l’on ne sais pas quand le retour de l’opération nous parviendra.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		L’api Maps de <fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> a également été intégrée au client (api latitude en alpha pour <fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> actuellement risquée).
+		</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">4.0-Les fonctionnalités de l’application:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		Quand un utilisateur accède à l’IMH il peut:
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Se connecter en rentrant: un login et password grâce au bouton Login.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Il peut créer un nouvelle utilisateur grâce au bouton créer un utilisateur,bouton Create User.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		Quand l’utilisateur est connecté la liste de ses contacts est affichée sur le bord gauche de l’écran ainsi que son nom et prénom, il est par défaut caché des autres utilisateurs. dans cet état il peut:
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Se déconnecter, bouton Disconnect.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Publier sa position, bouton Publish Position.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Afficher sa position sur une carte ainsi que celle de l’ensemble de ses autres contacts si ces derniers se sont rendus visibles aux autres, bouton Display Position.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Ajouter un contact, bouton Add Contact.
+		</fo:block>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		-Il peut se rendre visible des autres utilisateurs qui l’on ajoutés en contact en changeant son droit de visibilité, bouton Show Me/Hide Me.
+		</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">5.0-ce que propose la base de données de l’application actuellement:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+		Dans la base de données actuellement il y a deux utilisateurs tmp1 (login: tmp1/pasword: tmp1) ainsi que tmp2 (login: tmp2/password: tmp2) et tmp3(login: tmp3/password: tmp3). tmp2 et tmp3 sont contacts de tmp1.
+		</fo:block>
+</fo:block>
+<fo:block text-align="left" font-size="15pt" font-weight="bold" space-after="15pt">
+<fo:inline font-style="normal">6.0-conclusion:</fo:inline>
+</fo:block>
+<fo:block text-align="justify">
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">
+			<fo:basic-link internal-destination="GWT" color="blue">GWT</fo:basic-link> est puissant une fois compris le mécanisme de callback utilisé avec le client pour dialoguer avec les services distants. Le choix du concept de la persistence utilisé avec GAE manque de souplesse beaucoup de limitations avec JPA. JDO reste perfectible pourtant il est plus stable et offre plus de fonctionnalités que JPA (restrint à la version 1) avec GAE.
+Google propose une plate-forme commode d’emploi, bien documentée.  
+		</fo:block>
+</fo:block>
+<fo:block text-align="center" font-size="12pt" space-after="30pt" keep-together="always" break-before="page">
+<fo:inline text-align="left" font-size="15pt" font-weight="bold" space-after="15pt" color="blue">Bibliographie</fo:inline>
+<fo:inline>
+<fo:block font-style="normal" font-size="12pt" space-after="14pt">Cette bibliographie donne des références vers des livres.</fo:block>
+</fo:inline>
+<fo:table text-align="center" table-layout="fixed" width="100%" border="1pt solid black" space-after="10pt" space-before="10pt">
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-column column-width="proportional-column-width(1)"/>
+<fo:table-header>
+<fo:table-cell border="1pt solid black">
+<fo:block font-weight="bold">Auteur</fo:block>
+</fo:table-cell>
+<fo:table-cell border="1pt solid black">
+<fo:block font-weight="bold">Titre</fo:block>
+</fo:table-cell>
+</fo:table-header>
+<fo:table-body>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block id="GWT">
+<fo:inline font-style="normal">Sami-Jaber</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="normal" font-weight="bold">Programmation GWT 2</fo:block>
+</fo:table-cell>
+</fo:table-row>
+<fo:table-row>
+<fo:table-cell column-number="1" border="1pt solid black">
+<fo:block id="datastore">
+<fo:inline font-style="normal">William-H. Inmon</fo:inline>
+</fo:block>
+</fo:table-cell>
+<fo:table-cell column-number="2" border="1pt solid black">
+<fo:block font-style="normal" font-weight="bold">Construire un Datastore opérationel</fo:block>
+</fo:table-cell>
+</fo:table-row>
+</fo:table-body>
+</fo:table>
+</fo:block>
+</fo:block>
+</fo:flow>
+</fo:page-sequence>
+</fo:root>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.5//EN"
+                         "http://www.oasis-open.org/docbook/xml/4.5/docbookx.dtd">
+
+<article lang="fr-FR">
+	<articleinfo>
+		<title>TAA Google Web Toolkit</title>
+		<author>
+			<firstname>Nicolas</firstname>
+			<surname>Evano</surname>
+		</author>
+		<author>
+			<firstname>Sylvie</firstname>
+			<surname>Auneau</surname>
+		</author>
+	</articleinfo>
+	<section label="1.0">
+		<title>Objectif:</title>
+		<para>
+		Développer un projet en <link linkend="GWT">GWT</link> déployé sur Google App Engine. l’idée est d’afficher la position courante d’un utilisateur grâce à l’api lattitude de Google.
+		</para>
+	</section>
+	<section label="2.0">
+		<title>Les choix de conception:</title>
+		<para>
+		<link linkend="datastore">Google App Engine offre le choix entre JPA et JDO pour gérer la persistence</link>. Nous avons choisi JDO parce qu’il offre plus de fonctionnalités et est plus stable sur la plate forme de Google.
+		</para>
+		<para>
+		JDO permet d’utiliser des filtres pour s’abstraire complètement des requêtes SQL.
+		</para>
+		<para>
+		JDO souffre pourtant d’un manque de maturité. Pour exemple il est recommandé pour les relations un à plusieurs d’utiliser des clefs primaires de type KEY d’une façon générale les long sont à proscrire. Le type String peut également être employé sous réserve d’utiliser l’annotation suivante:
+		</para>
+		<para>
+		@Extension( vendorName="datanucleus", key="gae.encoded-pk", value="true" )
+		</para>
+		<para>
+		Dans le modèle métier utilisé, la table User utilise comme clef primaire un String:
+		</para>
+		<mediaobject>
+			<imageobject>
+				<imagedata fileref="./../image/TAAGWTModelMetier.gif" format="GIF"/>
+			</imageobject>
+			<textobject>
+  				<para>
+    				modéle métier employé en TAA<footnote label="1"><para>Utilisé pour le TP1 et TP4</para></footnote>.
+  				</para>
+			</textobject>
+		</mediaobject>
+		<para>
+		une fois le service RLattitudeService<footnote label="2"><para>Service définit pour notre application <link linkend="GWT">GWT</link></para></footnote> implémenté nous avons commencé la conception du client.
+		</para>
+	</section>
+	<section label="3.0">
+		<title>L’aspect client:</title>
+		<para> 
+			<link linkend="GWT">GWT</link> est en fait du code java traduit en java script par un compilateur il est donc important de bien comprendre que le résultat sera du javascript et non du “byte code” executé par le moteur javascript du navigateur du client.
+		</para>
+		<para>
+			Il faut également comprendre le mécanisme de callback employé par <link linkend="GWT">GWT</link> pour dialoguer avec des services distants à savoir: nous sommes en mesure de prévoir quand on invoque une opération du service sur le serveur distant mais l’on ne sais pas quand le retour de l’opération nous parviendra.
+		</para>
+		<para>
+		L’api Maps de <link linkend="GWT">GWT</link> a également été intégrée au client (api latitude en alpha pour <link linkend="GWT">GWT</link> actuellement risquée).
+		</para>
+	</section>
+	<section label="4.0">
+		<title>Les fonctionnalités de l’application:</title>
+		<para>
+		Quand un utilisateur accède à l’IMH il peut:
+		</para>
+		<para>
+		-Se connecter en rentrant: un login et password grâce au bouton Login.
+		</para>
+		<para>
+		-Il peut créer un nouvelle utilisateur grâce au bouton créer un utilisateur,bouton Create User.
+		</para>
+		<para>
+		Quand l’utilisateur est connecté la liste de ses contacts est affichée sur le bord gauche de l’écran ainsi que son nom et prénom, il est par défaut caché des autres utilisateurs. dans cet état il peut:
+		</para>
+		<para>
+		-Se déconnecter, bouton Disconnect.
+		</para>
+		<para>
+		-Publier sa position, bouton Publish Position.
+		</para>
+		<para>
+		-Afficher sa position sur une carte ainsi que celle de l’ensemble de ses autres contacts si ces derniers se sont rendus visibles aux autres, bouton Display Position.
+		</para>
+		<para>
+		-Ajouter un contact, bouton Add Contact.
+		</para>
+		<para>
+		-Il peut se rendre visible des autres utilisateurs qui l’on ajoutés en contact en changeant son droit de visibilité, bouton Show Me/Hide Me.
+		</para>
+	</section>
+	<section label="5.0">
+		<title>ce que propose la base de données de l’application actuellement:</title>
+		<para>
+		Dans la base de données actuellement il y a deux utilisateurs tmp1 (login: tmp1/pasword: tmp1) ainsi que tmp2 (login: tmp2/password: tmp2) et tmp3(login: tmp3/password: tmp3). tmp2 et tmp3 sont contacts de tmp1.
+		</para>
+	</section>
+	<section label="6.0">
+		<title>conclusion:</title>
+		<para>
+			<link linkend="GWT">GWT</link> est puissant une fois compris le mécanisme de callback utilisé avec le client pour dialoguer avec les services distants. Le choix du concept de la persistence utilisé avec GAE manque de souplesse beaucoup de limitations avec JPA. JDO reste perfectible pourtant il est plus stable et offre plus de fonctionnalités que JPA (restrint à la version 1) avec GAE.
+Google propose une plate-forme commode d’emploi, bien documentée.  
+		</para>
+	</section>
+	<bibliography>
+  		<title>Bibliographie</title>
+  		<para>Cette bibliographie donne des références vers des livres.</para>
+  		<biblioentry id="GWT">
+    		<author>
+      			<surname>Jaber</surname>
+      			<firstname>Sami</firstname>
+    		</author>
+    		<title>Programmation GWT 2</title>
+  		</biblioentry>
+  		<biblioentry id="datastore">
+    		<author>
+      			<surname>H. Inmon</surname>
+      			<firstname>William</firstname>
+    		</author>
+    		<title>Construire un Datastore opérationel</title>
+  		</biblioentry>
+	</bibliography>
+</article>

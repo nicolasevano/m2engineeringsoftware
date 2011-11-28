@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="docbook-src" default="newPDF">
+
+	<description>
+            This Ant build.xml file is used to transform DocBook XML to html and pdf output
+    </description>
+
+	<!-- =================================================================== -->
+	<!--Configure basic properties that will be used in the file.            -->
+	<!-- =================================================================== -->
+	<property name="input.dir" value="./article" />
+	<property name="output.dir" value="./html" />
+	<property name="fo_output.dir" value="./fo" />
+	<property name="pdf_output.dir" value="./pdf" />
+	<property name="docbook.xsl.dir" value="./docbook-xsl" />
+	<property name="html.stylesheet" value="${docbook.xsl.dir}/xhtml-1_1/docbook.xsl" />
+
+	<!-- =================================================================== -->
+	<!-- Making saxon available                                              -->
+	<!-- =================================================================== -->
+	<path id="saxon.class.path">
+		<pathelement location="lib/saxon.jar" />
+	</path>
+
+	<!-- =================================================================== -->
+	<!-- target:  usage                                                      -->
+    <!-- =================================================================== -->
+	<target name="usage" description="Prints the Ant build.xml usage">
+		<echo message="Use -projecthelp to get a list of the available targets." />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- target:  clean                                                      -->
+	<!-- =================================================================== -->
+	<target name="clean" description="Cleans up generated files.">
+		<delete includeemptydirs="true">
+		    <fileset dir="${output.dir}" includes="**/*.html" excludes="**/*.svn"/>
+		</delete>
+		<delete includeemptydirs="true">
+			<fileset dir="${fo_output.dir}" includes="**/*.fo" excludes="**/*.svn"/>
+		</delete>
+		<delete includeemptydirs="true">
+			<fileset dir="${pdf_output.dir}" includes="**/*.pdf" excludes="**/*.svn"/>
+		</delete>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- target:  depends                                                    -->
+	<!-- =================================================================== -->
+	<target name="depends">
+		<mkdir dir="${output.dir}" />
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Author:  Lars Vogel                                                 -->
+    <!-- target:  build-html                                                 -->
+    <!-- description:  Iterates through a directory and transforms           -->
+    <!--     .xml files into .html files using the DocBook XSL.              -->
+    <!-- =================================================================== -->
+	
+	<target name="build-html" depends="depends" description="Generates HTML files from DocBook XML">
+		<xslt style="${html.stylesheet}" extension=".html" basedir="${input.dir}" destdir="${output.dir}">
+			<include name="**/*.xml" />
+			<include name="**/*.xml" />
+			<param name="html.stylesheet" expression="style.css" />
+			<classpath refid="saxon.class.path" />
+		</xslt>
+		<!-- Copy the stylesheet to the same directory as the HTML files -->
+		<copy todir="${output.dir}">
+			<fileset dir="lib">
+				<include name="style.css" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Production du FO avec un transformateur XSLT	                     -->
+	<!-- =================================================================== -->
+	<target name="newFO" depends="build-html">
+		<xslt style="testdoc.xsl" extension=".fo" basedir="${input.dir}" destdir="${fo_output.dir}">
+			<include name="**/*.xml" />
+			<include name="**/*.xml" />
+		</xslt>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Initialisations pour FOP		                                     -->
+	<!-- =================================================================== -->
+	<target name="init" depends="newFO">
+		<tstamp/>
+		<path id="run-classpath">
+	  	  <fileset dir="lib">
+	    	  <include name="*.jar"/>
+		  </fileset>
+	      <pathelement location="lib/fop.jar"/>
+		  </path>
+	    <taskdef name="fop" classname="org.apache.fop.tools.anttasks.Fop" classpathref="run-classpath"/>
+	</target>
+				
+	<!-- =================================================================== -->
+	<!-- Fonction fop (dans le répertoire courant)							 -->
+	<!-- =================================================================== -->
+	<target name="newResult">
+	    <fop format="${mimetype}" outdir="${pdf_output.dir}" messagelevel="${msglevel}" relativebase="true">
+	      <fileset dir="${fo_output.dir}">
+	        <include name="*.fo"/>
+	      </fileset>
+	    </fop>
+	</target>
+	
+	<!-- =================================================================== -->
+	<!-- Produit un fichier PDF 		                                     -->
+	<!-- =================================================================== -->
+	<target name="newPDF" depends="init" description="création PDF">
+	    <antcall target="newResult">
+	      <param name="mimetype" value="application/pdf"/>
+	      <param name="msglevel" value="warn"/>
+	    </antcall>
+	</target>
+</project>

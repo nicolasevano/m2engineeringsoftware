@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+  PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><title>DOC TP FINAL DOCBOOK</title><link rel="stylesheet" type="text/css" href="style.css"/><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"/></head><body><div xml:lang="fr-FR" class="article" title="DOC TP FINAL DOCBOOK"><div class="titlepage"><div><div><h2 class="title"><a id="d46e1"/>DOC TP FINAL DOCBOOK</h2></div><div><div class="author"><h3 class="author"><span class="firstname">Nicolas</span> <span class="surname">Evano</span></h3></div></div><div><div class="author"><h3 class="author"><span class="firstname">Sylvie</span> <span class="surname">Auneau</span></h3></div></div></div><hr/></div><div class="toc"><p><strong>Table des matières</strong></p><dl><dt><span class="section"><a href="#d46e19">1.0. Introduction:</a></span></dt><dt><span class="section"><a href="#d46e33">2.0. Définition de la docbook:</a></span></dt><dt><span class="section"><a href="#d46e47">3.0. Les outils utilisés pour le TP:</a></span></dt><dt><span class="section"><a href="#d46e93">4.0. Le choix de la méthode de génération des documents finaux:</a></span></dt><dt><span class="section"><a href="#d46e114">5.0. La méthode de travail utilisée:</a></span></dt><dt><span class="section"><a href="#d46e188">6.0. Rappel du fonctionnement XSL-FO</a></span></dt><dt><span class="section"><a href="#d46e213">7.0. Le processus de construction des documents:</a></span></dt><dt><span class="section"><a href="#d46e234">8.0. Conclusion:</a></span></dt><dt><span class="bibliography"><a href="#d46e248">Bibliographie</a></span></dt></dl></div><div class="section" title="Introduction:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e19"/>Introduction:</h2></div></div></div><p>
+		L’objectif est d’utiliser le format <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> pour générer des documents finaux aux formats PDF et générer des documents <a class="link" href="#XHTML" title="XHTML mémento">XHTML</a>. Les documents seront produits à partir de feuille de style XSLT et seront conformes à la DTD de la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a>.
+		</p></div><div class="section" title="Définition de la docbook:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e33"/>Définition de la docbook:</h2></div></div></div><p>
+			La <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> est à l’origine une définition de type de document DTD développée par l’éditeur  O’Reilly .Elle a depuis été portée sous forme de schéma XML ainsi que de régles relax NG pour la version 5. <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">Docbook</a> est standardisée et maintenue par le DocBook Technical Comittee du consortium OASIS. Le format <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> peut être utilisé pour tout type de documentation technique.
+		</p></div><div class="section" title="Les outils utilisés pour le TP:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e47"/>Les outils utilisés pour le TP:</h2></div></div></div><p>
+		Pour la mise en oeuvre nous avons utilisé les outils suivants:
+		</p><p>
+		-<a class="link" href="#ant" title="Ant Précis et concis">Ant</a> version 1.7.1 pour exécuter les commandes de transformation de document à partir de feuille xslt.
+		</p><p>
+		-Fop0.95 pour générer des documents pdf à partir de de fichier fo.
+		</p><p>
+		-Le processeur xslt de la version standart de java1.6.
+		</p><p>
+		-Le processeur xslt de <a class="link" href="#saxon" title="XSLT: Programmer's Reference, Second Edition">saxon6-5-5</a>.
+		</p><p>
+		-Le package docbook-xsl-1.76.1 contient les feuilles de styles utilisées pour effectuer la transformation de document <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> vers <a class="link" href="#XHTML" title="XHTML mémento">XHTML-1.1</a>.
+		</p><p>
+		-L’IDE <a class="link" href="#saxon" title="XSLT: Programmer's Reference, Second Edition">eclipse galileo 3.5</a>.
+		</p><p>
+		-Adobe reader9.3.4 pour visualiser le résultat en PDF.
+		</p><p>
+		-Chrome 15.0.874.121 pour visualisé le résultat <a class="link" href="#XHTML" title="XHTML mémento">XHTML-1.1</a>.		
+		</p><p>
+		-La DTD 4.5 de la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a>
+		</p><p>
+		-Svn 1.6.0 pour versionner le projet sur la platforme code.google.com.
+		</p></div><div class="section" title="Le choix de la méthode de génération des documents finaux:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e93"/>Le choix de la méthode de génération des documents finaux:</h2></div></div></div><p>
+		Nous avons choisi d’utiliser le processeur FO plutôt que LaTeX pour la génération des document finaux.
+		</p><p>
+		<a class="link" href="#XSL-FO" title="XSL-FO">XSL-FO</a> est un outil puissant pour générer des documents imprimable d’autre part le format s’adapte bien avec la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> et les feuilles de style XSLT existe déjà.
+		</p><p>
+		De plus nous avions déjà eu l’opportunité d’utiliser <a class="link" href="#XSL-FO" title="XSL-FO">XSL-FO</a> lors d’un TP précédent aussi il nous a paru intéressant d’explorer certaines des possibilités du format non exploitées durant le TP. Donc nous avons développé notre propre feuille de style pour générer un fichier fo à partir d’un document xml <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a>.
+		</p></div><div class="section" title="La méthode de travail utilisée:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e114"/>La méthode de travail utilisée:</h2></div></div></div><p>
+		Nous avons étudié la documentation de la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> et déterminé quels sont les éléments disponibles et exploitables pour le compte-rendu.
+		</p><p>
+		la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> définit deux format de document:
+		</p><p>
+		-book pour les grands documents destinés aux livres.
+		</p><p>
+		-article pour les docment plus concis; celui utilisé dans notre cas.
+		</p><p>
+		Il est possible de générer un document <a class="link" href="#XHTML" title="XHTML mémento">XHTML</a> avec un document <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> par l’emploi du package docbook-xsl, conjointement avec le processeur xslt de <a class="link" href="#saxon" title="XSLT: Programmer's Reference, Second Edition">saxon</a>. Ainsi nous générons des documents au format <a class="link" href="#XHTML" title="XHTML mémento">XHTML-1.1</a>.
+		</p><p>
+		Pour les fichier PDF Nous avons décidé de développer notre propre feuille de style XSLT<sup>[<a id="d46e147" href="#ftn.d46e147" class="footnote">1</a>]</sup> plutôt que d’utiliser les modèles déjà disponibles dans le package docbook-xsl. Ce choix se justifie surtout car nous voulions mieux comprendre les mécanismes syntaxiques de <a class="link" href="#XSL-FO" title="XSL-FO">XSL-FO</a>. Enfin cela nous offre un résultat correspondant mieux à nos attentes.
+		</p><p>
+		La structure du projet a été travaillée et présente l’arborescence de répertoire suivante:
+		</p><p>
+		-article: qui contient l’ensemble des articles <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> que nous avons rédigé<sup>[<a id="d46e161" href="#ftn.d46e161" class="footnote">2</a>]</sup>.
+		</p><p>
+		-docbook-xsl: package des modéles de feuille de style xslt définit pour la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a>.
+		</p><p>
+		-fo: contient les fichiers fo générés
+		</p><p>
+		-html: contient les fichiers <a class="link" href="#XHTML" title="XHTML mémento">xhtml-1.1</a> générés.
+		</p><p>
+		-pdf: contient les fichiers pdf générés.
+		</p><p>
+		-image contient les images importées dans les documents
+		</p><p>
+		-lib: héberge les librairies nécessaires pour utiliser <a class="link" href="#saxon" title="XSLT: Programmer's Reference, Second Edition">saxon</a> ainsi que le processeur fop.
+		</p><p>
+		-pdf: utilisé pour stocker les fichiers finaux PDF.
+		</p></div><div class="section" title="Rappel du fonctionnement XSL-FO"><div class="titlepage"><div><div><h2 class="title"><a id="d46e188"/>Rappel du fonctionnement XSL-FO</h2></div></div></div><p>
+		Le <a class="link" href="#XSL-FO" title="XSL-FO">XSL-FO</a> permet de créer des documents finaux à partir de fichier xml et de feuille de style XSLT.
+		</p><div class="mediaobject"><img src="./../image/xslfoTransformation.gif"/></div><p>
+		1 Un ou plusieurs documents xml et XSLT sont fournis à un processeur xslt
+		</p><p>
+		2 en utilisant les règles définies dans les document XSLT le processeur génère un fichier fo à partir du ou des fichiers xml.
+		</p><p>
+		3 le document fo est fourni au processeur fo.
+		</p><p>
+		4 le processeur fo applique les régles de formatage définies dans le document fo pour générer un fichier final au format PDF.
+		</p></div><div class="section" title="Le processus de construction des documents:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e213"/>Le processus de construction des documents:</h2></div></div></div><p>
+		Le processus de construction des document est défini dans le fichier <a class="link" href="#ant" title="Ant Précis et concis">ant</a> build.xml situé à la racine du projet <a class="link" href="#eclipse" title="Développement JEE 5 avec Eclipse Europa">eclipse</a>.
+		</p><p>
+		Deux cibles<sup>[<a id="d46e226" href="#ftn.d46e226" class="footnote">3</a>]</sup> sont à retenir:
+		</p><p>
+		-clean qui vide les répertoires html, fo, pdf.
+		</p><p>
+		-newPDF qui génére les fichiers PDF dans le répertoire PDF, les fichiers fo utilisés sont stockés dans le répertoire fo, enfin cette cible génére également les fichiers résultat html dans le répertoire html en appelant la cible build-html.
+		</p></div><div class="section" title="Conclusion:"><div class="titlepage"><div><div><h2 class="title"><a id="d46e234"/>Conclusion:</h2></div></div></div><p>
+		La <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> est un format de document riche et complet il s’intégre particulierement bien avec le processeur fo pour générer des fichiers imprimables et autorise simplement des transformations vers divers formats comme le <a class="link" href="#XHTML" title="XHTML mémento">xhtml-1.1</a> il est mêmes possible de générer des slides pour une présentation. D’autre par la <a class="link" href="#docbook" title="DocBook 5: The Definitive Guide">docbook</a> est un format xml il offre donc un bien meilleur niveau d’interopérabilité que LaTeX.
+		</p></div><div class="bibliography" title="Bibliographie"><div class="titlepage"><div><div><h2 class="title"><a id="d46e248"/>Bibliographie</h2></div></div></div><p>Cette bibliographie donne des références vers des livres.</p><div class="biblioentry" title="XSL-FO"><a id="XSL-FO"/><p>[XSL-FO] <span class="author"><span class="firstname">Dave</span> <span class="surname">Pawson</span>. </span><span class="title"><em>XSL-FO</em>. </span></p></div><div class="biblioentry" title="Ant Précis et concis"><a id="ant"/><p>[ant] <span class="author"><span class="firstname">Stephen</span> <span class="surname">Edlich</span>. </span><span class="title"><em>Ant Précis et concis</em>. </span></p></div><div class="biblioentry" title="XSLT: Programmer's Reference, Second Edition"><a id="saxon"/><p>[saxon] <span class="author"><span class="firstname">Michael</span> <span class="surname">H. Kay</span>. </span><span class="title"><em>XSLT: Programmer's Reference, Second Edition</em>. </span></p></div><div class="biblioentry" title="Développement JEE 5 avec Eclipse Europa"><a id="eclipse"/><p>[eclipse] <span class="author"><span class="firstname">Karim</span> <span class="surname">Djaafar</span>. </span><span class="title"><em>Développement JEE 5 avec Eclipse Europa</em>. </span></p></div><div class="biblioentry" title="DocBook 5: The Definitive Guide"><a id="docbook"/><p>[docbook] <span class="author"><span class="firstname">Norman</span> <span class="surname">Walsh</span>. </span><span class="title"><em>DocBook 5: The Definitive Guide</em>. </span></p></div><div class="biblioentry" title="XHTML mémento"><a id="XHTML"/><p>[XHTML] <span class="author"><span class="firstname">Raphaël</span> <span class="surname">Goetter</span>. </span><span class="title"><em>XHTML mémento</em>. </span></p></div></div><div class="footnotes"><br/><hr/><div class="footnote"><p><sup>[<a id="ftn.d46e147" href="#d46e147" class="para">1</a>] </sup>Feuille de style xslt à la racine du projet testdoc.xsl.</p></div><div class="footnote"><p><sup>[<a id="ftn.d46e161" href="#d46e161" class="para">2</a>] </sup>Les articles rédigés sont disponibles dans le répertoire article du projet.</p></div><div class="footnote"><p><sup>[<a id="ftn.d46e226" href="#d46e226" class="para">3</a>] </sup>ant doit être installé pour pouvoir les utiliser.</p></div></div></div></body></html>
