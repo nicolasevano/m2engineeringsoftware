@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ASCII"?>
+<android:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:android="http://android/1.0" xsi:schemaLocation="http://android/1.0 ../metamodel/Android.ecore">
+  <contains xsi:type="android:Activity" acLabel="Say Hello" name="SayHelloActivity" extends="android.app.Activity">
+    <screen>
+      <layout width="fill_parent" weight="fill_parent" orientation="vertical">
+        <elements xsi:type="android:TextButton" id="@+id/btn_sayhello" width="wrap_content" weight="wrap_content" btnLabel="Say Hello"/>
+      </layout>
+    </screen>
+    <intentFilter>
+      <action name="MAIN"/>
+      <category xsi:type="android:Launcher" name="LAUNCHER"/>
+    </intentFilter>
+    <onCreateCode name="onCreate" importRequire="android.app.Activity,android.content.Intent,android.os.Bundle,android.view.View,android.view.View.OnClickListener,android.widget.Button">
+      <lines currentLine="super.onCreate(savedInstanceState);"/>
+      <lines currentLine="setContentView(R.layout.SayHelloActivity);"/>
+      <lines currentLine="Button btn = (Button) findViewById(R.id.btn_sayhello);"/>
+      <lines currentLine="btn.setOnClickListener(new OnClickListener(){"/>
+      <lines currentLine="@Override"/>
+      <lines currentLine="public void onClick(View arg0) {"/>
+      <lines currentLine="Intent i = new Intent( SayHelloActivity.this, HelloActivity.class );"/>
+      <lines currentLine="startActivity( i );"/>
+      <lines currentLine="}"/>
+      <lines currentLine="});"/>
+    </onCreateCode>
+  </contains>
+  <contains xsi:type="android:Activity" acLabel="Hello" name="HelloActivity" extends="android.app.Activity">
+    <screen>
+      <layout width="fill_parent" weight="fill_parent" orientation="vertical">
+        <elements xsi:type="android:TextField" id="@+id/tv_hello" width="fill_parent" weight="wrap_content" text="Hello world!"/>
+      </layout>
+    </screen>
+    <onCreateCode name="onCreateHello" importRequire="android.app.Activity,android.os.Bundle,android.widget.TextView">
+      <lines currentLine="super.onCreate(savedInstanceState);"/>
+      <lines currentLine="setContentView( R.layout.HelloActivity );"/>
+    </onCreateCode>
+  </contains>
+</android:Application>
