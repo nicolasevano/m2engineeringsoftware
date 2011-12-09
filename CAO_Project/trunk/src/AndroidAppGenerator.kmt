@@ -1,0 +1,56 @@
+/* $Id:$ 
+ * Creation : December 8, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            nicolas
+ */
+@mainClass "root_package::Main"
+@mainOperation "main"
+
+
+package root_package;
+
+
+require kermeta
+require "./kermeta/JavaGenerator.kmt"
+require "./kermeta/LayoutGenerator.kmt"
+require "./kermeta/ManifestGenerator.kmt"
+
+using kermeta::standard
+
+//should take in parameter path of the application
+class Main
+{
+	operation main( uriModel: String, sourcePath: String, path: String) : Void is do 
+		// TODO: implement 'main' operation
+		var metaModelURI: String init "../metamodel/Android.ecore"
+		var toJava : ToJava init ToJava.new
+		var toLayout: ToLayout init ToLayout.new
+		var toManifest: ToManifest init ToManifest.new
+		
+		//generate java code
+		stdio.writeln( "Try to generate java code:" )
+		stdio.writeln( "-from model: '" + uriModel + "'." )
+		stdio.writeln( "-on package: '" + sourcePath + "'." )
+		stdio.writeln( "-with path: '" + path + "'." )
+		toJava.generateJava(uriModel, metaModelURI, sourcePath, path)
+		stdio.writeln( "Java code done." )
+		
+		//generate layout
+		stdio.writeln( "Try to generate layout (if they are):" )
+		stdio.writeln( "-from model: '" + uriModel + "'." )
+		stdio.writeln( "-on package: '" + sourcePath + "'." )
+		stdio.writeln( "-with path: '" + path + "'." )
+		toLayout.generateLayout(uriModel, metaModelURI, sourcePath, path)
+		stdio.writeln( "Layout(s) done." )
+		
+		//generate manifest
+		stdio.writeln( "Try to generate manifest:" )
+		stdio.writeln( "-from model: '" + uriModel + "'." )
+		stdio.writeln( "-with path: '" + path + "'." )
+		toManifest.generateManifest(uriModel, metaModelURI, sourcePath, path)
+		stdio.writeln( "Manifest done." )
+		
+	end
+}

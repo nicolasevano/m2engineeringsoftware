@@ -1,0 +1,143 @@
+@uri "http://android/1.0"
+package android;
+
+require "kermeta"
+class Activity inherits ApplicationKind
+{
+	attribute acLabel : String
+
+	attribute name : String
+	
+	attribute extends : String
+	
+	attribute screen : View[1..1]
+
+	attribute intentFilter : IntentFilter
+	
+	attribute onCreateCode : ExecuteCode[0..1]
+	
+	operation onCreate() : Void is
+		abstract
+
+}
+
+alias String : kermeta::standard::String;
+
+class Receiver inherits ApplicationKind
+{
+	attribute name : String
+
+	attribute intentFilter : IntentFilter
+
+	attribute extends : String
+	
+	attribute onReceiveCode : ExecuteCode[0..1]
+	
+	operation onReceive() : Void is
+		abstract
+
+}
+class View
+{
+	attribute layout : LinearLayout[1..1]
+
+}
+class Widget
+{
+	attribute id : String
+
+	attribute width : String
+
+	attribute weight : String
+
+}
+class TextButton inherits Widget
+{
+	attribute btnLabel : String
+
+}
+class TextLabel inherits Widget
+{
+	attribute text : String
+
+}
+class TextField inherits Widget
+{
+	attribute text : String
+
+}
+class Action
+{
+	attribute name : String
+
+}
+class SMS_send inherits Action
+{
+}
+
+class ExecuteCode inherits Action
+{
+	attribute toExecute : String
+	attribute importRequire : String
+	attribute lines : Line[0..*]
+}
+
+class Line
+{
+	attribute currentLine : String
+}
+
+class SMS_Reseived inherits Action
+{
+}
+
+class ApplicationKind{
+}
+
+class Application
+{
+	attribute contains : ApplicationKind[1..*]
+	attribute right : Right[0..*]
+}
+
+class IntentFilter
+{
+	attribute action : Action
+
+	attribute category : Category
+
+}
+
+class Launcher inherits Category
+{
+}
+
+class Category
+{
+	attribute name : String
+
+}
+
+class Main inherits Action
+{
+}
+
+class LinearLayout
+{
+	attribute elements : Widget[0..*]
+
+	attribute width : String
+
+	attribute weight : String
+
+	attribute orientation : String
+
+}
+
+class Right
+{
+	attribute name : String
+
+}
+
+

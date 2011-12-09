@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="ASCII"?>
+<android:Application xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:android="http://android/1.0" xsi:schemaLocation="http://android/1.0 ../metamodel/Android.ecore">
+  <right name="READ_SMS"/>
+  <right name="RECEIVE_SMS"/>
+  <contains xsi:type="android:Receiver" name="SMSPrinter" extends="android.content.BroadcastReceiver">
+    <intentFilter>
+      <action xsi:type="android:SMS_Reseived" name="android.provider.Telephony.SMS_RECEIVED"/>
+    </intentFilter>
+    <onReceiveCode name="onReceive" importRequire="android.content.BroadcastReceiver,android.content.Context,android.content.Intent,android.telephony.SmsMessage">
+      <lines currentLine="Object []objs = (Object[]) intent.getExtras().get(&quot;pdus&quot;);"/>
+      <lines currentLine="SmsMessage sms = SmsMessage.createFromPdu( (byte[]) objs[0] );"/>
+      <lines currentLine="if(sms != null){"/>
+      <lines currentLine="System.out.println(&quot;From: &quot; + sms.getDisplayOriginatingAddress());"/>
+      <lines currentLine="System.out.println(&quot;Contents: &quot; + sms.getDisplayMessageBody());"/>
+      <lines currentLine="} else {"/>
+      <lines currentLine="System.out.println(&quot;receive a text message&quot;);"/>
+      <lines currentLine="}"/>
+    </onReceiveCode>
+  </contains>
+</android:Application>

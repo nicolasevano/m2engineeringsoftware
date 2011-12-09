@@ -1,0 +1,308 @@
+/* $Id:$ 
+ * Creation : December 9, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            nicolas
+ */
+
+package helpers;
+
+require kermeta
+require "EcoreUtil.kmt"
+require "Android.kmt"
+
+using android
+using ecore
+using kermeta::standard
+
+class GeneratorHelper
+{
+	/**
+	 * operation : flatJavaActivity
+	 * generate a java class result in output string from an activity given in parameter
+	 * @param 	Activity 	activity 	activity on which we want generate java class.
+	 * @param 	String		pkg 		the package on which java class have to be.
+	 *
+	 * @return 	EString 	The result java class in String 	
+	 */
+	operation flatJavaActivity(activity : Activity, pkg : String) : EString
+	is do
+		var output : EString init ""
+		//TODO add package
+		output := "package " + pkg + ";\n"
+		activity.onCreateCode.importRequire.split(",").each{ e |
+		do
+			output := output + "import " + e + "; \n" 
+		end
+		}
+		//add inierited type
+		output := output + "/************************************************\n"
+		output := output + "*" + activity.name + " class definition\n"
+		output := output + "************************************************/\n"
+		//TODO solve extends trouble
+		output := output + "\npublic class " + activity.name + " extends " + activity.extends + "{\n"		
+		
+		// add onCreate method
+		output := flatOnCreate( activity, output )
+		output := output + "}\n"
+		// renvoie de la chaine de caractère de l'opération short
+		result := output
+	end
+	
+	/**
+	 * opération : flatOnCreate
+	 * generate onCreate method java in output string result with the actvity given in parameter
+	 * @param 	Activity	activity	activity on wich we want generate onCreate java method.
+	 * @param 	EString		output 		the output String to complete with onCreate java method
+	 *
+	 * @return 	EString 	completed with onCreate java method	
+	 */
+	operation flatOnCreate( activity : Activity, output:EString ) : EString
+	is do
+		output := output + "\n\t@Override\n"
+		output := output + "\tpublic void onCreate( " 
+		//add operation parameter
+		output := output + "Bundle savedInstanceState"
+		// generate body method
+		output := output + " ){\n"
+		output := output + "\t\t//TODO auto generated method\n"
+		activity.onCreateCode.lines.each{ e |
+		do
+			output := output + "\t\t" +  e.currentLine + "\n" 
+		end
+		}
+		output := output + "\t}\n"
+		result :=output
+	end
+	
+	/**
+	 * operation : flatJavaReceiver
+	 * generate a java class result in output string from an receiver given in parameter
+	 * @param 	Receiver 	receiver 	receiver on which we want generate java class.
+	 * @param 	String		pkg 		the package on which java class have to be.
+	 *
+	 * @return 	EString 	The result java class in String 	
+	 */
+	operation flatJavaReceiver(receiver : Receiver, pkg : String) : EString
+	is do
+		var output : EString init ""
+		//TODO add package
+		output := "package " + pkg + ";\n"
+		receiver.onReceiveCode.importRequire.split(",").each{ e |
+		do
+			output := output + "import " + e + ";\n" 
+		end
+		}
+		//add inierited type
+		output := output + "/************************************************\n"
+		output := output + "*" + receiver.name + " class definition\n"
+		output := output + "************************************************/\n"
+		output := output + "\npublic class " + receiver.name + " extends " + receiver.extends + "{\n"		
+		// add onReceive method
+		output := flatOnReceive( receiver, output )
+		output := output + "}\n"
+		// renvoie de la chaine de caractère de l'opération short
+		result := output
+	end
+	
+	/**
+	 * opération : flatOnReceive
+	 * generate onReceive method java in output string result with the actvity given in parameter
+	 * @param 	Receive		receive		receive on wich we want generate onReceive java method.
+	 * @param 	EString		output 		the output String to complete with onReceive java method
+	 *
+	 * @return 	EString 	completed with onReceive java method	
+	 */
+	operation flatOnReceive( receiver : Receiver,output:EString ) : EString
+	is do
+		output := output + "\n\t@Override\n"
+		output := output + "\tpublic void onReceive( " 
+		//add operation parameter
+		output := output + "Context context, Intent intent"
+		// generate body method
+		output := output + " ){\n"
+		output := output + "\t\t//TODO auto generated method\n"
+		receiver.onReceiveCode.lines.each{ e |
+			do
+				output := output + "\t\t" + e.currentLine + "\n" 
+			end
+		}
+		output := output + "\t}\n"
+		result := output
+	end
+	
+	/**
+	 * opération : flatLayout
+	 * affiche la hiérachie d'héritage d'une classe
+	 * @param 	LinearLayout linearLayout generate a layout.xml with linearLayout given in parameter 
+	 * @param 	linearLayout LinearLayout on which we want generate layout.xml 
+	 *
+	 * @return 	EString layout.xml	
+	 */
+	operation flatLayout(linearLayout : LinearLayout) : EString
+	is do
+		var output : EString init ""
+		//<?xml version="1.0" encoding="utf-8"?>
+		//<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    	//	android:layout_width="fill_parent"
+    	//	android:layout_height="fill_parent"
+    	//	android:orientation="vertical" >
+		//	<Button android:layout_width="wrap_content"
+	    //		android:layout_height="wrap_content"
+	    //		android:text="Say Hello"
+	    //		android:id="@+id/btn_sayhello">
+		//	</Button>
+		//<TextView
+    	//android:layout_width="fill_parent"
+    	//android:layout_height="wrap_content"
+    	//android:text="hello world!"
+    	//android:layout_gravity="center" 
+    	//android:visibility="visible"
+    	//android:id="@+id/tv_hello" />
+    	//<com.example.android.apis.view.LabelView
+        //    android:background="@drawable/red"
+        //    android:layout_width="match_parent"
+        //    android:layout_height="wrap_content" 
+        //    app:text="Red"/>
+		//</LinearLayout>
+		output := "<?xml version=\"1.0\" encoding=\"utf-8\"?> \n"
+		output := output + "<LinearLayout xmlns:android=\"http://schemas.android.com/apk/res/android\" \n"
+		output := output + " android:layout_width=\"" + linearLayout.width + "\"\n" 
+		output := output + " android:layout_height=\"" + linearLayout.weight + "\"\n"
+		output := output + " android:orientation=\"" + linearLayout.orientation + "\">\n"
+		linearLayout.elements.each{ currentElement | 
+			do
+				var textButton: TextButton textButton ?= currentElement
+				if not textButton.isVoid then
+					output := output + "\t<Button android:layout_width=\""+ currentElement.width + "\"\n"
+					output := output + "\t android:layout_height=\"" + currentElement.weight + "\"\n"
+					output := output + "\t android:text=\"" + textButton.btnLabel + "\"\n"
+					output := output + "\t android:id=\"" + textButton.id + "\">\n"
+					output := output + "\t</Button>\n"
+				end
+			end }
+		linearLayout.elements.each{ currentElement | 
+			do
+				var textField: TextField textField ?= currentElement
+				if not textField.isVoid then
+					output := output + "\t<TextView android:layout_width=\""+ currentElement.width + "\"\n"
+					output := output + "\t android:layout_height=\"" + currentElement.weight + "\"\n"
+					output := output + "\t android:layout_gravity=\"center\"\n"
+					output := output + "\t android:text=\"" + textField.text + "\"\n"
+					output := output + "\t android:id=\"" + currentElement.id + "\">\n"
+					output := output + "\t</TextView>\n"
+				end
+			end }
+		linearLayout.elements.each{ currentElement | 
+			do
+				var textLabel: TextLabel textLabel ?= currentElement
+				if not textLabel.isVoid then
+					output := output + "\t<LabelView\n"
+					output := output + "\t android:layout_width=\"" + currentElement.width + "\"\n"
+					output := output + "\t android:layout_height=\"" + currentElement.weight + "\"\n"
+					output := output + "\t android:id=\"" + currentElement.id + "\"\n"
+					output := output + "\t app:text=\"" + textLabel.text + "\"/>\n"
+				end	
+			end }
+		//if new element is design add another loop to manage it
+		output := output + "</LinearLayout>"
+		result := output
+	end
+	
+	/**
+	 * opération : flatManifest
+	 * generate android application manifest xml with the given application in parameter
+	 * @param 	Application	application on which we want generate the manifest
+	 * @param 	EString		packageName class package path of the application
+	 *
+	 * @return 	EString		manifest.xml		
+	 */
+	operation flatManifest(application : Application, packageName : EString) : EString
+	is do
+		var output : EString init ""
+		var firstActivity : Boolean init true 
+		//<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    	//package="cao.project.sayHello"
+    	//android:versionCode="1"
+    	//android:versionName="1.0" >
+
+    	//<uses-sdk android:minSdkVersion="14" />
+
+    	//<application
+        //	android:icon="@drawable/ic_launcher"
+        //	android:label="@string/app_name" >
+        //	<activity
+        //    	android:name=".HelloActivity" />
+        //	<activity
+        //    	android:label="@string/app_name"
+        //    	android:name=".SayHelloActivity" >
+        //    	<intent-filter >
+        //        	<action android:name="android.intent.action.MAIN" />
+
+        //        	<category android:name="android.intent.category.LAUNCHER" />
+        //    	</intent-filter>
+        //	</activity>
+    	//</application>
+		//</manifest>
+		output := "<?xml version=\"1.0\" encoding=\"utf-8\"?> \n"
+		output := output + "<manifest xmlns:android=\"http://schemas.android.com/apk/res/android\"\n"
+		output := output + " package=\"" + packageName.replace("/",".") + "\"\n"
+		output := output + " android:versionCode=\"1\" \n"
+    	output := output + " android:versionName=\"1.0\" > \n"
+    	output := output + "<uses-sdk android:minSdkVersion=\"14\" /> \n"
+    	output := output + "\n"
+    	output := output + "<application "
+        output := output + "android:icon=\"@drawable/ic_launcher\"\n"
+    	application.contains.each{ applicationKind | 
+		do
+    		var activity: Activity activity ?= applicationKind
+			if not activity.isVoid then
+				if(firstActivity) then
+					output := output + " android:label=\"" + activity.name + "\" >\n"
+					firstActivity := false
+				end
+				output := output + "\t<activity\n"
+				output := output + "\t android:label=\"" + activity.acLabel + "\"\n"
+        		output := output + "\t android:name=\"." + activity.name + "\" >\n"
+				if not activity.intentFilter.isVoid then
+					output := output + "\t\t<intent-filter >\n"
+					output := output + "\t\t\t<action android:name=\"android.intent.action." 
+								 	 + activity.intentFilter.action.name + "\" />\n"
+					output := output + "\t\t\t<category android:name=\"android.intent.category." 
+					 			 	 + activity.intentFilter.category.name + "\" />\n"
+					output := output + "\t\t</intent-filter>\n"
+				end
+				output := output + "\t</activity>\n"
+			end
+			var receiver: Receiver receiver ?= applicationKind
+			if not receiver.isVoid then
+				//<receiver android:name="SMSPrinter" >
+            	//	<intent-filter >
+            	//    	<action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            	//	</intent-filter>
+        		//</receiver>
+        		if(firstActivity) then
+					output := output + " android:label=\"" + receiver.name + "\" >\n"
+					firstActivity := false
+				end
+        		output := output + "\t<receiver android:name=\"" + receiver.name + "\" >\n"
+				output := output + "\t\t<intent-filter>\n"
+				output := output + "\t\t\t<action android:name=\"" + receiver.intentFilter.action.name + "\" />\n"
+				output := output + "\t\t</intent-filter>\n"
+				output := output + "\t</receiver>\n"
+				application.right.each{ currentRight |
+				do
+					output := output + "\t<uses-permission android:name=\"android.permission." 
+								 	 + currentRight.name 
+								 	 + "\"/>\n"
+				end
+				} 
+			end
+		end
+		}
+		output := output + "</application> \n"
+    	output := output + "</manifest> \n"
+    	result := output
+	end
+}

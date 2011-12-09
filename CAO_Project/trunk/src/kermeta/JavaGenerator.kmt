@@ -1,0 +1,61 @@
+/* $Id:$ 
+ * Creation : December 4, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            nicolas
+ */
+
+package root_package;
+require "./helpers/GeneratorHelper.kmt"
+require "./helpers/EcoreUtil.kmt"
+require "./helpers/FileWriter.kmt"
+require "./helpers/Android.kmt"
+require kermeta
+
+using EcoreUtil
+using kermeta::standard
+using ecore
+using android
+using helpers
+
+class ToJava
+{
+	
+	//generateJava function
+	//take two parameters 
+	//targetUri String contains path of model to use
+	//pkgName package on which the generated java code have to be stored
+	operation generateJava(targetUri: String,metaModel: String, pkgName: String, path: String): Void is do
+		var util : EcoreUtil init EcoreUtil.new
+		var androidApp : Application 
+		androidApp := util.loadModel(targetUri,metaModel, androidApp )
+		var docHelper : GeneratorHelper init GeneratorHelper.new
+		var fileWriter: FileWriter init FileWriter.new
+		androidApp.contains.each{e | e.isKindOf( Activity ) or e.isKindOf( Receiver )
+			do
+				var activity: Activity activity ?= e
+				if not activity.isVoid then
+					fileWriter.serializeIfNotExists( docHelper.flatJavaActivity( activity,pkgName.replace("/",".") ), 
+													 path + 
+													 "/src/" + 
+													 pkgName + 
+													 "/" + 
+													 activity.name + 
+													 ".java")
+				end
+				var receiver: Receiver receiver ?= e
+				if not receiver.isVoid then
+					fileWriter.serializeIfNotExists( docHelper.flatJavaReceiver( receiver,pkgName.replace("/",".") ), 
+													 path + 
+													 "/src/" + 
+													 pkgName + 
+													 "/" + 
+													 receiver.name + 
+													 ".java")
+				end
+			end 
+		}
+		
+	end
+}

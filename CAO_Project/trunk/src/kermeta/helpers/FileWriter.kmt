@@ -1,0 +1,26 @@
+/* $Id:$ 
+ * Creation : December 5, 2011
+ * Licence  : EPL 
+ * Copyright:
+ * Authors  : 
+ *            nicolas
+ */
+
+package helpers;
+
+
+require kermeta
+
+using kermeta::standard
+using kermeta::io
+using kermeta::exceptions
+
+class FileWriter
+{
+	
+	operation serializeIfNotExists(content: String, uri: String): Void is do
+		var file: FileIO init FileIO.new
+		file.writeTextFile(uri, content)
+	end
+
+}
