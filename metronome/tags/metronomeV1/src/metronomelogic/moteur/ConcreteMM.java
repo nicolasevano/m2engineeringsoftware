@@ -138,7 +138,7 @@ public class ConcreteMM implements MoteurMetronome {
 
 	@Override
 	public void removeBPMObs( Observateur observer ) {
-		obsTempos.remove( observer );
+		obsBPMs.remove( observer );
 	}
 	
 	public final Map<String, Command> getCommands() {
