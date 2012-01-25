@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="screen4" name="screen4" class="client.ScreenImplRMI">
+		<constructor-arg type="int" value="4" />
+	</bean>
+	
+	<bean id="rmiProvider" class="org.springframework.remoting.rmi.RmiProxyFactoryBean">
+		<property name="serviceUrl" value="rmi://localhost:1099/rmi-canal"/>
+		<property name="serviceInterface" value="canal.Canal"/>
+	</bean>
+	
+	<bean id="rmiBridge" name="rmiBridge" class="client.RMIChannelBridge">
+		<constructor-arg type="canal.Canal" ref="rmiProvider" />
+	</bean>
+	
+</beans>
