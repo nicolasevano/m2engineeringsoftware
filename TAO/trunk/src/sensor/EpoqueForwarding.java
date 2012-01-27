@@ -25,7 +25,7 @@ public class EpoqueForwarding implements ForwardingAlgo {
 		// TODO Auto-generated method stub
 		EntryVersion entryVersion = new EntryVersion( version++, 
 													  sensor.getForwardedValue(), 
-													  ( ( SensorImpl ) sensor ).observers.size() );
+													  sensor.getObservers().size() );
 		versionBuffer.add( entryVersion );
 		sensor.notifySensorServiceObserver();
 	}
@@ -37,7 +37,7 @@ public class EpoqueForwarding implements ForwardingAlgo {
 	public void observerUpdated(){
 		if(!versionBuffer.isEmpty()){
 			versionBuffer.element().decreaseTTL();
-			if( versionBuffer.element().isUpTodate() ) versionBuffer.poll();
+			if( !versionBuffer.element().isUpTodate() ) versionBuffer.poll();
 		}
 	}
 	
@@ -46,8 +46,7 @@ public class EpoqueForwarding implements ForwardingAlgo {
 	 * Get the head revision on versioned queue. 
 	 */
 	public EntryVersion getHeadVersion(){
-		return ( !versionBuffer.isEmpty() )?versionBuffer.element():new EntryVersion(-1,-1,0);
-		
+		return ( !versionBuffer.isEmpty() )? versionBuffer.element() : new EntryVersion( -1,-1,-1 );
 	}
 	
 	
@@ -64,5 +63,5 @@ public class EpoqueForwarding implements ForwardingAlgo {
 	/**
 	 * Version queue
 	 */
-	private Queue< EntryVersion > versionBuffer = new ArrayDeque< EntryVersion >();
+	private Queue< EntryVersion > versionBuffer = new ArrayDeque< EntryVersion >(10);
 }

@@ -44,7 +44,7 @@ public class SensorImpl implements Sensor {
 	 */
 	public void notifySensorServiceObserver() {
 		// TODO Auto-generated method stub
-		for( SensorServiceObserver observer:this.observers ){
+		for( SensorServiceObserver observer : this.observers ){
 			observer.update();
 		}
 	}
@@ -57,7 +57,7 @@ public class SensorImpl implements Sensor {
 		// TODO Auto-generated method stub
 		
 		EntryVersion result = forward.getHeadVersion();
-		if (result.getValue() == -1) result.setValue(value);
+		if (result.getValue() == -1) result.setValue( value );
 		System.out.println( "Forwarded result version: " + result.getKey() );
 		forward.observerUpdated();
 		return result;
@@ -86,10 +86,12 @@ public class SensorImpl implements Sensor {
 		forward.execute();
 	}
 	
+	@Override
 	public List<SensorServiceObserver> getObservers() {
 		return observers;
 	}
 
+	
 	public void setObservers(List<SensorServiceObserver> observers) {
 		this.observers = observers;
 	}

@@ -1,5 +1,9 @@
 package sensor;
 
+import java.util.List;
+
+import canal.SensorServiceObserver;
+
 
 public interface Sensor extends Subject{
 
@@ -12,5 +16,7 @@ public interface Sensor extends Subject{
 	 * Tick function indicate that new value has arrived on the sensor.
 	 */
 	public void tick();
+	
+	public List<SensorServiceObserver> getObservers();
 	
 }

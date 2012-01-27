@@ -20,11 +20,10 @@ import sensor.Sensor;
 
 public class CanalImpl implements SensorServiceObserver, Canal{
 	
-	public CanalImpl(Sensor sensor, int delay)throws RemoteException{
-		this.delay = delay;
+	public CanalImpl(Sensor sensor)throws RemoteException{
 		this.access = sensor;
-		updateScheduler = Executors.newScheduledThreadPool(1);
-		getValueScheduler = Executors.newScheduledThreadPool(1);
+		updateScheduler = Executors.newScheduledThreadPool( 1 );
+		getValueScheduler = Executors.newScheduledThreadPool( 1 );
 	}
 	
 	/* (non-Javadoc)
@@ -35,7 +34,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 	 * Attach function screen implementation to a canal
 	 * @param screen
 	 */
-	public void attach(Screen screen) throws RemoteException{
+	public void attach( Screen screen ) throws RemoteException{
 		screens.add( screen );
 	}
 	
@@ -71,8 +70,8 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 				public ScheduledFuture<EntryVersion> getValue(){
 					ScheduledFuture<EntryVersion> result = null;
 					try {
-						result = canal.getValue(screen.getID());
-					} catch (RemoteException e) {
+						result = canal.getValue( screen.getID() );
+					} catch ( RemoteException e ) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
@@ -87,7 +86,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 				}
 
 				@Override
-				public void setCanal(Canal canal){
+				public void setCanal( Canal canal ){
 					this.canal = canal;
 				}			
 				private Canal canal;
@@ -95,7 +94,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 			update.setCanal(this);
 			( ( ScheduledExecutorService ) updateScheduler ).schedule( 
 					update, 
-					generator.nextInt(1000) + 1/*delay*/, 
+					generator.nextInt( 1000 ) + 1/*delay*/, 
 					TimeUnit.MILLISECONDS );
 		}
 	}
@@ -119,13 +118,13 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 			}
 
 			@Override
-			public void setCanal(Canal canal) {
+			public void setCanal( Canal canal ) {
 				// TODO Auto-generated method stub
 				this.canal = canal;
 			}
 
 			@Override
-			public void update(Canal epoqueCP) {
+			public void update( Canal epoqueCP ) {
 				// TODO Auto-generated method stub
 			}
 
@@ -134,7 +133,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 				// TODO Auto-generated method stub
 				EntryVersion result;
 				result = canal.getSensor().getValue();
-				System.out.println("new value get:" + result);
+				System.out.println( "new value get: " + result );
 				tickets.put(ID,result);
 				return result;
 			}
@@ -144,7 +143,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 		getValue.setCanal( this );
 		final ScheduledFuture<EntryVersion> f1 = ( ( ScheduledExecutorService ) getValueScheduler ).schedule( 
 				getValue, 
-				generator.nextInt(1000) + 1/*delay*/, 
+				generator.nextInt(1000) + 1, 
 				TimeUnit.MILLISECONDS );
 		return f1;
 	}
@@ -153,7 +152,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 		return screens;
 	}
 
-	public void setScreens(List<Screen> screens) {
+	public void setScreens( List<Screen> screens ) {
 		this.screens = screens;
 	}
 	
@@ -166,7 +165,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 	 * @return Sensor
 	 * @throws RemoteException
 	 */
-	public Sensor getSensor()throws RemoteException{
+	public Sensor getSensor() throws RemoteException {
 		return this.access;
 	}
 	
@@ -176,7 +175,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 	 * @return Map<Integer,Integer>
 	 * @throws RemoteException
 	 */
-	public Map<Integer, EntryVersion> getTickets()throws RemoteException {
+	public Map<Integer, EntryVersion> getTickets() throws RemoteException {
 		return tickets;
 	}
 	
@@ -197,9 +196,6 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 	/** ticket sensor value executor */
 	private ExecutorService getValueScheduler;
 	
-	/** delay execution for each callableServant */
-	private int delay;
-	
 	/** current sensor on which canal is observer */
 	private Sensor access;
 	
@@ -210,7 +206,7 @@ public class CanalImpl implements SensorServiceObserver, Canal{
 	private Random generator = new Random();
 	
 	/** ticket list for remote observer*/
-	private Map< Integer, EntryVersion > tickets= new TreeMap<Integer, EntryVersion >();
+	private Map< Integer, EntryVersion > tickets = new TreeMap<Integer, EntryVersion >();
 
 	/**
 	 * 

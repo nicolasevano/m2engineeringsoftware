@@ -64,8 +64,9 @@ public class RMIChannelBridge extends UnicastRemoteObject {
 					e.printStackTrace();
 				}
 				try {
-					if( getRmiChannel().getTicket( screen4.getID() ) != null &&
-						getRmiChannel().getTicket( screen4.getID() ).getKey() != -1)
+					if( getRmiChannel().getTicket( screen4.getID() ) != null && 
+						getRmiChannel().getTicket( screen4.getID() ).getValue() != -1 &&
+						( getRmiChannel().getTicket( screen4.getID() ).getKey() != -1 || getRmiChannel().getTicket( screen4.getID() ).isUpTodate() )  )
 						( ( ScreenImplRMI ) screen4 ).setValue( getRmiChannel().getTicket( screen4.getID() ) );
 				} catch (RemoteException e) {
 					// TODO Auto-generated catch block

@@ -30,7 +30,7 @@ public class EntryVersion implements Serializable {
 	}
 	
 	public boolean isUpTodate(){
-		return (TTL <= 0);
+		return (TTL >= 0);
 	}
 
 	public void setValue(int value) {
