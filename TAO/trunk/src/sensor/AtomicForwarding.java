@@ -27,8 +27,9 @@ public class AtomicForwarding implements ForwardingAlgo {
 	 */
 	public synchronized void execute() {
 		//( ( SensorImpl ) sensor ).setValue( sensor.getValue() + 1 );
-		blockingQueue.addAll( ( ( SensorImpl ) sensor ).observers );
+		blockingQueue.addAll( sensor.getObservers() );
 		sensor.notifySensorServiceObserver();
+		this.snapShotValue = sensor.getForwardedValue();
 		while( !blockingQueue.isEmpty() ){
 			try {
 				Thread.sleep( 100 );
@@ -58,7 +59,7 @@ public class AtomicForwarding implements ForwardingAlgo {
 	 */
 	public EntryVersion getHeadVersion() {
 		// TODO Auto-generated method stub
-		EntryVersion result = new EntryVersion( -1, -1, 0 );
+		EntryVersion result = new EntryVersion( -1, snapShotValue, 1 );
 		return result;
 	}
 	
@@ -71,5 +72,5 @@ public class AtomicForwarding implements ForwardingAlgo {
 	 * waiting observers used during update atomic sequences.
 	 */
 	private BlockingQueue<SensorServiceObserver> blockingQueue = new LinkedBlockingQueue<SensorServiceObserver>();
-	
+	private int snapShotValue = 0;
 }

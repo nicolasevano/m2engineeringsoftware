@@ -27,6 +27,7 @@
 	
 	<bean id="canal1" name="canal1" class="canal.CanalImpl">
 		<constructor-arg type="sensor.Sensor" ref="sensor1" />
+		<constructor-arg type="int" value="100" />
 		<property name="screens">
 			<list>
 				<ref bean="screen1"/>
@@ -38,6 +39,7 @@
 	
 	<bean id="canal2" name="canal2" class="canal.CanalImpl">
 		<constructor-arg type="sensor.Sensor" ref="sensor1" />
+		<constructor-arg type="int" value="100" />
 	</bean>
 	
 	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">

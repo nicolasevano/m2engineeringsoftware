@@ -15,8 +15,13 @@ import sensor.SensorImpl;
  * Create the canals for local and distant screen. 
  *
  */
-public class Main {
-	public static void main(String...args){
+public class Main implements Runnable {
+	
+	public Main(int numberOfIteration){
+		this.numberOfIteration = numberOfIteration;
+	}
+	
+	public void run(){
 		
 		int i = 0;
 		//Sensor sensor1 = new SensorImpl( new EpoqueForwarding()/*AtomicForwarding()*/ );
@@ -27,7 +32,7 @@ public class Main {
 		//System.out.println("Screen one and Two created");
 		//Canal canal1 = new CanalImpl( sensor1, 100);
 		//System.out.println("canal created");
-		ApplicationContext beanFactory = new ClassPathXmlApplicationContext( "TAOActiveObject.xml" );
+		//ApplicationContext beanFactory = new ClassPathXmlApplicationContext( "TAOActiveObject.xml" );
 		Sensor sensor1 = ( Sensor ) beanFactory.getBean( "sensor1" );
 		( ( Subject ) sensor1 ).attach( ( SensorServiceObserver ) beanFactory.getBean( "canal1" ) );
 		( ( Subject ) sensor1 ).attach( ( SensorServiceObserver ) beanFactory.getBean( "canal2" ) );
@@ -39,7 +44,7 @@ public class Main {
 		//canal1.attach( screen13 );
 		//System.out.println( "Screen3 attach to canal" );
 		
-		while( i < 30 ){
+		while( i < numberOfIteration ){
 			
 			i++;
 			sensor1.setValue( i );
@@ -56,4 +61,17 @@ public class Main {
 		}
 		
 	}
+	
+	public void setBeanFactory(ApplicationContext beanFactory) {
+		this.beanFactory = beanFactory;
+	}
+	
+	public static void main(String...arg){
+		ApplicationContext beanFactory = new ClassPathXmlApplicationContext( "TAOActiveObject.xml" );
+		( ( Main ) beanFactory.getBean( "main" ) ).setBeanFactory( beanFactory );
+		( ( Thread ) beanFactory.getBean( "executor" ) ).start();
+	}
+	
+	private ApplicationContext beanFactory;
+	private int numberOfIteration;
 }
