@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="forwardinStrategyEpoque" name="forwardingStrategyEpoque" class="sensor.EpoqueForwarding" />
+	
+	<bean id="forwardinStrategyAtomic" name="forwardingStrategyAtomic" class="sensor.AtomicForwarding" />
+	
+	
+	<bean id="screen1" name="screen1" class="client.ScreenImpl">
+		<constructor-arg type="int" value="1" />
+	</bean>
+	
+	<bean id="screen2" name="screen2" class="client.ScreenImpl">
+		<constructor-arg type="int" value="2" />
+	</bean>
+	
+	<bean id="screen3" name="screen3" class="client.ScreenImpl">
+		<constructor-arg type="int" value="3" />
+	</bean>
+	
+	<bean id="sensor1" name="sensor1" class="sensor.SensorImpl">
+		<!-- constructor-arg type="sensor.ForwardingAlgo" ref="forwardinStrategyAtomic" /-->
+		<constructor-arg type="sensor.ForwardingAlgo" ref="forwardinStrategyEpoque" />
+	</bean>
+	
+	<bean id="canal1" name="canal1" class="canal.CanalImpl">
+		<constructor-arg type="sensor.Sensor" ref="sensor1" />
+		<property name="screens">
+			<list>
+				<ref bean="screen1"/>
+				<ref bean="screen2"/>
+				<ref bean="screen3"/>
+			</list>
+		</property>
+	</bean>
+	
+	<bean id="canal2" name="canal2" class="canal.CanalImpl">
+		<constructor-arg type="sensor.Sensor" ref="sensor1" />
+	</bean>
+	
+	<bean class="org.springframework.remoting.rmi.RmiServiceExporter">
+        <property name="serviceName" value="rmi-canal"/>
+        <property name="service" ref="canal2"/>
+        <property name="serviceInterface" value="canal.Canal"/>
+        <property name="registryPort" value="1099"/>
+    </bean>
+    
+    <bean class="canal.Main" name="main">
+    	<constructor-arg type="int" value="25" />
+    </bean>
+    
+    <bean class="java.lang.Thread" name="executor">
+		<constructor-arg type="java.lang.Runnable" ref="main" />
+	</bean>
+	
+</beans>
+
