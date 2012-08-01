@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="bookUnicArticle" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+    <target>
+        <inSequence>
+            <payloadFactory>
+                <format>
+                    <ns2:getBook xmlns:ns2="http://referential_book.sodifrance.com/">
+                        <arg0 xmlns="">$1</arg0>
+                    </ns2:getBook>
+                </format>
+                <args>
+                    <arg xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/id"/>
+                </args>
+            </payloadFactory>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort/getBook"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <xquery key="book-to-unic-article.xq">
+                <variable name="payload" type="ELEMENT"/>
+            </xquery>
+            <send/>
+        </outSequence>
+    </target>
+</proxy>

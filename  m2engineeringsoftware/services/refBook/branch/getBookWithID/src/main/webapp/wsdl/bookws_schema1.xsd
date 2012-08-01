@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:tns="http://referential_book.sodifrance.com/" elementFormDefault="unqualified"
+	targetNamespace="http://referential_book.sodifrance.com/" version="1.0">
+	<xs:element name="addBook" type="tns:addBook" />
+	<xs:element name="addBookResponse" type="tns:addBookResponse" />
+	<xs:element name="deleteBook" type="tns:deleteBook" />
+	<xs:element name="deleteBookResponse" type="tns:deleteBookResponse" />
+	<xs:element name="getAllBook" type="tns:getAllBook" />
+	<xs:element name="getAllBookResponse" type="tns:getAllBookResponse" />
+	<xs:element name="getBook" type="tns:getBook" />
+	<xs:element name="getBookResponse" type="tns:getBookResponse" />
+	<xs:element name="updateBook" type="tns:updateBook" />
+	<xs:element name="updateBookResponse" type="tns:updateBookResponse" />
+	<xs:complexType name="getAllBook">
+		<xs:sequence />
+	</xs:complexType>
+	<xs:complexType name="getAllBookResponse">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="return"
+				type="tns:book" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getBook">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="arg0" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="getBookResponse">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" minOccurs="0" name="return"
+				type="tns:book" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="book">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="author" type="xs:string" />
+			<xs:element minOccurs="0" name="description" type="xs:string" />
+			<xs:element minOccurs="0" name="editor" type="xs:string" />
+			<xs:element name="NBChapitre" type="xs:int" />
+			<xs:element name="NBPage" type="xs:int" />
+			<xs:element minOccurs="0" name="publishDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="releaseDate" type="xs:dateTime" />
+			<xs:element minOccurs="0" name="title" type="xs:string" />
+			<xs:element name="version" type="xs:int" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="deleteBook">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="arg0" type="tns:book" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="deleteBookResponse">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="return" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="addBook">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="arg0" type="xs:string" />
+			<xs:element minOccurs="0" name="arg1" type="xs:string" />
+			<xs:element minOccurs="0" name="arg2" type="xs:string" />
+			<xs:element minOccurs="0" name="arg3" type="xs:string" />
+			<xs:element name="arg4" type="xs:int" />
+			<xs:element name="arg5" type="xs:int" />
+			<xs:element name="arg6" type="xs:int" />
+			<xs:element minOccurs="0" name="arg7" type="xs:string" />
+			<xs:element minOccurs="0" name="arg8" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="addBookResponse">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="return" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="updateBook">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="arg0" type="tns:book" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="updateBookResponse">
+		<xs:sequence>
+			<xs:element minOccurs="0" name="return" type="xs:string" />
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

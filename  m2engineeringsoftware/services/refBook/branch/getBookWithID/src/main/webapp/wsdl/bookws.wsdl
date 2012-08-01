@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="BookWSImplService"
+	targetNamespace="http://referential_book.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://referential_book.sodifrance.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://referential_book.sodifrance.com/"
+				schemaLocation="bookws_schema1.xsd" />
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="addBookResponse">
+		<wsdl:part name="parameters" element="tns:addBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteBook">
+		<wsdl:part name="parameters" element="tns:deleteBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllBookResponse">
+		<wsdl:part name="parameters" element="tns:getAllBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBookResponse">
+		<wsdl:part name="parameters" element="tns:updateBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateBook">
+		<wsdl:part name="parameters" element="tns:updateBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteBookResponse">
+		<wsdl:part name="parameters" element="tns:deleteBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addBook">
+		<wsdl:part name="parameters" element="tns:addBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllBook">
+		<wsdl:part name="parameters" element="tns:getAllBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBook">
+		<wsdl:part name="parameters" element="tns:getBook">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getBookResponse">
+		<wsdl:part name="parameters" element="tns:getBookResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="BookWS">
+		<wsdl:operation name="getAllBook">
+			<wsdl:input name="getAllBook" message="tns:getAllBook">
+			</wsdl:input>
+			<wsdl:output name="getAllBookResponse" message="tns:getAllBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBook">
+			<wsdl:input name="getBook" message="tns:getBook">
+			</wsdl:input>
+			<wsdl:output name="getBookResponse" message="tns:getBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteBook">
+			<wsdl:input name="deleteBook" message="tns:deleteBook">
+			</wsdl:input>
+			<wsdl:output name="deleteBookResponse" message="tns:deleteBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addBook">
+			<wsdl:input name="addBook" message="tns:addBook">
+			</wsdl:input>
+			<wsdl:output name="addBookResponse" message="tns:addBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBook">
+			<wsdl:input name="updateBook" message="tns:updateBook">
+			</wsdl:input>
+			<wsdl:output name="updateBookResponse" message="tns:updateBookResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="BookWSImplServiceSoapBinding" type="tns:BookWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getAllBook">
+			<soap:operation soapAction="urn:getAllBook" style="document" />
+			<wsdl:input name="getAllBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAllBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getBook">
+			<soap:operation soapAction="urn:getBook" style="document" />
+			<wsdl:input name="getBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteBook">
+			<soap:operation soapAction="urn:deleteBook" style="document" />
+			<wsdl:input name="deleteBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addBook">
+			<soap:operation soapAction="urn:AddBook" style="document" />
+			<wsdl:input name="addBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateBook">
+			<soap:operation soapAction="urn:updateBook" style="document" />
+			<wsdl:input name="updateBook">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateBookResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="BookWSImplService">
+		<wsdl:port name="BookWSImplPort" binding="tns:BookWSImplServiceSoapBinding">
+			<soap:address
+				location="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

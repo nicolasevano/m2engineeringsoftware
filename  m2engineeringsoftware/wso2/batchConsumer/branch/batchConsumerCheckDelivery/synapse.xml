@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="foo2" transports="jms" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
+            <inSequence>
+                <property name="OUT_ONLY" value="true"/>
+                <property name="transport.vfs.ReplyFileName" expression="get-property('transport', 'FILE_NAME')" scope="transport"/>
+                <clone>
+                    <target>
+                        <endpoint name="outputDirectory">
+                            <address uri="vfs:///C:/output/"/>
+                        </endpoint>
+                    </target>
+                    <target>
+                        <endpoint name="inputQueue">
+                            <address uri="jms:/cr?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                            <property name="OUT_ONLY" value="true"/>
+                        </endpoint>
+                    </target>
+                </clone>
+            </inSequence>
+        </target>
+    </proxy>
+    <proxy name="foo1" transports="jms" startOnLoad="true" trace="enable" statistics="enable">
+        <target inSequence="dbAritclesAdd"/>
+        <parameter name="transport.jms.ContentType">application/xml</parameter>
+    </proxy>
+    <proxy name="conditionalArticleRedo" transports="http" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
+            <inSequence>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:8280/services/articleConditionalService">
+                            <timeout>
+                                <duration>4000</duration>
+                                <responseAction>fault</responseAction>
+                            </timeout>
+                            <suspendOnFailure>
+                                <errorCodes>101404,101504</errorCodes>
+                                <initialDuration>1000</initialDuration>
+                                <progressionFactor>2.0</progressionFactor>
+                                <maximumDuration>64000</maximumDuration>
+                            </suspendOnFailure>
+                            <markForSuspension>
+                                <errorCodes>101404,101504</errorCodes>
+                                <retriesBeforeSuspension>3</retriesBeforeSuspension>
+                                <retryDelay>1</retryDelay>
+                            </markForSuspension>
+                        </address>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+        <publishWSDL uri="file:repository/resources/wsdl/serviceConditional.wsdl"/>
+        <policy key="conf:/repository/axis2/service-groups/conditionalArticleRedo/services/conditionalArticleRedo/policies/WSO2CachingPolicy"/>
+    </proxy>
+    <proxy name="allArticleConditional" transports="https http" startOnLoad="true" trace="disable">
+        <target>
+            <inSequence>
+                <clone>
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/cdConditionalArticle"/>
+                        </endpoint>
+                    </target>
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/bookConditionalArticle"/>
+                        </endpoint>
+                    </target>
+                </clone>
+            </inSequence>
+            <outSequence>
+                <aggregate>
+                    <completeCondition>
+                        <messageCount min="2" max="2"/>
+                    </completeCondition>
+                    <onComplete expression="//getAllArticleConditionalResponse//return">
+                        <send/>
+                    </onComplete>
+                </aggregate>
+            </outSequence>
+        </target>
+    </proxy>
+    <proxy name="trap" transports="jms" startOnLoad="true" trace="disable">
+        <target>
+            <inSequence>
+                <log level="full"/>
+                <send>
+                    <endpoint name="outputDirectory">
+                        <address uri="vfs:///C:\log\batchConsumer\trap.txt"/>
+                        <property name="OUT_ONLY" value="true"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+        </target>
+        <parameter name="transport.jms.ContentType">application/xml</parameter>
+        <parameter name="transport.vfs.FileNamePattern">*.xml</parameter>
+        <parameter name="transport.vfs.Append">true</parameter>
+        <parameter name="transport.vfs.ContentType">application/xml</parameter>
+        <parameter name="transport.vfs.MoveTimestampFormat">yyyy-MM-dd'T'HH:mm:ss.SSSZ</parameter>
+        <parameter name="transport.vfs.ReplyFileName">trap.xml</parameter>
+    </proxy>
+    <proxy name="cr" transports="jms" startOnLoad="true" trace="disable">
+        <target>
+            <endpoint name="outputQueue">
+                <address uri="jms:/trap?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                <property name="OUT_ONLY" value="true"/>
+            </endpoint>
+        </target>
+        <parameter name="transport.jms.ContentType">application/xml</parameter>
+    </proxy>
+    <proxy name="bar" transports="jms" startOnLoad="true" trace="disable">
+        <target>
+            <inSequence>
+                <property name="OUT_ONLY" value="true"/>
+                <clone continueParent="true" sequential="true">
+                    <target>
+                        <endpoint name="finalOutputDBQueue">
+                            <address uri="jms:/foo2?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                            <property name="OUT_ONLY" value="true"/>
+                        </endpoint>
+                    </target>
+                    <target>
+                        <endpoint name="finalOutputFileQueue">
+                            <address uri="jms:/foo1?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                            <property name="OUT_ONLY" value="true"/>
+                        </endpoint>
+                    </target>
+                </clone>
+            </inSequence>
+        </target>
+        <parameter name="transport.jms.ContentType">application/xml</parameter>
+    </proxy>
+    <proxy name="bookArticle" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
+            <inSequence>
+                <payloadFactory>
+                    <format>
+                        <ns2:getAllBook xmlns:ns2="http://referential_book.sodifrance.com/"/>
+                    </format>
+                </payloadFactory>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort/getAllBook"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <xquery key="book-to-article.xq">
+                    <variable name="payload" type="ELEMENT"/>
+                </xquery>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>
+    <localEntry key="book-to-article-conditional.xq">
+        <x>
+declare namespace ns2="http://referential_book.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleConditionalResponse&gt;{for $book in $payload/ns2:getAllBookResponse/return return &lt;return&gt;
+                &lt;author&gt;{$book/author/text()}&lt;/author&gt;
+                &lt;kind&gt;book&lt;/kind&gt;
+                &lt;editor&gt;{$book/editor/text()}&lt;/editor&gt;
+                &lt;meta&gt;chapitre: {$book/NBChapitre/text()}; nb page: {$book/NBPage/text()}; description: {$book/description/text()}&lt;/meta&gt;
+                &lt;title&gt;{$book/title/text()}&lt;/title&gt;
+                &lt;publishDate&gt;{$book/publishDate/text()}&lt;/publishDate&gt;
+                &lt;releaseDate&gt;{$book/releaseDate/text()}&lt;/releaseDate&gt;
+&lt;/return&gt;}&lt;/getAllArticleConditionalResponse&gt;</x>
+    </localEntry>
+    <localEntry key="book-to-unic-article.xq">
+        <x>
+declare namespace ns2="http://referential_book.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getArticleConditionalResponse&gt;{for $book in $payload/ns2:getBookResponse/return return &lt;return&gt;
+                &lt;author&gt;{$book/author/text()}&lt;/author&gt;
+                &lt;kind&gt;book&lt;/kind&gt;
+                &lt;editor&gt;{$book/editor/text()}&lt;/editor&gt;
+                &lt;meta&gt;chapitre: {$book/NBChapitre/text()}; nb page: {$book/NBPage/text()}; description: {$book/description/text()}&lt;/meta&gt;
+                &lt;title&gt;{$book/title/text()}&lt;/title&gt;
+                &lt;publishDate&gt;{$book/publishDate/text()}&lt;/publishDate&gt;
+                &lt;releaseDate&gt;{$book/releaseDate/text()}&lt;/releaseDate&gt;
+&lt;/return&gt;}&lt;/getArticleConditionalResponse&gt;</x>
+    </localEntry>
+    <sequence name="dbAritclesAdd" trace="enable" statistics="enable">
+        <dbreport>
+            <connection>
+                <pool>
+                    <password>ne900139</password>
+                    <user>root</user>
+                    <url>jdbc:mysql://localhost:3306/articles</url>
+                    <driver>com.mysql.jdbc.Driver</driver>
+                    <property name="autocommit" value="false"/>
+                </pool>
+            </connection>
+            <statement>
+                <sql>
+            insert into article (author, editor, kind, meta, publishDate, releaseDate, title) values(?,?,?,?,?,?,?)</sql>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/author/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/editor/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/kind/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/meta/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/publishDate/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/releaseDate/text()" type="CHAR"/>
+                <parameter xmlns:ns="http://org.apache.synapse/xsd" xmlns:ns3="http://org.apache.synapse/xsd" expression="$body/item/title/text()" type="CHAR"/>
+            </statement>
+        </dbreport>
+        <send>
+            <endpoint name="inputQueue">
+                <address uri="jms:/cr?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                <property name="OUT_ONLY" value="true"/>
+            </endpoint>
+        </send>
+    </sequence>
+    <localEntry key="cd-to-unic-article.xq">
+        <x>
+	
+declare namespace ns2="http://referential_cd.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getArticleConditionalResponse&gt;{for $cd in $payload/ns2:getCDResponse/return return &lt;return&gt;
+						&lt;author&gt;{$cd/artist/text()}&lt;/author&gt;
+						&lt;kind&gt;cd&lt;/kind&gt;
+						&lt;editor&gt;{$cd/editor/text()}&lt;/editor&gt;
+						&lt;meta&gt;number of track: {$cd/numberOfTrack/text()}&lt;/meta&gt;
+						&lt;title&gt;{$cd/title/text()}&lt;/title&gt;
+						&lt;publishDate&gt;{$cd/publishDate/text()}&lt;/publishDate&gt;
+						&lt;releaseDate&gt;{$cd/releaseDate/text()}&lt;/releaseDate&gt;
+					&lt;/return&gt;
+}&lt;/getArticleConditionalResponse&gt;
+	
+        </x>
+    </localEntry>
+    <localEntry key="cd-to-article-conditional.xq">
+        <x>
+	
+declare namespace ns2="http://referential_cd.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleConditionalResponse&gt;{for $cd in $payload/ns2:getAllCDResponse/return return &lt;return&gt;
+						&lt;author&gt;{$cd/artist/text()}&lt;/author&gt;
+						&lt;kind&gt;cd&lt;/kind&gt;
+						&lt;editor&gt;{$cd/editor/text()}&lt;/editor&gt;
+						&lt;meta&gt;number of track: {$cd/numberOfTrack/text()}&lt;/meta&gt;
+						&lt;title&gt;{$cd/title/text()}&lt;/title&gt;
+						&lt;publishDate&gt;{$cd/publishDate/text()}&lt;/publishDate&gt;
+						&lt;releaseDate&gt;{$cd/releaseDate/text()}&lt;/releaseDate&gt;
+					&lt;/return&gt;
+}&lt;/getAllArticleConditionalResponse&gt;
+	
+        </x>
+    </localEntry>
+</definitions>

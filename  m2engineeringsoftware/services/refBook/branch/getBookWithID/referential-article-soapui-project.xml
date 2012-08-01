@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="referential-article" soapui-version="4.0.1.1" abortOnError="false" runType="SEQUENTIAL" resourceRoot="" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ArticleWSImplServiceSoapBinding" type="wsdl" bindingName="{http://talend.esb.stage.sodifrance.com/}ArticleWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8085/articleService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8085/articleService?wsdl"><con:part><con:url>http://localhost:8085/articleService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ArticleWSImplService" targetNamespace="http://talend.esb.stage.sodifrance.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://talend.esb.stage.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://talend.esb.stage.sodifrance.com/" schemaLocation="http://localhost:8085/articleService?xsd=articlews_schema1.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="getAllArticleResponse">
+    <wsdl:part element="tns:getAllArticleResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllArticle">
+    <wsdl:part element="tns:getAllArticle" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ArticleWS">
+    <wsdl:operation name="getAllArticle">
+      <wsdl:input message="tns:getAllArticle" name="getAllArticle"></wsdl:input>
+      <wsdl:output message="tns:getAllArticleResponse" name="getAllArticleResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ArticleWSImplServiceSoapBinding" type="tns:ArticleWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllArticle">
+      <soap:operation soapAction="urn:getAllArticle" style="document"/>
+      <wsdl:input name="getAllArticle">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllArticleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ArticleWSImplService">
+    <wsdl:port binding="tns:ArticleWSImplServiceSoapBinding" name="ArticleWSImplPort">
+      <soap:address location="http://localhost:8085/articleService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8085/articleService?xsd=articlews_schema1.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="unqualified" targetNamespace="http://talend.esb.stage.sodifrance.com/" version="1.0" xmlns:tns="http://talend.esb.stage.sodifrance.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getAllArticle" type="tns:getAllArticle"/>
+  <xs:element name="getAllArticleResponse" type="tns:getAllArticleResponse"/>
+  <xs:complexType name="getAllArticle">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getAllArticleResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Article"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Article">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="author" type="xs:string"/>
+      <xs:element minOccurs="0" name="kind">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="cd"/>
+            <xs:enumeration value="book"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="editor" type="xs:string"/>
+      <xs:element minOccurs="0" name="meta" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="publishDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="releaseDate" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8085/articleService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:getAllArticle" name="getAllArticle" bindingOperationName="getAllArticle" type="Request-Response" outputName="getAllArticleResponse" inputName="getAllArticle" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/articleService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:tal="http://talend.esb.stage.sodifrance.com/" xmlns:ser="http://servicemix.esb.stage.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <tal:getAllArticle/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="http://servicemix.esb.stage.sodifrance.com/ArticleReferentialPortType/getAllArticle"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="ArticleConditionalWSImplServiceSoapBinding" type="wsdl" bindingName="{http://conditional.talend.esb.stage.sodifrance.com/}ArticleConditionalWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8085/articleConditionalService?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8085/articleConditionalService?wsdl"><con:part><con:url>http://localhost:8085/articleConditionalService?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="ArticleConditionalWSImplService" targetNamespace="http://conditional.talend.esb.stage.sodifrance.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://conditional.talend.esb.stage.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://conditional.talend.esb.stage.sodifrance.com/" schemaLocation="http://localhost:8085/articleConditionalService?xsd=articlewsConditional_schema1.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="getAllArticleConditional">
+    <wsdl:part element="tns:getAllArticleConditional" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllArticleConditionalResponse">
+    <wsdl:part element="tns:getAllArticleConditionalResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ArticleConditionalWS">
+    <wsdl:operation name="getAllArticleConditional">
+      <wsdl:input message="tns:getAllArticleConditional" name="getAllArticleConditional"></wsdl:input>
+      <wsdl:output message="tns:getAllArticleConditionalResponse" name="getAllArticleConditionalResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ArticleConditionalWSImplServiceSoapBinding" type="tns:ArticleConditionalWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllArticleConditional">
+      <soap:operation soapAction="urn:getAllArticleConditional" style="document"/>
+      <wsdl:input name="getAllArticleConditional">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllArticleConditionalResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ArticleConditionalWSImplService">
+    <wsdl:port binding="tns:ArticleConditionalWSImplServiceSoapBinding" name="ArticleConditionalWSImplPort">
+      <soap:address location="http://localhost:8085/articleConditionalService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8085/articleConditionalService?xsd=articlewsConditional_schema1.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="unqualified" targetNamespace="http://conditional.talend.esb.stage.sodifrance.com/" version="1.0" xmlns:tns="http://conditional.talend.esb.stage.sodifrance.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="getAllArticleConditional" type="tns:getAllArticleConditional"/>
+  <xs:element name="getAllArticleConditionalResponse" type="tns:getAllArticleConditionalResponse"/>
+  <xs:complexType name="getAllArticleConditional">
+    <xs:sequence>
+      <xs:element maxOccurs="1" minOccurs="1" name="wantedkind" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllArticleConditionalResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ArticleConditional"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ArticleConditional">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="author" type="xs:string"/>
+      <xs:element minOccurs="0" name="kind">
+        <xs:simpleType>
+          <xs:restriction base="xs:string">
+            <xs:enumeration value="cd"/>
+            <xs:enumeration value="book"/>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element minOccurs="0" name="editor" type="xs:string"/>
+      <xs:element minOccurs="0" name="meta" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element minOccurs="0" name="publishDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="releaseDate" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8085/articleConditionalService</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:getAllArticleConditional" name="getAllArticleConditional" bindingOperationName="getAllArticleConditional" type="Request-Response" outputName="getAllArticleConditionalResponse" inputName="getAllArticleConditional" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/articleConditionalService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://conditional.talend.esb.stage.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:getAllArticleConditional>
+         <wantedkind>cd</wantedkind>
+      </con:getAllArticleConditional>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllArticleConditional"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/articleConditionalService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://conditional.talend.esb.stage.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:getAllArticleConditional>
+         <wantedkind>book</wantedkind>
+      </con:getAllArticleConditional>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllArticleConditional"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/articleConditionalService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:con="http://conditional.talend.esb.stage.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <con:getAllArticleConditional>
+         <wantedkind>all</wantedkind>
+      </con:getAllArticleConditional>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllArticleConditional"/><con:wsrmConfig version="1.2"/></con:call></con:operation></con:interface><con:testSuite name="ArticleReferentialSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="ArticleReferentialSoapBinding TestSuite" searchProperties="true"><con:settings/><con:testStep type="request" name="getAllArticle"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>ArticleWSImplServiceSoapBinding</con:interface><con:operation>getAllArticle</con:operation><con:request name="getAllArticle"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8085/articleService</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ser="http://servicemix.esb.stage.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ser:getAllArticle/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig action="http://servicemix.esb.stage.sodifrance.com/ArticleReferentialPortType/getAllArticle"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>50</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>600</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval><con:reportParameters/></con:loadTest><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:sensitiveInformation/></con:soapui-project>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry xmlns="http://ws.apache.org/ns/synapse" key="cd-to-article.xq">
+    <x>
+	
+declare namespace ns2="http://referential_cd.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleResponse&gt;{for $cd in $payload/ns2:getAllCDResponse/return return &lt;return&gt;
+						&lt;author&gt;{$cd/artist/text()}&lt;/author&gt;
+						&lt;kind&gt;cd&lt;/kind&gt;
+						&lt;editor&gt;{$cd/editor/text()}&lt;/editor&gt;
+						&lt;meta&gt;number of track: {$cd/numberOfTrack/text()}&lt;/meta&gt;
+						&lt;title&gt;{$cd/title/text()}&lt;/title&gt;
+						&lt;publishDate&gt;{$cd/publishDate/text()}&lt;/publishDate&gt;
+						&lt;releaseDate&gt;{$cd/releaseDate/text()}&lt;/releaseDate&gt;
+					&lt;/return&gt;
+}&lt;/getAllArticleResponse&gt;
+	
+        </x>
+</localEntry>

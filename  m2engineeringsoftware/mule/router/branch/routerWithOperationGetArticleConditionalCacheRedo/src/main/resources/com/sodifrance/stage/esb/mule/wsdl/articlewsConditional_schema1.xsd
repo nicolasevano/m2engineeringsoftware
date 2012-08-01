@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema 
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+	xmlns:tns="http://conditional.mule.esb.stage.sodifrance.com/" 
+	elementFormDefault="unqualified" 
+	targetNamespace="http://conditional.mule.esb.stage.sodifrance.com/" 
+	version="1.0">
+
+	<xs:element name="getAllArticleConditional" type="tns:getAllArticleConditional" />
+
+	<xs:element name="getAllArticleConditionalResponse" type="tns:getAllArticleConditionalResponse" />
+	
+	<xs:element name="getArticleConditional" type="tns:getArticleConditional" />
+
+	<xs:element name="getArticleConditionalResponse" type="tns:getArticleConditionalResponse" />
+
+	<xs:complexType name="getAllArticleConditional">
+    	<xs:sequence>
+    		<xs:element maxOccurs="1" minOccurs="1" name="wantedkind" type="xs:string"></xs:element>
+    	</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getAllArticleConditionalResponse">
+    	<xs:sequence>
+    		<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ArticleConditional"/>
+    	</xs:sequence>
+  	</xs:complexType>
+  	
+  	<xs:complexType name="getArticleConditional">
+    	<xs:sequence>
+    		<xs:element maxOccurs="1" minOccurs="1" name="wantedkind" type="xs:string"></xs:element>
+    		<xs:element maxOccurs="1" minOccurs="1" name="id" type="xs:string"></xs:element>
+    	</xs:sequence>
+	</xs:complexType>
+
+	<xs:complexType name="getArticleConditionalResponse">
+    	<xs:sequence>
+    		<xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:ArticleConditional"/>
+    	</xs:sequence>
+  	</xs:complexType>
+
+	<xs:complexType name="ArticleConditional">
+    	<xs:sequence>
+      		<xs:element minOccurs="0" name="author" type="xs:string"/>
+      		<xs:element minOccurs="0" name="kind">
+      			<xs:simpleType>
+    				<xs:restriction base="xs:string">
+      					<xs:enumeration value="cd"/>
+      					<xs:enumeration value="book"/>
+    				</xs:restriction>
+  				</xs:simpleType>
+      		</xs:element>
+      		<xs:element minOccurs="0" name="editor" type="xs:string"/>
+      		<xs:element minOccurs="0" name="meta" type="xs:string"/>
+      		<xs:element minOccurs="0" name="title" type="xs:string"/>
+      		<xs:element minOccurs="0" name="publishDate" type="xs:string"/>
+      		<xs:element minOccurs="0" name="releaseDate" type="xs:string"/>
+    	</xs:sequence>
+	</xs:complexType>
+
+</xs:schema>

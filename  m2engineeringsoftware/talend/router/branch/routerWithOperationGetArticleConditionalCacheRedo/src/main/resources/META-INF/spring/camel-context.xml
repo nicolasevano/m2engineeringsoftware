@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cxf="http://camel.apache.org/schema/cxf" xmlns:camel-spring="http://camel.apache.org/schema/spring"
+	xmlns:con="http://conditional.talend.esb.stage.sodifrance.com/"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://camel.apache.org/schema/blueprint http://camel.apache.org/schema/spring/camel-blueprint.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://camel.apache.org/schema/cxf  http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+	<spring:import resource="classpath:META-INF/cxf/cxf.xml" />
+
+
+	<spring:bean id="aggregatorStrategy"
+		class="com.sodifrance.stage.esb.talend.AgregateStrategy" />
+		
+	<spring:bean id="aggregatorCache"
+		class="com.sodifrance.stage.esb.talend.AggregateCache" />
+
+	<!-- added to try another way to design cxf service -->
+
+	<cxf:cxfEndpoint id="articleService"
+		address="http://localhost:8085/articleService" serviceName="article:ArticleWSImplService"
+		serviceClass="com.sodifrance.stage.esb.talend.ArticleWS" wsdlURL="service.wsdl"
+		xmlns:article="http://talend.esb.stage.sodifrance.com/">
+		<cxf:properties>
+<!-- 			enable mtom by setting this property to true -->
+			<entry key="mtom-enabled" value="true" />
+<!-- 			set the camel-cxf endpoint data fromat to PAYLOAD mode -->
+			<entry key="dataFormat" value="PAYLOAD" />
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	<cxf:cxfEndpoint id="articleConditionalService"
+		address="http://localhost:8085/articleConditionalService" serviceName="article-conditional:ArticleConditionalWSImplService"
+		serviceClass="com.sodifrance.stage.esb.talend.conditional.ArticleConditionalWS"
+		wsdlURL="serviceConditional.wsdl" xmlns:article-conditional="http://conditional.talend.esb.stage.sodifrance.com/">
+		<cxf:properties>
+<!-- 			enable mtom by setting this property to true -->
+			<entry key="mtom-enabled" value="true" />
+<!-- 			set the camel-cxf endpoint data fromat to PAYLOAD mode -->
+			<entry key="dataFormat" value="PAYLOAD" />
+		</cxf:properties>
+	</cxf:cxfEndpoint>
+
+	<bean id="myDeadLetterErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+		<property name="deadLetterUri"
+			value="cxf:bean:articleConditionalService?dataFormat=PAYLOAD" />
+		<property name="redeliveryPolicy" ref="myRedeliveryPolicyConfig" />
+	</bean>
+
+	<bean id="myRedeliveryPolicyConfig" class="org.apache.camel.processor.RedeliveryPolicy">
+		<property name="maximumRedeliveries" value="1" />
+		<property name="redeliveryDelay" value="500" />
+	</bean>
+	
+	<bean id="getQueue" class="java.lang.String">
+        <constructor-arg value="replicationGetQueue" />
+    </bean>
+
+    <bean id="getTopic" class="java.lang.String">
+        <constructor-arg value="replicationTopic" />
+    </bean>
+	
+	<bean id="amqCF" class="org.apache.activemq.ActiveMQConnectionFactory">
+        <property name="brokerURL" value="vm://localhost?broker.persistent=false"/>
+    </bean>
+
+    <bean id="activemq" class="org.apache.camel.component.jms.JmsComponent">
+        <property name="connectionFactory">
+            <ref bean="amqCF"/>
+        </property>
+    </bean>
+	
+	<!-- Import the xml file explained at step three -->
+    <import resource="cache-bean.xml"/>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<propertyPlaceholder id="ficConf"
+			location="classpath:com.sodifrance.stage.esb.talend.cfg" />
+		
+		<camel-spring:endpoint id="articleCache" 
+		uri="cache:article?cacheManagerFactory=#cacheManagerFactory1&amp;eventListenerRegistry=#eventListenerRegistry1&amp;cacheLoaderRegistry=#cacheLoaderRegistry1"/>
+		
+
+		<camel-spring:endpoint id="camelConditionalRouter"
+			uri="cxf:bean:articleConditionalService?dataFormat=PAYLOAD" />
+
+		<camel-spring:endpoint id="camelRouter"
+			uri="cxf:bean:articleService?dataFormat=PAYLOAD" />
+
+		<camel-spring:route id="cacheConditionalRouter" errorHandlerRef="myDeadLetterErrorHandler">
+			<camel-spring:from ref="camelConditionalRouter" />
+			<camel-spring:setHeader headerName="CamelCacheOperation">
+				<camel-spring:constant>CamelCacheGet</camel-spring:constant>
+			</camel-spring:setHeader>
+			<camel-spring:setHeader headerName="CamelCacheKey">
+						<xpath>/node()//node()</xpath>
+			</camel-spring:setHeader>
+			<camel-spring:setProperty propertyName="storedBody">
+				<camel-spring:constant>${body}</camel-spring:constant>
+			</camel-spring:setProperty>
+			<!-- <camel-spring:bean beanType="java.lang.String"> -->
+			<!-- </camel-spring:bean> -->
+			<log message="body: ${body}" />
+			<!-- <log message="header: ${header}"/> -->
+<!-- 			<to uri="cache://TestCache1?timeToLiveSeconds=60" /> -->
+			<to ref="articleCache" />
+			<choice>
+				<when>
+					<!-- <xpath >${header}/CamelCacheElementWasFound[not(text())]</xpath> -->
+					<simple>${in.header.CamelCacheElementWasFound} == null</simple>
+					<camel-spring:multicast strategyRef="aggregatorCache"
+						parallelProcessing="false">
+						<camel-spring:to uri="log:INFO" />
+						<camel-spring:to uri="direct:camelConditionalRouter" />
+					</camel-spring:multicast>
+					<!-- <log message="body:{storedBody}"/> -->
+					<!-- <to uri="direct:camelConditionalRouter" /> -->
+					<log message="body contains: ${body}" />
+					<camel-spring:setHeader headerName="CamelCacheOperation">
+						<camel-spring:constant>CamelCacheAdd</camel-spring:constant>
+					</camel-spring:setHeader>
+					<camel-spring:setHeader headerName="CamelCacheKey">
+						<xpath>/all/request/node()//node()</xpath>
+					</camel-spring:setHeader>
+					<transform>
+						<camel-spring:xpath>/all/response/node()</camel-spring:xpath>
+					</transform>
+<!-- 					<to uri="cache://TestCache1?timeToLiveSeconds=60" /> -->
+					<to ref="articleCache" />
+				</when>
+				<otherwise />
+			</choice>
+		</camel-spring:route>
+			
+		<camel-spring:route id="conditionalRouter">
+<!-- 			in progress -->
+			<camel-spring:from uri="direct:camelConditionalRouter" />
+			<log message="The message contains ${body}" />
+			<choice>
+				<when>
+					<xpath>/con:getAllArticleConditional/wantedkind/text() = 'cd'</xpath>
+					<to uri="direct:transformerCD" />
+					<to uri="properties:{{query.conditional-response}}"/>
+				</when>
+				<when>
+					<xpath>/con:getAllArticleConditional/wantedkind/text() = 'book'</xpath>
+					<to uri="direct:transformerBook" />
+					<to uri="properties:{{query.conditional-response}}"/>
+				</when>
+				<when>
+					<xpath>/con:getArticleConditional/wantedkind/text() = 'cd'</xpath>
+					<to uri="direct:unicTransformerCD" />
+				</when>
+				<when>
+					<xpath>/con:getArticleConditional/wantedkind/text() = 'book'</xpath>
+					<to uri="direct:unicTransformerBook" />
+				</when>
+				<when>
+					<xpath>/con:getArticleConditional/wantedkind/text() = 'all'</xpath>
+					<to uri="direct:camelArticleIdList" />
+				</when>
+				<otherwise>
+					<setHeader headerName="operationname">
+						<simple>getAllArticle</simple>
+					</setHeader>
+					<setHeader headerName="operationnamespace">
+						<simple>${properties:namespace.all}</simple>
+					</setHeader>
+					<transform>
+						<simple>${properties:payload.all}</simple>
+					</transform>
+					<to uri="direct:camelRouter" />
+					<log message="The message contains ${body}" />
+<!-- 					<camel-spring:to uri="properties:{{query.removesoap}}" /> -->
+					<to uri="properties:{{query.conditional-response}}"/>
+				</otherwise>
+			</choice>
+			<log message="The message contains ${in.body}" />
+		</camel-spring:route>
+
+		<camel-spring:route id="transformer">
+			<camel-spring:from ref="camelRouter" />
+			<to uri="direct:camelRouter" />
+		</camel-spring:route>
+		
+		<camel-spring:route id="directTransformer">
+			<camel-spring:from uri="direct:camelRouter" />
+			<camel-spring:multicast strategyRef="aggregatorStrategy"
+				parallelProcessing="true">
+				<camel-spring:to uri="direct:transformerCD" />
+				<camel-spring:to uri="direct:transformerBook" />
+			</camel-spring:multicast>
+			<log message="The message contains ${body}" />
+			<camel-spring:to uri="properties:{{query.merge}}" />
+			<log message="The referential contains ${in.body}" />
+		</camel-spring:route>
+		
+		<camel-spring:route id="unicDirectTransformer">
+			<camel-spring:from uri="direct:camelArticleIdList" />
+			<camel-spring:multicast strategyRef="aggregatorStrategy"
+				parallelProcessing="false">
+				<camel-spring:to uri="direct:unicTransformerCD" />
+				<camel-spring:to uri="direct:unicTransformerBook" />
+			</camel-spring:multicast>
+			<log message="The message contains ${body}" />
+			<camel-spring:to uri="properties:{{query.conditional.merge}}" />
+			<log message="The referential contains ${in.body}" />
+		</camel-spring:route>
+		
+		<camel-spring:route id="cd">
+			<camel-spring:from uri="direct:transformerCD" />
+			<transform>
+				<simple>${properties:payload.cd}</simple>
+			</transform>
+			<setHeader headerName="operationname">
+				<simple>getAllCD</simple>
+			</setHeader>
+			<setHeader headerName="operationnamespace">
+				<simple>${properties:namespace.cd}</simple>
+			</setHeader>
+			<log message="try to get all cd" />
+			<camel-spring:convertBodyTo type="java.lang.String" />
+			<camel-spring:to uri="properties:{{http.address.cd}}" />
+			<camel-spring:to uri="properties:{{query.cd}}" />
+		</camel-spring:route>
+
+		<camel-spring:route id="book">
+			<camel-spring:from uri="direct:transformerBook" />
+			<transform>
+				<simple>${properties:payload.book}</simple>
+			</transform>
+			<setHeader headerName="operationname">
+				<simple>getAllBook</simple>
+			</setHeader>
+			<setHeader headerName="operationnamespace">
+				<simple>${properties:namespace.book}</simple>
+			</setHeader>
+			<log message="Try to get all book" />
+			<camel-spring:to uri="properties:{{http.address.book}}" />
+			<camel-spring:to uri="properties:{{query.book}}" />
+		</camel-spring:route>
+		
+		<camel-spring:route id="unicCd">
+			<camel-spring:from uri="direct:unicTransformerCD" />
+			<transform>
+				<xpath>/con:getArticleConditional/id/text()</xpath>
+			</transform>
+			<transform>
+				<simple>${properties:payload.idCDBegin}${in.body}${properties:payload.idCDEnd}</simple>
+			</transform>
+			<setHeader headerName="operationname">
+				<simple>getCD</simple>
+			</setHeader>
+			<setHeader headerName="operationnamespace">
+				<simple>${properties:namespace.cd}</simple>
+			</setHeader>
+			<log message="try to get cd" />
+			<camel-spring:convertBodyTo type="java.lang.String" />
+			<camel-spring:to uri="properties:{{http.address.cd}}" />
+			<camel-spring:to uri="properties:{{query.conditional.cd}}" />
+		</camel-spring:route>
+
+		<camel-spring:route id="unicBook">
+			<camel-spring:from uri="direct:unicTransformerBook" />
+			<transform>
+				<xpath>/con:getArticleConditional/id/text()</xpath>
+			</transform>
+			<transform>
+				<simple>${properties:payload.idBookBegin}${in.body}${properties:payload.idBookEnd}</simple>
+			</transform>
+			<setHeader headerName="operationname">
+				<simple>getBook</simple>
+			</setHeader>
+			<setHeader headerName="operationnamespace">
+				<simple>${properties:namespace.book}</simple>
+			</setHeader>
+			<log message="Try to get all book" />
+			<camel-spring:to uri="properties:{{http.address.book}}" />
+			<camel-spring:to uri="properties:{{query.conditional.book}}" />
+		</camel-spring:route>
+		
+	</camelContext>
+
+</beans>

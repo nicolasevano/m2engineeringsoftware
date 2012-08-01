@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="CDWSImplService"
+	targetNamespace="http://referential_cd.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+	xmlns:tns="http://referential_cd.sodifrance.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://referential_cd.sodifrance.com/"
+				schemaLocation="cdws_schema1.xsd" />
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="addCDResponse">
+		<wsdl:part name="parameters" element="tns:addCDResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllCD">
+		<wsdl:part name="parameters" element="tns:getAllCD">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCD">
+		<wsdl:part name="parameters" element="tns:getCD">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteCD">
+		<wsdl:part name="parameters" element="tns:deleteCD">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateCDResponse">
+		<wsdl:part name="parameters" element="tns:updateCDResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="addCD">
+		<wsdl:part name="parameters" element="tns:addCD">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="deleteCDResponse">
+		<wsdl:part name="parameters" element="tns:deleteCDResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllCDResponse">
+		<wsdl:part name="parameters" element="tns:getAllCDResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getCDResponse">
+		<wsdl:part name="parameters" element="tns:getCDResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="updateCD">
+		<wsdl:part name="parameters" element="tns:updateCD">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="CDWS">
+		<wsdl:operation name="deleteCD">
+			<wsdl:input name="deleteCD" message="tns:deleteCD">
+			</wsdl:input>
+			<wsdl:output name="deleteCDResponse" message="tns:deleteCDResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="addCD">
+			<wsdl:input name="addCD" message="tns:addCD">
+			</wsdl:input>
+			<wsdl:output name="addCDResponse" message="tns:addCDResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllCD">
+			<wsdl:input name="getAllCD" message="tns:getAllCD">
+			</wsdl:input>
+			<wsdl:output name="getAllCDResponse" message="tns:getAllCDResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCD">
+			<wsdl:input name="getCD" message="tns:getCD">
+			</wsdl:input>
+			<wsdl:output name="getCDResponse" message="tns:getCDResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateCD">
+			<wsdl:input name="updateCD" message="tns:updateCD">
+			</wsdl:input>
+			<wsdl:output name="updateCDResponse" message="tns:updateCDResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="CDWSImplServiceSoapBinding" type="tns:CDWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="addCD">
+			<soap:operation soapAction="urn:AddCD" style="document" />
+			<wsdl:input name="addCD">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="addCDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="deleteCD">
+			<soap:operation soapAction="urn:deleteCD" style="document" />
+			<wsdl:input name="deleteCD">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="deleteCDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getAllCD">
+			<soap:operation soapAction="urn:getAllCD" style="document" />
+			<wsdl:input name="getAllCD">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAllCDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getCD">
+			<soap:operation soapAction="urn:getCD" style="document" />
+			<wsdl:input name="getCD">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getCDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="updateCD">
+			<soap:operation soapAction="urn:updateCD" style="document" />
+			<wsdl:input name="updateCD">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="updateCDResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="CDWSImplService">
+		<wsdl:port name="CDWSImplPort" binding="tns:CDWSImplServiceSoapBinding">
+			<soap:address
+				location="http://localhost:8080/referential-cd/services/CDWSImplPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

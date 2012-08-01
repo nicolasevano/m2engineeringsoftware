@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="batchConsumer" transports="vfs" startOnLoad="true" trace="enable" statistics="enable">
+    <target>
+        <inSequence>
+            <send>
+                <endpoint name="inputQueue">
+                    <address uri="jms:/bar?transport.jms.DestinationType=queue&amp;transport.jms.ContentTypeProperty=Content-Type&amp;java.naming.provider.uri=tcp://localhost:61616&amp;java.naming.factory.initial=org.apache.activemq.jndi.ActiveMQInitialContextFactory&amp;transport.jms.ConnectionFactoryJNDIName=QueueConnectionFactory&amp;transport.jms.ContentTypeProperty=Content-Type"/>
+                    <property name="OUT_ONLY" value="true"/>
+                </endpoint>
+            </send>
+        </inSequence>
+    </target>
+    <parameter name="transport.jms.ContentType">application/xml</parameter>
+    <parameter name="transport.PollInterval">1</parameter>
+    <parameter name="transport.vfs.ActionAfterProcess">DELETE</parameter>
+    <parameter name="transport.vfs.FileURI">file:///C:/input</parameter>
+    <parameter name="transport.vfs.FileNamePattern">.*.xml</parameter>
+    <parameter name="transport.vfs.ContentType">application/xml</parameter>
+    <parameter name="serviceType">proxy</parameter>
+    <parameter name="transport.vfs.MoveTimestampFormat">yyyy-MM-dd'T'HH:mm:ss.SSSZ</parameter>
+</proxy>

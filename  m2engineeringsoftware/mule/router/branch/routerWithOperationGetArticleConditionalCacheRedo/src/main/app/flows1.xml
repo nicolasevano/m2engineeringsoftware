@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:vm="http://www.mulesoft.org/schema/mule/vm"
+	xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml"
+	xmlns:http="http://www.mulesoft.org/schema/mule/http" xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation"
+	xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core"
+	xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0"
+	xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd 
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd ">
+	<spring:beans>
+		<spring:bean name="ArticleWSImplService" class="org.mule.module.cxf.WSProxyService">
+			<spring:property name="wsdlFile"
+				value="com/sodifrance/stage/esb/mule/service.wsdl" />
+		</spring:bean>
+		<spring:bean name="ArticleConditionalWSImplService" class="org.mule.module.cxf.WSProxyService">
+			<spring:property name="wsdlFile"
+				value="com/sodifrance/stage/esb/mule/serviceConditional.wsdl" />
+		</spring:bean>
+		<spring:bean name="CDWSImplService" class="org.mule.module.cxf.WSProxyService">
+			<spring:property name="wsdlFile"
+				value="http://localhost:8080/referential-cd-0.0.1-SNAPSHOT/services/1.0.0/CDWSImplPort/?wsdl" />
+		</spring:bean>
+		<spring:bean name="BookWSImplService" class="org.mule.module.cxf.WSProxyService">
+			<spring:property name="wsdlFile"
+				value="http://localhost:8080/referential-book-0.0.1-SNAPSHOT/services/1.0.0/BookWSImplPort/?wsdl" />
+		</spring:bean>
+		<spring:bean name="response"
+			class="com.sodifrance.stage.esb.mule.GetAllArticleResponse" />
+		<spring:bean name="responseConditional"
+			class="com.sodifrance.stage.esb.mule.conditional.GetAllArticleConditionalResponse" />
+		<spring:bean name="responseConditionalUnic"
+			class="com.sodifrance.stage.esb.mule.conditional.GetArticleConditionalResponse" />
+	</spring:beans>
+	<context:property-placeholder
+		location="com/sodifrance/stage/esb/mule/articlews.properties" />
+	<ee:object-store-caching-strategy
+		name="Caching_Strategy_CD" doc:name="Caching Strategy">
+		<in-memory-store name="cdCache" maxEntries="10000"
+			entryTTL="60000" expirationInterval="60000" />
+	</ee:object-store-caching-strategy>
+	<ee:object-store-caching-strategy
+		name="Caching_Strategy_Book" doc:name="Caching Strategy">
+		<in-memory-store name="bookCache" maxEntries="10000"
+			entryTTL="60000" expirationInterval="60000" />
+	</ee:object-store-caching-strategy>
+	<ee:object-store-caching-strategy
+		name="Caching_Strategy_Frontend" doc:name="Caching Strategy">
+		<in-memory-store name="frontEndCache" maxEntries="10000"
+			entryTTL="60000" expirationInterval="60000" />
+	</ee:object-store-caching-strategy>
+	<flow name="HTTP_input" doc:name="HTTP_input"
+		doc:description="    Article referential CCM         ">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			address="${url.frontend}" mimeType="text/xml" doc:name="Generic">
+			<idempotent-redelivery-policy
+				maxRedeliveryCount="1">
+				<dead-letter-queue>
+					<vm:outbound-endpoint path="error-queue" />
+				</dead-letter-queue>
+			</idempotent-redelivery-policy>
+		</http:inbound-endpoint>
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<cxf:proxy-service namespace="${namespace.frontend}"
+			service="ArticleWSImplService" wsdlLocation="${path.frontend_wsdl}"
+			doc:name="SOAP" />
+		<object-to-string-transformer doc:name="Object to String" />
+		<all doc:name="All">
+			<processor-chain>
+					<flow-ref name="cd_flow" doc:name="Flow Reference" />
+<!--					<http:outbound-endpoint exchange-pattern="request-response" address="${url.cdflow}" -->
+<!--						mimeType="text/xml" doc:name="Generic"/>-->
+			</processor-chain>
+			<processor-chain>
+					<flow-ref name="book_flow" doc:name="Flow Reference" />
+<!--					<http:outbound-endpoint exchange-pattern="request-response" address="${url.bookflow}" -->
+<!--						mimeType="text/xml" doc:name="Generic"/>-->
+			</processor-chain>
+		</all>
+		<scripting:transformer doc:name="Script">
+			<scripting:script engine="groovy">
+				<scripting:text><![CDATA[log.info( "*** Logging from script ..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                
+                                def content = "<ns:getAllArticleResponse xmlns:ns=" +'"' + "http://mule.esb.stage.sodifrance.com/" + '"' + ">" 
+                                for ( m in message.getMessagesAsArray() ) { 
+                                        content += m.getPayloadAsString().substring(110,m.getPayloadAsString().length()-24); 
+                                } 
+                                content += "</ns:getAllArticleResponse>"
+                                log.info( "aggregated msg: " + content ) 
+                                
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+			</scripting:script>
+		</scripting:transformer>
+		<custom-transformer
+			class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+			doc:name="XmlToXSR" />
+	</flow>
+	<flow name="cd_flow" doc:name="cd_flow">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			address="${url.cdflow}" mimeType="text/xml" doc:name="Generic" />
+		<response>
+			<mulexml:object-to-xml-transformer
+				doc:name="Object to XML" />
+			<logger message="get response from cd service" level="INFO"
+				doc:name="Logger" />
+			<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+			<mulexml:xquery-transformer
+				outputEncoding="UTF-8" mimeType="text/xml" xquery-file="${path.xquery_cd_to_article}"
+				name="cdToArticle"></mulexml:xquery-transformer>
+			<mulexml:dom-to-xml-transformer></mulexml:dom-to-xml-transformer>
+			<logger message="#[message:]" level="INFO" doc:name="Logger" />
+		</response>
+		<cxf:jaxws-client operation="getAllCD"
+			serviceClass="com.sodifrance.referential_cd.CDWS" doc:name="SOAP" />
+		<http:outbound-endpoint exchange-pattern="request-response"
+			address="${url.cdservice}" doc:name="Generic" />
+	</flow>
+	<flow name="book_flow" doc:name="book_flow">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			address="${url.bookflow}" mimeType="text/xml" doc:name="Generic" />
+		<response>
+			<mulexml:object-to-xml-transformer
+				doc:name="Object to XML" />
+			<mulexml:xquery-transformer
+				outputEncoding="UTF-8" mimeType="text/xml" xquery-file="${path.xquery_book_to_article}"
+				name="bookToArticle"></mulexml:xquery-transformer>
+			<mulexml:xml-to-dom-transformer
+				doc:name="Object to XML"></mulexml:xml-to-dom-transformer>
+		</response>
+		<cxf:jaxws-client operation="getAllBook"
+			serviceClass="com.sodifrance.referential_book.BookWS" doc:name="SOAP" />
+		<http:outbound-endpoint exchange-pattern="request-response"
+			address="${url.bookservice}" doc:name="Generic" />
+	</flow>
+	<flow name="HTTP_conditional" doc:name="HTTP_conditional">
+		<http:inbound-endpoint exchange-pattern="request-response"
+			address="${url.frontend.conditional}" mimeType="text/xml" doc:name="Generic">
+			<idempotent-redelivery-policy
+				maxRedeliveryCount="1">
+				<dead-letter-queue>
+					<vm:outbound-endpoint path="error-queue" />
+				</dead-letter-queue>
+			</idempotent-redelivery-policy>
+		</http:inbound-endpoint>
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<cxf:proxy-service namespace="${namespace.frontend.conditional}"
+			service="ArticleConditionalWSImplService" wsdlLocation="${path.frontend_wsdl.conditional}"
+			doc:name="SOAP" />
+		<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_Frontend">
+			<choice doc:name="Choice">
+				<when expression="/getArticleConditional/wantedkind='cd'"
+					evaluator="xpath">
+					<processor-chain>
+						<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_CD">
+							<vm:outbound-endpoint exchange-pattern="request-response"
+								address="${vm.cdunicflow}" doc:name="Generic" />
+						</ee:cache>
+						<mulexml:object-to-xml-transformer
+							doc:name="Object to XML" />
+						<logger message="get response from unic cd" level="INFO"
+							doc:name="Logger" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+						<mulexml:xquery-transformer
+							outputEncoding="UTF-8" xquery-file="${path.xquery_cd_to_unic_article}"
+							name="cdToExclusive4Article"></mulexml:xquery-transformer>
+						<mulexml:dom-to-xml-transformer></mulexml:dom-to-xml-transformer>
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+					</processor-chain>
+				</when>
+				<when expression="/getArticleConditional/wantedkind='book'"
+					evaluator="xpath">
+					<processor-chain>
+						<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_Book">
+							<vm:outbound-endpoint exchange-pattern="request-response"
+								address="${vm.bookunicflow}" doc:name="Generic" />
+						</ee:cache>
+						<mulexml:object-to-xml-transformer
+							doc:name="Object to XML" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+						<mulexml:xquery-transformer
+							outputEncoding="UTF-8" xquery-file="${path.xquery_book_to_unic_article}"
+							name="bookToExclusive4Article"></mulexml:xquery-transformer>
+						<mulexml:dom-to-xml-transformer></mulexml:dom-to-xml-transformer>
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+					</processor-chain>
+				</when>
+				<when expression="/getArticleConditional/wantedkind='all'"
+					evaluator="xpath">
+					<processor-chain>
+						<all doc:name="All">
+							<processor-chain>
+								<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_CD">
+									<vm:outbound-endpoint exchange-pattern="request-response"
+										address="${vm.cdunicflow}" doc:name="Generic" />
+								</ee:cache>
+								<mulexml:object-to-xml-transformer
+									doc:name="Object to XML" />
+								<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+								<mulexml:xquery-transformer
+									outputEncoding="UTF-8" xquery-file="${path.xquery_cd_to_unic_article}"
+									name="cdToExclusive6Article"></mulexml:xquery-transformer>
+								<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+							</processor-chain>
+							<processor-chain>
+								<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_Book">
+									<vm:outbound-endpoint exchange-pattern="request-response"
+										address="${vm.bookunicflow}" doc:name="Generic" />
+								</ee:cache>
+								<mulexml:object-to-xml-transformer
+									doc:name="Object to XML" />
+								<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+								<mulexml:xquery-transformer
+									outputEncoding="UTF-8" xquery-file="${path.xquery_book_to_unic_article}"
+									name="bookToExclusive6Article"></mulexml:xquery-transformer>
+								<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+							</processor-chain>
+						</all>
+						<scripting:transformer doc:name="Script">
+							<scripting:script engine="groovy">
+								<scripting:text><![CDATA[log.info( "*** Logging from script ..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                def content = "<getArticleConditionalResponse xmlns:xml=" +'"' + "http://www.w3.org/XML/1998/namespace" + '"' + ">"
+                                for ( m in message.getMessagesAsArray() ) { 
+                                        content += m.getPayloadAsString().substring(118,m.getPayloadAsString().length()-32); 
+                                } 
+                                content += "</getArticleConditionalResponse>"
+                                log.info( "aggregated msg: " + content ) 
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+							</scripting:script>
+						</scripting:transformer>
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+					</processor-chain>
+				</when>
+				<when expression="/getAllArticleConditional/wantedkind='book'"
+					evaluator="xpath">
+					<processor-chain>
+						<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_Book">
+							<flow-ref name="book_flow" doc:name="Flow Reference" />
+						</ee:cache>
+						<mulexml:xml-to-dom-transformer
+							doc:name="Object to XML"></mulexml:xml-to-dom-transformer>
+						<logger message="message receive from book service" level="INFO"
+							doc:name="Logger" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+						<scripting:transformer doc:name="Script">
+							<scripting:script engine="groovy">
+								<scripting:text><![CDATA[log.info( "*** Logging from script ..." ) 
+							log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+							def content = "<getAllArticleConditionalResponse>" 
+							content += message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).substring(61,message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).length()-24) 
+							content += "</getAllArticleConditionalResponse>" 
+							log.info( "aggregated msg: " + content ) 
+							return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+							</scripting:script>
+						</scripting:transformer>
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+					</processor-chain>
+				</when>
+				<when expression="/getAllArticleConditional/wantedkind='cd'"
+					evaluator="xpath">
+					<processor-chain>
+						<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_CD">
+							<flow-ref name="cd_flow" doc:name="Flow Reference" />
+						</ee:cache>
+						<mulexml:xml-to-dom-transformer
+							doc:name="Object to XML"></mulexml:xml-to-dom-transformer>
+						<logger message="message receive from cd service" level="INFO"
+							doc:name="Logger" />
+						<logger message="#[payload:]" level="INFO" doc:name="Logger" />
+						<scripting:transformer doc:name="Script">
+							<scripting:script engine="groovy">
+								<scripting:text><![CDATA[log.info( "*** Logging from script ..." ) 
+							log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+							def content = "<getAllArticleConditionalResponse>" 
+							content += message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).substring(61,message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).length()-24) 
+							content += "</getAllArticleConditionalResponse>" 
+							log.info( "aggregated msg: " + content ) 
+							return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+							</scripting:script>
+						</scripting:transformer>
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+					</processor-chain>
+				</when>
+				<when expression="/getAllArticleConditional/wantedkind='all'"
+					evaluator="xpath">
+					<processor-chain>
+						<log-component></log-component>
+						<all doc:name="All">
+							<processor-chain>
+								<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_CD">
+									<flow-ref name="cd_flow" doc:name="Flow Reference" />
+									<!-- <http:outbound-endpoint exchange-pattern="request-response" 
+										address="${url.cdflow}" mimeType="text/xml" doc:name="Generic"/> -->
+								</ee:cache>
+							</processor-chain>
+							<processor-chain>
+								<ee:cache doc:name="Cache" cachingStrategy-ref="Caching_Strategy_Book">
+									<flow-ref name="book_flow" doc:name="Flow Reference" />
+									<!-- <http:outbound-endpoint exchange-pattern="request-response" 
+										address="${url.bookflow}" mimeType="text/xml" doc:name="Generic"/> -->
+								</ee:cache>
+							</processor-chain>
+						</all>
+						<scripting:transformer doc:name="Script">
+							<scripting:script engine="groovy">
+								<scripting:text><![CDATA[log.info( "*** Logging from script ..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                def content = "<getAllArticleConditionalResponse xmlns:xml=" +'"' + "http://www.w3.org/XML/1998/namespace" + '"' + ">"
+                                for ( m in message.getMessagesAsArray() ) { 
+                                        content += m.getPayloadAsString().substring(110,m.getPayloadAsString().length()-24); 
+                                } 
+                                content += "</getAllArticleConditionalResponse>"
+                                log.info( "aggregated msg: " + content ) 
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+							</scripting:script>
+						</scripting:transformer>
+						<custom-transformer
+							class="org.mule.module.xml.transformer.XmlToXMLStreamReader"
+							doc:name="XmlToXSR" />
+					</processor-chain>
+				</when>
+			</choice>
+		</ee:cache>
+	</flow>
+	<flow name="directCdToArticle" doc:name="directCdToArticle">
+		<vm:inbound-endpoint exchange-pattern="request-response"
+			address="${vm.cdunicflow}" responseTimeout="10000" doc:name="VM" />
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<mulexml:xquery-transformer outputEncoding="UTF-8"
+			mimeType="text/xml" xquery-file="${path.xquery_request_unic_cd}"
+			name="requestUnic4CD"></mulexml:xquery-transformer>
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<logger doc:name="Logger" />
+		<scripting:transformer doc:name="Script">
+			<scripting:script engine="groovy">
+				<scripting:text><![CDATA[log.info( "*** Logging from script unic cd..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                def content = message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).substring(91,message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).length()-41); 
+                                log.info( "aggregated msg: " + content ) 
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+			</scripting:script>
+		</scripting:transformer>
+		<cxf:jaxws-client operation="getCD"
+			serviceClass="com.sodifrance.referential_cd.CDWS" doc:name="SOAP" />
+		<http:outbound-endpoint exchange-pattern="request-response"
+			address="${url.cdservice}" doc:name="Generic" />
+	</flow>
+	<flow name="directBookToArticle" doc:name="directBookToArticle">
+		<vm:inbound-endpoint exchange-pattern="request-response"
+			address="${vm.bookunicflow}" responseTimeout="10000" doc:name="VM" />
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<mulexml:xquery-transformer outputEncoding="UTF-8"
+			mimeType="text/xml" xquery-file="${path.xquery_request_unic_book}"
+			name="requestUnic4Book"></mulexml:xquery-transformer>
+		<mulexml:dom-to-xml-transformer
+			returnClass="java.lang.String"></mulexml:dom-to-xml-transformer>
+		<logger doc:name="Logger" />
+		<scripting:transformer doc:name="Script">
+			<scripting:script engine="groovy">
+				<scripting:text><![CDATA[log.info( "*** Logging from script unic cd..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                def content = message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).substring(91,message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE).length()-41); 
+                                log.info( "aggregated msg: " + content ) 
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext)]]></scripting:text>
+			</scripting:script>
+		</scripting:transformer>
+		<cxf:jaxws-client operation="getBook"
+			serviceClass="com.sodifrance.referential_book.BookWS" doc:name="SOAP" />
+		<http:outbound-endpoint exchange-pattern="request-response"
+			address="${url.bookservice}" doc:name="Generic" />
+	</flow>
+</mule>

@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<mule-configuration xmlns="http://www.mulesoft.com/tooling/messageflow" name="flows1">
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="3825a8ba-89ff-4f74-b1fa-3935f2772b78">
+        <properties>
+            <property name="id"/>
+            <property name="name" value="ArticleWSImplService"/>
+            <property name="class" value="org.mule.module.cxf.WSProxyService"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property name="name" value="wsdlFile"/>
+                <property name="value" value="com/sodifrance/stage/esb/mule/service.wsdl"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="28fb3011-7f15-4b76-8b46-953ca3820b0a">
+        <properties>
+            <property name="id"/>
+            <property name="name" value="CDWSImplService"/>
+            <property name="class" value="org.mule.module.cxf.WSProxyService"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property name="name" value="wsdlFile"/>
+                <property name="value" value="http://localhost:8080/referential-cd-0.0.1-SNAPSHOT/services/1.0.0/CDWSImplPort/?wsdl"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="c3509bde-dccd-4960-b90f-d04968fe788d">
+        <properties>
+            <property name="id"/>
+            <property name="name" value="BookWSImplService"/>
+            <property name="class" value="org.mule.module.cxf.WSProxyService"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+            <property-collection name="@http://www.springframework.org/schema/beans/property;0">
+                <property name="name" value="wsdlFile"/>
+                <property name="value" value="http://localhost:8080/referential-book-0.0.1-SNAPSHOT/services/1.0.0/BookWSImplPort/?wsdl"/>
+            </property-collection>
+        </properties>
+    </global-element>
+    <global-element name="Bean" type="http://www.springframework.org/schema/beans/bean" entity-id="2be11603-e7da-49be-a7cf-c11bbb5e9745">
+        <properties>
+            <property name="id"/>
+            <property name="name" value="response"/>
+            <property name="class" value="com.sodifrance.stage.esb.mule.GetAllArticleResponse"/>
+            <property name="parent"/>
+            <property name="scope"/>
+            <property name="abstract"/>
+            <property name="lazy-init"/>
+            <property name="autowire"/>
+            <property name="depends-on"/>
+            <property name="autowire-candidate"/>
+            <property name="primary"/>
+            <property name="init-method"/>
+            <property name="destroy-method"/>
+            <property name="factory-method"/>
+            <property name="factory-bean"/>
+        </properties>
+    </global-element>
+    <global-unknown wrapIn="beans" wrapNSPref="spring" wrapNSURL="http://www.springframework.org/schema/beans" entity-id="9f150d58-0136-4b9e-8331-dd59b05293dc">
+        <content>&lt;context:property-placeholder xmlns:context=&quot;http://www.springframework.org/schema/context&quot; location=&quot;com/sodifrance/stage/esb/mule/articlews.properties&quot;&gt;&lt;/context:property-placeholder&gt;</content>
+    </global-unknown>
+    <flow SubFlow="false" name="HTTP_input">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <description>    Article referential CCM         </description>
+        <lane entity-id="3ecbf306-a863-4885-a733-c583586f1fb5">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="541f6d85-ab80-4385-b936-7e39604f0676">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="address" value="${url.frontend}"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType" value="text/xml"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <unknown entity-id="bf4d1d13-ae47-4afc-9216-af4e5dcbcf72">
+                <content>&lt;mulexml:dom-to-xml-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; returnClass=&quot;java.lang.String&quot;/&gt;</content>
+            </unknown>
+            <response entity-id="8589fa3a-1341-458c-8564-e581a13c28f3">
+                <compartment entity-id="1096c61d-3d2b-4e01-ac0e-3dc14e4d7fe5">
+                    <lane entity-id="116f0e23-6ec9-4534-8576-eaa5a9643d4d">
+                        <unknown entity-id="e9e79278-f893-46d2-947b-1633b4f0f716">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="2739bf99-24a1-423e-bbc8-73a0e6c2b6d4">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/proxy-service"/>
+                    <property name="configuration-ref"/>
+                    <property name="bindingId"/>
+                    <property name="port"/>
+                    <property name="namespace" value="${namespace.frontend}"/>
+                    <property name="service" value="ArticleWSImplService"/>
+                    <property name="serviceClass"/>
+                    <property name="validationEnabled"/>
+                    <property name="payload"/>
+                    <property name="mtomEnabled"/>
+                    <property name="wsdlLocation" value="${path.frontend_wsdl}"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <unknown entity-id="00f3f626-62c9-49e1-aa46-d6f3a62c0d09">
+                <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+            </unknown>
+            <splitter name="All" type="org.mule.tooling.ui.modules.core.pattern.all" entity-id="64a5c0f1-aa2a-4767-9a9a-5764d0b15ebd">
+                <pattern name="All" type="org.mule.tooling.ui.modules.core.pattern.all" entity-id="6e428ea7-710a-45d5-8d4c-e3300bdfe8d5"/>
+                <compartment entity-id="24fea21d-9630-4137-a48a-9171dcdc54ca">
+                    <lane entity-id="74947668-7b47-4ed7-929f-53af439bf992">
+                        <unknown entity-id="525677b6-b573-46aa-b05d-058cb234ed03">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="d63d5e06-7bb4-4d26-aedd-1f65c6a3e42a">
+                            <properties>
+<property name="name" value="cd_flow"/>
+                            </properties>
+                        </pattern>
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="85892306-0ab0-4481-a99a-c59369373207">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+<property name="httpLabel"/>
+<property name="host"/>
+<property name="port"/>
+<property name="path"/>
+<property name="method"/>
+<property name="address" value="${url.cdflow}"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType" value="text/xml"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                    <lane entity-id="eb47d72f-9cc9-4673-b608-943af82dd3f8">
+                        <unknown entity-id="ba5b7dad-b66c-44b6-bab0-1e533492885d">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="Flow Reference" type="http://www.mulesoft.org/schema/mule/core/flow-ref" entity-id="d01f1c40-1ca7-4926-87b5-9d86ea9c4e33">
+                            <properties>
+<property name="name" value="book_flow"/>
+                            </properties>
+                        </pattern>
+                        <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="c6d84b4b-cab5-4978-ab38-f2f1ef176637">
+                            <properties>
+<property name="exchange-pattern" value="one-way"/>
+<property name="exchange-pattern" value="request-response"/>
+<property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+<property name="httpLabel"/>
+<property name="host"/>
+<property name="port"/>
+<property name="path"/>
+<property name="method"/>
+<property name="address" value="${url.bookflow}"/>
+<property name="encoding"/>
+<property name="disableTransportTransformer"/>
+<property name="mimeType" value="text/xml"/>
+<property name="responseTimeout"/>
+<property name="followRedirects"/>
+<property name="connector-ref"/>
+<property name="ref"/>
+<property name="transformer-refs"/>
+<property name="responseTransformer-refs"/>
+<property name="user"/>
+<property name="password"/>
+<property name="contentType"/>
+<property name="keep-alive"/>
+                            </properties>
+                        </endpoint>
+                    </lane>
+                </compartment>
+            </splitter>
+            <pattern name="Object to String" type="http://www.mulesoft.org/schema/mule/core/object-to-string-transformer" entity-id="fd836ba5-80fa-48a4-9134-b05889966b11">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                </properties>
+            </pattern>
+            <pattern name="Script" type="http://www.mulesoft.org/schema/mule/scripting/transformer" entity-id="4dba88af-33df-4a2f-9aa3-69fa7f9e40c0">
+                <properties>
+                    <property name="returnClass"/>
+                    <property name="ignoreBadInput"/>
+                    <property name="encoding"/>
+                    <property name="mimeType"/>
+                    <property-collection name="@http://www.mulesoft.org/schema/mule/scripting/script;0">
+                        <property name="text" value="log.info( &quot;*** Logging from script ...&quot; ) &#xA;                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) &#xA;                                &#xA;                                def content = &quot;&lt;getAllArticleResponse&gt;&quot; &#xA;                                for ( m in message.getMessagesAsArray() ) { &#xA;                                        content += m.getPayloadAsString().substring(110,m.getPayloadAsString().length()-24); &#xA;                                } &#xA;                                content += &quot;&lt;/getAllArticleResponse&gt;&quot;&#xA;                                log.info( &quot;aggregated msg: &quot; + content ) &#xA;                                &#xA;                                return new org.mule.DefaultMuleMessage(content, message, muleContext)"/>
+                        <property name="engine" value="groovy"/>
+                    </property-collection>
+                </properties>
+            </pattern>
+            <unknown entity-id="a5a881fd-4b0f-4eb5-953b-954d83ebc940">
+                <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+            </unknown>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="cd_flow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="8f0dbbb9-7e60-46db-9e69-266e5ecace19">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="fd2d6a3e-7680-49d7-9723-3ef6d13bf020">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="address" value="${url.cdflow}"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType" value="text/xml"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <response entity-id="62287108-606b-407d-9e04-30b80c3436d6">
+                <compartment entity-id="14fa9c37-f077-4ad1-883c-32256c4337e2">
+                    <lane entity-id="a65b2d64-7166-492a-872d-a64ac61193d7">
+                        <unknown entity-id="dc305cb8-8609-4a35-b564-207bf0825fdf">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="Object to XML" type="org.mule.tooling.ui.modules.core.pattern.objectToXmlTransformer" entity-id="37394aa0-cfdb-41a9-af5b-7e070c73a9d2">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="driverClass"/>
+<property name="acceptMuleMessage"/>
+                            </properties>
+                        </pattern>
+                        <unknown entity-id="4ed1263a-0b12-408b-86f4-59d97f6d7a15">
+                            <content>&lt;mulexml:xquery-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; outputEncoding=&quot;UTF-8&quot; mimeType=&quot;text/xml&quot; xquery-file=&quot;${path.xquery_cd_to_article}&quot; name=&quot;cdToArticle&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="XML to Object" type="http://www.mulesoft.org/schema/mule/xml/xml-to-object-transformer" entity-id="b11c2244-a2c7-40d7-9fdc-324b7a29aa43">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="driverClass"/>
+                            </properties>
+                        </pattern>
+                        <unknown entity-id="384dd7c3-04f9-4b36-9732-37450f662f0b">
+                            <content>&lt;mulexml:dom-to-xml-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; returnClass=&quot;java.lang.String&quot;/&gt;</content>
+                        </unknown>
+                        <unknown entity-id="0388fae8-b879-42d7-b414-76a2f6197fc2">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="ee36661a-4438-4c3a-9298-b1ca8ab00c1f">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client"/>
+                    <property name="operation" value="getAllCD"/>
+                    <property name="serviceClass" value="com.sodifrance.referential_cd.CDWS"/>
+                    <property name="decoupledEndpoint"/>
+                    <property name="clientClass"/>
+                    <property name="port"/>
+                    <property name="mtomEnabled"/>
+                    <property name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <response entity-id="b6d69129-9bf0-47c3-af21-c7ff62956dab">
+                <compartment entity-id="21a408be-74ac-4acd-9854-0ea0edcdf46f">
+                    <lane entity-id="7a3f9122-34b1-4e26-bc6f-82b73831bc6b">
+                        <unknown entity-id="18c3422e-309b-44a5-a9ee-22a614f4bcb6">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </response>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="0d4121a2-52c4-459d-a412-7e840169e4ed">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="address" value="${url.cdservice}"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <flow SubFlow="false" name="book_flow">
+        <properties>
+            <property name="processingStrategy2"/>
+            <property name="processingStrategy"/>
+        </properties>
+        <lane entity-id="333aaae1-a081-40aa-bb41-5eea9a76e93e">
+            <endpoint direction="Inbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="eb2e4039-2ff9-49bd-a8ae-510041655545">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="address" value="${url.bookflow}"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType" value="text/xml"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+            <response entity-id="b0aed4be-b85e-4752-a968-7bb89b5b9c5f">
+                <compartment entity-id="8780b3b5-cc30-4276-aaa1-09a537b081e9">
+                    <lane entity-id="7e277cc5-5c23-48e3-8ca6-4649843c52f3">
+                        <unknown entity-id="dabf4d1e-0bf7-42d5-ac4e-6667c998f67f">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="Object to XML" type="org.mule.tooling.ui.modules.core.pattern.objectToXmlTransformer" entity-id="00faa398-be20-4a4c-a70c-20774571e39d">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="driverClass"/>
+<property name="acceptMuleMessage"/>
+                            </properties>
+                        </pattern>
+                        <unknown entity-id="3192a88f-ed46-4d07-bc9a-563e20ccbdda">
+                            <content>&lt;mulexml:xquery-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; outputEncoding=&quot;UTF-8&quot; mimeType=&quot;text/xml&quot; xquery-file=&quot;${path.xquery_book_to_article}&quot; name=&quot;bookToArticle&quot;/&gt;</content>
+                        </unknown>
+                        <pattern name="XML to Object" type="http://www.mulesoft.org/schema/mule/xml/xml-to-object-transformer" entity-id="42bc6d1b-d5d7-4ce7-bc1f-d91759aaa054">
+                            <properties>
+<property name="returnClass"/>
+<property name="ignoreBadInput"/>
+<property name="encoding"/>
+<property name="mimeType"/>
+<property name="driverClass"/>
+                            </properties>
+                        </pattern>
+                        <unknown entity-id="00235aa4-8b0c-49ce-ac6e-db0b38de0b31">
+                            <content>&lt;mulexml:dom-to-xml-transformer xmlns:mulexml=&quot;http://www.mulesoft.org/schema/mule/xml&quot; returnClass=&quot;java.lang.String&quot;/&gt;</content>
+                        </unknown>
+                        <unknown entity-id="20c0918f-383f-4f64-8736-9220af6f9b29">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </response>
+            <pattern name="SOAP" type="http://www.mulesoft.org/schema/mule/cxf/soapComponent" entity-id="a5609152-c350-4536-9511-f66de54f03d9">
+                <properties>
+                    <property name="configuration-ref"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/cxf/jaxws-client"/>
+                    <property name="operation" value="getAllBook"/>
+                    <property name="serviceClass" value="com.sodifrance.referential_book.BookWS"/>
+                    <property name="decoupledEndpoint"/>
+                    <property name="clientClass"/>
+                    <property name="port"/>
+                    <property name="mtomEnabled"/>
+                    <property name="wsdlLocation"/>
+                    <property name="enableMuleSoapHeaders"/>
+                </properties>
+            </pattern>
+            <response entity-id="9e83e437-d61a-4105-ab5d-1767e8960a49">
+                <compartment entity-id="6b1fd0ca-2284-44cc-8b16-4dace4c74c18">
+                    <lane entity-id="762b7bf3-0f25-4c40-b9ca-d470cd2a0ba7">
+                        <unknown entity-id="cd32c4f5-45f1-416e-a677-71a1a6b8f5f1">
+                            <content>&lt;log-component xmlns=&quot;http://www.mulesoft.org/schema/mule/core&quot;/&gt;</content>
+                        </unknown>
+                    </lane>
+                </compartment>
+            </response>
+            <endpoint direction="Outbound" message-exchange-pattern="OneWay" name="Generic" type="http://www.mulesoft.org/schema/mule/http/endpoint" entity-id="06fed0fa-c137-4bce-9275-3820cb1078ec">
+                <properties>
+                    <property name="exchange-pattern" value="one-way"/>
+                    <property name="exchange-pattern" value="request-response"/>
+                    <property name="org.mule.tooling.ui.modules.core.widgets.meta.ModeAttribute" value="http://www.mulesoft.org/schema/mule/http/endpoint"/>
+                    <property name="httpLabel"/>
+                    <property name="host"/>
+                    <property name="port"/>
+                    <property name="path"/>
+                    <property name="method"/>
+                    <property name="address" value="${url.bookservice}"/>
+                    <property name="encoding"/>
+                    <property name="disableTransportTransformer"/>
+                    <property name="mimeType"/>
+                    <property name="responseTimeout"/>
+                    <property name="followRedirects"/>
+                    <property name="connector-ref"/>
+                    <property name="ref"/>
+                    <property name="transformer-refs"/>
+                    <property name="responseTransformer-refs"/>
+                    <property name="user"/>
+                    <property name="password"/>
+                    <property name="contentType"/>
+                    <property name="keep-alive"/>
+                </properties>
+            </endpoint>
+        </lane>
+    </flow>
+    <description></description>
+</mule-configuration>

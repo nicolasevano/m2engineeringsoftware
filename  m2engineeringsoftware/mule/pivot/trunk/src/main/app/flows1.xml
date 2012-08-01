@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" 
+xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" 
+xmlns:http="http://www.mulesoft.org/schema/mule/http" 
+xmlns:cxf="http://www.mulesoft.org/schema/mule/cxf" 
+xmlns:jms="http://www.mulesoft.org/schema/mule/jms" 
+xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" 
+xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" 
+xmlns:spring="http://www.springframework.org/schema/beans" 
+xmlns:core="http://www.mulesoft.org/schema/mule/core" 
+xmlns:vm="http://www.mulesoft.org/schema/mule/vm" 
+xmlns:stdio="http://www.mulesoft.org/schema/mule/stdio" 
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="CE-3.2.1" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd 
+http://www.mulesoft.org/schema/mule/cxf http://www.mulesoft.org/schema/mule/cxf/current/mule-cxf.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/vm http://www.mulesoft.org/schema/mule/vm/current/mule-vm.xsd 
+http://www.mulesoft.org/schema/mule/stdio http://www.mulesoft.org/schema/mule/stdio/current/mule-stdio.xsd ">
+    <spring:beans>
+<!--        <spring:bean name="connectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory" doc:name="Bean">-->
+<!--            <spring:property name="brokerURL" value="tcp://PC-nevano:61616/articles"/>-->
+<!--            <spring:property name="redeliveryPolicy">-->
+<!--                <spring:bean class="org.apache.activemq.RedeliveryPolicy">-->
+<!--                    <spring:property name="redeliveryDelay" value="2000"/>-->
+<!--                    <spring:property name="maximumRedeliveries" value="10"/>-->
+<!--                    <spring:property name="initialRedeliveryDelay" value="2000"/>-->
+<!--                </spring:bean>-->
+<!--            </spring:property>-->
+<!--        </spring:bean>-->
+        <spring:bean name="ArticleWSImplService" class="org.mule.module.cxf.WSProxyService" doc:name="Bean">
+            <spring:property name="wsdlFile" value="com/sodifrance/stage/esb/mule/service.wsdl"/>
+        </spring:bean>
+        <spring:bean name="CDWSImplService" class="org.mule.module.cxf.WSProxyService" doc:name="Bean">
+            <spring:property name="wsdlFile" value="http://localhost:8080/referential-cd-0.0.1-SNAPSHOT/services/1.0.0/CDWSImplPort/?wsdl"/>
+        </spring:bean>
+        <spring:bean name="BookWSImplService" class="org.mule.module.cxf.WSProxyService" doc:name="Bean">
+            <spring:property name="wsdlFile" value="http://localhost:8080/referential-book-0.0.1-SNAPSHOT/services/1.0.0/BookWSImplPort/?wsdl"/>
+        </spring:bean>
+        <spring:bean name="response" class="com.sodifrance.stage.esb.mule.GetAllArticleResponse" doc:name="Bean"/>
+        <context:property-placeholder xmlns:context="http://www.springframework.org/schema/context" location="com/sodifrance/stage/esb/mule/articlews.properties"></context:property-placeholder>
+    </spring:beans>
+<!--    <jms:activemq-connector name="jmsConnector" connectionFactory-ref="connectionFactory" doc:name="Active MQ"/>-->
+    <flow name="HTTP_input" doc:name="HTTP_input" doc:description="    Article referential CCM         ">
+        <http:inbound-endpoint exchange-pattern="request-response" address="${url.frontend}" mimeType="text/xml" doc:name="Generic"/>
+        <mulexml:dom-to-xml-transformer returnClass="java.lang.String"/>
+        <response>
+            <log-component></log-component>
+        </response>
+        <cxf:proxy-service namespace="${namespace.frontend}" service="ArticleWSImplService" wsdlLocation="${path.frontend_wsdl}" doc:name="SOAP"/>
+        <log-component></log-component>
+        <all doc:name="All" enableCorrelation="NEVER">
+            <processor-chain>
+                <log-component></log-component>
+                <flow-ref name="cd_flow" doc:name="Flow Reference"/>
+                <http:outbound-endpoint exchange-pattern="request-response" address="${url.cdflow}" mimeType="text/xml" doc:name="Generic"/>
+            </processor-chain>
+            <processor-chain>
+                <log-component></log-component>
+                <flow-ref name="book_flow" doc:name="Flow Reference"/>
+                <http:outbound-endpoint exchange-pattern="request-response" address="${url.bookflow}" mimeType="text/xml" doc:name="Generic"/>
+            </processor-chain>
+        </all>
+        <object-to-string-transformer doc:name="Object to String"/>
+        <scripting:transformer>
+                <scripting:script engine="groovy">
+                        <scripting:text>
+                                log.info( "*** Logging from script ..." ) 
+                                log.info( message.getPayload(org.mule.api.transformer.DataType.STRING_DATA_TYPE) ) 
+                                
+                                def content = "&lt;getAllArticleResponse&gt;" 
+                                for ( m in message.getMessagesAsArray() ) { 
+                                        content += m.getPayloadAsString().substring(110,m.getPayloadAsString().length()-24); 
+                                } 
+                                content += "&lt;/getAllArticleResponse&gt;"
+                                log.info( "aggregated msg: " + content ) 
+                                
+                                return new org.mule.DefaultMuleMessage(content, message, muleContext) 
+                        </scripting:text>
+                </scripting:script>
+        </scripting:transformer>
+        <log-component></log-component>
+    </flow>
+    <flow name="cd_flow" doc:name="cd_flow">
+        <http:inbound-endpoint exchange-pattern="request-response" address="${url.cdflow}" mimeType="text/xml" doc:name="Generic"/>
+        <response>
+            <log-component></log-component>
+            <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+            <mulexml:xquery-transformer outputEncoding="UTF-8" mimeType="text/xml" xquery-file="${path.xquery_cd_to_article}" name="cdToArticle"/>
+            <mulexml:xml-to-object-transformer doc:name="XML to Object"/>
+            <mulexml:dom-to-xml-transformer returnClass="java.lang.String"/>
+            <log-component></log-component>
+        </response>
+        <cxf:jaxws-client operation="getAllCD" serviceClass="com.sodifrance.referential_cd.CDWS" doc:name="SOAP"/>
+        <response>
+            <log-component></log-component>
+        </response>
+        <http:outbound-endpoint exchange-pattern="request-response" address="${url.cdservice}" doc:name="Generic"/>
+    </flow>
+    <flow name="book_flow" doc:name="book_flow">
+        <http:inbound-endpoint exchange-pattern="request-response" address="${url.bookflow}" mimeType="text/xml" doc:name="Generic"/>
+        <response>
+            <log-component></log-component>
+            <mulexml:object-to-xml-transformer doc:name="Object to XML"/>
+            <mulexml:xquery-transformer outputEncoding="UTF-8" mimeType="text/xml" xquery-file="${path.xquery_book_to_article}" name="bookToArticle"/>
+            <mulexml:xml-to-object-transformer doc:name="XML to Object"/>
+            <mulexml:dom-to-xml-transformer returnClass="java.lang.String"/>
+            <log-component></log-component>
+        </response>
+        <cxf:jaxws-client operation="getAllBook" serviceClass="com.sodifrance.referential_book.BookWS" doc:name="SOAP"/>
+        <response>
+            <log-component></log-component>
+        </response>
+        <http:outbound-endpoint exchange-pattern="request-response" address="${url.bookservice}" doc:name="Generic"/>
+    </flow>
+</mule>

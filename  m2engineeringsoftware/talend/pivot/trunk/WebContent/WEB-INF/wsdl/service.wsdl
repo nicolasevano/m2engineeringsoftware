@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="ArticleWSImplService" targetNamespace="http://talend.esb.stage.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://talend.esb.stage.sodifrance.com/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+<import namespace="http://talend.esb.stage.sodifrance.com/" schemaLocation="articlews_schema1.xsd"/>
+</schema>
+  </wsdl:types>
+  <wsdl:message name="getAllArticleResponse">
+    <wsdl:part name="parameters" element="tns:getAllArticleResponse">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllArticle">
+    <wsdl:part name="parameters" element="tns:getAllArticle">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="ArticleWS">
+    <wsdl:operation name="getAllArticle">
+      <wsdl:input name="getAllArticle" message="tns:getAllArticle">
+    </wsdl:input>
+      <wsdl:output name="getAllArticleResponse" message="tns:getAllArticleResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ArticleWSImplServiceSoapBinding" type="tns:ArticleWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllArticle">
+      <soap:operation soapAction="urn:getAllArticle" style="document"/>
+      <wsdl:input name="getAllArticle">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllArticleResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ArticleWSImplService">
+    <wsdl:port name="ArticleWSImplPort" binding="tns:ArticleWSImplServiceSoapBinding">
+      <soap:address location="null/services/ArticleWSImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -1,0 +1,148 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://camel.apache.org/schema/cxf  http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="maxConnections" value="8" />
+		<property name="maximumActive" value="500" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="concurrentConsumers" value="1" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
+	
+<!-- 	<bean id="amqCF" class="org.apache.activemq.ActiveMQConnectionFactory"> -->
+<!--         <property name="brokerURL" value="vm://localhost?broker.persistent=false"/> -->
+<!--     </bean> -->
+
+<!--     <bean id="activemq" class="org.apache.camel.component.jms.JmsComponent"> -->
+<!--         <property name="connectionFactory"> -->
+<!--             <ref bean="amqCF"/> -->
+<!--         </property> -->
+<!--     </bean> -->
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="referentialArticlePU" />
+		<property name="jpaVendorAdapter" ref="jpaAdapter" />
+	</bean>
+	
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager">
+			<bean class="org.springframework.orm.jpa.JpaTransactionManager">
+				<property name="entityManagerFactory" ref="entityManagerFactory" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!--
+		Hibernate addapter <bean id="jpaAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform"
+		value="org.hibernate.dialect.HSQLDialect" /> </bean>
+	-->
+
+	<!-- OpenJPA addapter -->
+	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
+		<property name="databasePlatform" value="org.apache.openjpa.jdbc.sql.HSQLDictionary" />
+		<property name="database" value="HSQL" />
+	</bean>
+	
+	<bean id="myDeadLetterErrorHandler" class="org.apache.camel.builder.DeadLetterChannelBuilder">
+		<property name="deadLetterUri"
+			value="mock:result" />
+		<property name="redeliveryPolicy" ref="myRedeliveryPolicyConfig" />
+	</bean>
+
+	<bean id="myRedeliveryPolicyConfig" class="org.apache.camel.processor.RedeliveryPolicy" >
+		<property name="maximumRedeliveries" value="0" />
+		<property name="redeliveryDelay" value="500" />
+	</bean>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+	
+		<!-- 	input JMS queue ( file consumer ) -->
+		<camel:package>com.sodifrance.stage.esb.servicemix</camel:package>
+		<route>
+			<from uri="file://C:/input/" />
+			<to uri="activemq:queue:foo" />
+		</route>
+		
+		<!-- 		intermediate JMS queu  -->
+		<route errorHandlerRef="myDeadLetterErrorHandler">
+			<from uri="activemq:queue:foo" />
+<!-- 			<setHeader headerName="camelJmsReplyTo"> -->
+<!-- 				<constant>queue:cr</constant> -->
+<!-- 			</setHeader> -->
+			<multicast parallelProcessing="false">
+				<to uri="jms:queue:bar1" />
+				<inOut uri="jms:queue:bar2?concurrentConsumers=1&amp;requestTimeout=10&amp;replyToType=Shared&amp;replyTo=queue:cr" />
+<!-- 				<inOut uri="activemq:queue:bar2" /> -->
+			</multicast>
+<!-- 			<to uri="activemq:queue:cr"/> -->
+		</route>
+		
+		<!-- reception ticket jms queue -->
+		<route>
+			<from uri="jms:queue:cr" />
+			<inOnly uri="jms:queue:trap" />
+		</route>
+		
+		<!-- dead end jms trap queue -->
+		<route>
+			<from uri="jms:queue:trap"/>
+			<to uri="file://C:/log/batchConsumer/?fileName=trap.txt&amp;fileExist=Append" />
+		</route>
+		
+		<!-- file final step save on output directory -->
+		<route>
+			<!-- use consumer.exclusive ActiveMQ destination option, notice we have 
+				to prefix with destination. -->
+			<from uri="jms:bar1?concurrentConsumers=1&amp;requestTimeout=1000&amp;replyToType=Shared&amp;replyTo=queue:cr" />
+			<wireTap uri="file://C:/output" />
+			<to uri="jms:queue:cr"/>	
+		</route>
+		
+		<!-- jpa final step save on db -->	
+		<route>
+			<from uri="jms:bar2?concurrentConsumers=1"/>
+			<convertBodyTo type="com.sodifrance.stage.esb.servicemix.Article" charset="UTF8" ></convertBodyTo>
+			<to uri="jpa:com.sodifrance.stage.esb.servicemix.Article" />
+		</route>
+			
+		<route>
+			<from uri="direct:backup" />
+<!-- 			<unmarshal/> -->
+<!-- 			<unmarshal> -->
+<!--       			<jaxb prettyPrint="true" contextPath="com.sodifrance.stage.esb.servicemix.PossibleArticle"/> -->
+<!--     		</unmarshal> -->
+			<to uri="file://C:/output" />			
+		</route>
+	</camelContext>
+</beans>

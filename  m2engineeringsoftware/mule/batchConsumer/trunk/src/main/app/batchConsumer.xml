@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns="http://www.mulesoft.org/schema/mule/core" xmlns:file="http://www.mulesoft.org/schema/mule/file" xmlns:jdbc-ee="http://www.mulesoft.org/schema/mule/ee/jdbc" xmlns:jms="http://www.mulesoft.org/schema/mule/jms" xmlns:context="http://www.springframework.org/schema/context" xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:spring="http://www.springframework.org/schema/beans" xmlns:core="http://www.mulesoft.org/schema/mule/core" xmlns:mulexml="http://www.mulesoft.org/schema/mule/xml" xmlns:scripting="http://www.mulesoft.org/schema/mule/scripting" xmlns:tracking="http://www.mulesoft.org/schema/mule/ee/tracking" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="EE-3.3.0" xsi:schemaLocation="
+http://www.mulesoft.org/schema/mule/file http://www.mulesoft.org/schema/mule/file/current/mule-file.xsd 
+http://www.mulesoft.org/schema/mule/ee/jdbc http://www.mulesoft.org/schema/mule/ee/jdbc/current/mule-jdbc-ee.xsd 
+http://www.mulesoft.org/schema/mule/jms http://www.mulesoft.org/schema/mule/jms/current/mule-jms.xsd 
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-current.xsd 
+http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd 
+http://www.mulesoft.org/schema/mule/xml http://www.mulesoft.org/schema/mule/xml/current/mule-xml.xsd 
+http://www.mulesoft.org/schema/mule/scripting http://www.mulesoft.org/schema/mule/scripting/current/mule-scripting.xsd 
+http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/mule/ee/tracking/current/mule-tracking-ee.xsd ">
+    <context:property-placeholder location="classpath:batchConsumer.properties"/>
+    <jdbc-ee:mysql-data-source name="dataSource" user="${database.user}" password="${database.password}" database="${database.name}" doc:name="MySQL Data Source"/>
+    <jdbc-ee:connector name="jdbcEeConnector" dataSource-ref="dataSource" doc:name="Database (JDBC)">
+        <jdbc-ee:query key="outboundInsertStatement" value="INSERT INTO article ( author, editor, kind, meta, publishDate, releaseDate, title)    VALUES ( #[xpath:/item/author], #[xpath:/item/editor], #[xpath:/item/kind], #[xpath:/item/meta], #[xpath:/item/publishDate], #[xpath:/item/releaseDate], #[xpath:/item/title])"/>
+    </jdbc-ee:connector>
+    <jms:activemq-connector name="jmsConnector" brokerURL="tcp://localhost:61616" doc:name="Active MQ"/>
+    <jms:activemq-xa-connector name="jmsXAConnector" brokerURL="tcp://localhost:61616" doc:name="Active MQ"/>
+    <file:connector name="input" streaming="false" pollingFrequency="10" fileAge="200" doc:name="File"/>
+    <file:connector name="output" outputPattern="item_#[function:datestamp].xml" outputAppend="true" doc:name="File"/>
+    <byte-array-to-string-transformer doc:name="Byte Array to String" name="byteToString"/>
+    <flow name="batchConsumerInputItemFlow" doc:name="batchConsumerInputItemFlow">
+    	<file:inbound-endpoint path="C:\input" responseTimeout="10000" connector-ref="input" doc:name="File"/>
+        <jms:outbound-endpoint address="jms://foo" connector-ref="jmsConnector" transformer-refs="byteToString" doc:name="JMS"/>
+    </flow>
+    <flow name="batchConsumerIntermediateFlow" doc:name="batchConsumerIntermediateFlow">
+        <jms:inbound-endpoint address="jms://foo" connector-ref="jmsConnector" doc:name="JMS"/>
+        <jms:outbound-endpoint address="jms://bar" connector-ref="jmsConnector" doc:name="JMS"/>
+    </flow>
+    <flow name="batchConsumerFinalFlow" doc:name="batchConsumerFinalFlow">
+        <jms:inbound-endpoint address="jms://bar" connector-ref="jmsConnector" doc:name="JMS"/>
+        <all doc:name="All">
+            <processor-chain>
+                <file:outbound-endpoint path="C:\output" responseTimeout="10000" mimeType="text/xml" connector-ref="output" doc:name="File"/>
+            </processor-chain>
+            <processor-chain>
+                <custom-transformer class="org.mule.module.xml.transformer.XmlToXMLStreamReader" doc:name="XmlToXSR"/>
+                <logger message="#[xpath:/item/author]" level="INFO" doc:name="Logger"/>
+                <jdbc-ee:outbound-endpoint exchange-pattern="one-way" queryKey="outboundInsertStatement" queryTimeout="-1" connector-ref="jdbcEeConnector" doc:name="Database (JDBC)"/>
+            </processor-chain>
+        </all>
+    </flow>
+</mule>

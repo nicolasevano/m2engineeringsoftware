@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<endpoint xmlns="http://ws.apache.org/ns/synapse" name="articleConditionalService">
+    <wsdl service="ArticleConditionalWSImplService" port="ArticleConditionalWSImplPort" uri="file:repository/resources/wsdl/serviceConditional.wsdl"/>
+</endpoint>

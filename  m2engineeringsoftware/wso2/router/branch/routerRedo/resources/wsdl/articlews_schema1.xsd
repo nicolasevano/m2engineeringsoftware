@@ -1,0 +1,30 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://wso2.esb.stage.sodifrance.com/" elementFormDefault="unqualified" targetNamespace="http://wso2.esb.stage.sodifrance.com/" version="1.0">
+    <xs:element name="getAllArticle" type="tns:getAllArticle"/>
+    <xs:element name="getAllArticleResponse" type="tns:getAllArticleResponse"/>
+    <xs:complexType name="getAllArticle">
+        <xs:sequence/>
+    </xs:complexType>
+    <xs:complexType name="getAllArticleResponse">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:Article"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="Article">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="author" type="xs:string"/>
+                <xs:element minOccurs="0" name="kind">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:enumeration value="cd"/>
+                            <xs:enumeration value="book"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+            <xs:element minOccurs="0" name="editor" type="xs:string"/>
+            <xs:element minOccurs="0" name="meta" type="xs:string"/>
+            <xs:element minOccurs="0" name="title" type="xs:string"/>
+            <xs:element minOccurs="0" name="publishDate" type="xs:string"/>
+            <xs:element minOccurs="0" name="releaseDate" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:schema>

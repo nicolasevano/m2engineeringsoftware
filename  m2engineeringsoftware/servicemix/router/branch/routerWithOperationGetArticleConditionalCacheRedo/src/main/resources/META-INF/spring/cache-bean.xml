@@ -1,0 +1,58 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+       
+	<bean id="queueConnection1" factory-bean="amqCF" factory-method="createQueueConnection"
+		class="javax.jms.QueueConnection" />
+	<bean id="topicConnection1" factory-bean="amqCF" factory-method="createTopicConnection"
+		class="javax.jms.TopicConnection" />
+	<bean id="queue1" class="org.apache.activemq.command.ActiveMQQueue">
+		<constructor-arg ref="getQueue" />
+	</bean>
+	<bean id="topic1" class="org.apache.activemq.command.ActiveMQTopic">
+		<constructor-arg ref="getTopic" />
+	</bean>
+
+	<bean id="jmsListener1" class="net.sf.ehcache.distribution.jms.JMSCacheReplicator">
+		<constructor-arg index="0" value="true" />
+		<constructor-arg index="1" value="true" />
+		<constructor-arg index="2" value="true" />
+		<constructor-arg index="3" value="true" />
+		<constructor-arg index="4" value="false" />
+		<constructor-arg index="5" value="0" />
+	</bean>
+
+	<bean id="jmsLoader1" class="com.sodifrance.stage.esb.servicemix.cache.WrappedJMSCacheLoader">
+		<constructor-arg index="0" ref="queueConnection1" />
+		<constructor-arg index="1" ref="queue1" />
+		<constructor-arg index="2" value="AUTO_ACKNOWLEDGE" />
+		<constructor-arg index="3" value="30000" />
+	</bean>
+
+	<bean id="cacheManagerFactory1" class="com.sodifrance.stage.esb.servicemix.cache.ArticleCacheManagerFactory">
+		<constructor-arg index="0" value="ehcache-config.xml" />
+		<constructor-arg index="1" ref="topicConnection1" />
+		<constructor-arg index="2" ref="topic1" />
+		<constructor-arg index="3" ref="queueConnection1" />
+		<constructor-arg index="4" ref="queue1" />
+	</bean>
+
+	<bean id="eventListenerRegistry1"
+		class="org.apache.camel.component.cache.CacheEventListenerRegistry">
+		<constructor-arg>
+			<list>
+				<ref bean="jmsListener1" />
+			</list>
+		</constructor-arg>
+	</bean>
+
+	<bean id="cacheLoaderRegistry1" class="org.apache.camel.component.cache.CacheLoaderRegistry">
+		<constructor-arg>
+			<list>
+				<ref bean="jmsLoader1" />
+			</list>
+		</constructor-arg>
+	</bean>
+</beans>

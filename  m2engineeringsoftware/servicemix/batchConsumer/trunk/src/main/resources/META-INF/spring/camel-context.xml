@@ -1,0 +1,109 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:camel="http://camel.apache.org/schema/spring"
+	xmlns:osgi="http://www.springframework.org/schema/osgi" xmlns:cxf="http://camel.apache.org/schema/cxf"
+	xsi:schemaLocation="
+       http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd
+       http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd
+       http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+       http://camel.apache.org/schema/cxf  http://camel.apache.org/schema/cxf/camel-cxf.xsd">
+
+	<bean id="jmsConnectionFactory" class="org.apache.activemq.ActiveMQConnectionFactory">
+		<property name="brokerURL" value="tcp://localhost:61616" />
+	</bean>
+
+	<bean id="pooledConnectionFactory" class="org.apache.activemq.pool.PooledConnectionFactory">
+		<property name="maxConnections" value="8" />
+		<property name="maximumActive" value="500" />
+		<property name="connectionFactory" ref="jmsConnectionFactory" />
+	</bean>
+
+	<bean id="jmsConfig" class="org.apache.camel.component.jms.JmsConfiguration">
+		<property name="connectionFactory" ref="pooledConnectionFactory" />
+		<property name="transacted" value="false" />
+		<property name="concurrentConsumers" value="10" />
+	</bean>
+
+	<bean id="activemq" class="org.apache.activemq.camel.component.ActiveMQComponent">
+		<property name="configuration" ref="jmsConfig" />
+	</bean>
+	
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+		<property name="persistenceUnitName" value="referentialArticlePU" />
+		<property name="jpaVendorAdapter" ref="jpaAdapter" />
+	</bean>
+	
+	<bean id="transactionTemplate"
+		class="org.springframework.transaction.support.TransactionTemplate">
+		<property name="transactionManager">
+			<bean class="org.springframework.orm.jpa.JpaTransactionManager">
+				<property name="entityManagerFactory" ref="entityManagerFactory" />
+			</bean>
+		</property>
+	</bean>
+
+	<bean id="jpaTemplate" class="org.springframework.orm.jpa.JpaTemplate">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<bean id="jpa" class="org.apache.camel.component.jpa.JpaComponent">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!--
+		Hibernate addapter <bean id="jpaAdapter"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+		<property name="databasePlatform"
+		value="org.hibernate.dialect.HSQLDialect" /> </bean>
+	-->
+
+	<!-- OpenJPA addapter -->
+	<bean id="jpaAdapter" class="org.springframework.orm.jpa.vendor.OpenJpaVendorAdapter">
+		<property name="databasePlatform" value="org.apache.openjpa.jdbc.sql.HSQLDictionary" />
+		<property name="database" value="HSQL" />
+	</bean>
+	
+	<camelContext xmlns="http://camel.apache.org/schema/spring">
+		<!-- 	input JMS queu -->
+		<camel:package>com.sodifrance.stage.esb.servicemix</camel:package>
+		<route>
+			<from uri="file://C:/input/" />
+			<to uri="activemq:queue:foo" />
+		</route>
+		
+		<!-- 		intermediate JMS queu -->
+		<route>
+			<from uri="activemq:queue:foo" />
+			<to uri="activemq:queue:bar" />
+		</route>
+		
+		<!-- 		file step save on file and back up on base -->
+		<route>
+			<!-- use consumer.exclusive ActiveMQ destination option, notice we have 
+				to prefix with destination. -->
+			<from uri="activemq:bar" />
+			<wireTap uri="direct:backup"/>
+<!-- 			<convertBodyTo type="javax.xml.transform.stream.StreamSource"></convertBodyTo> -->
+<!-- 			<unmarshal> -->
+<!--             	<jaxb prettyPrint="false" contextPath="com.sodifrance.stage.esb.servicemix" -->
+<!--             		partClass="com.sodifrance.stage.esb.servicemix.PossibleArticle" /> -->
+<!-- 			</unmarshal> -->
+<!-- 			<unmarshal> -->
+<!--             	<jaxb prettyPrint="false" contextPath="com.sodifrance.stage.esb.servicemix" -->
+<!--             		partClass="com.sodifrance.stage.esb.servicemix.PossibleArticle" /> -->
+<!-- 			</unmarshal> -->
+			<convertBodyTo type="com.sodifrance.stage.esb.servicemix.Article" charset="UTF8" ></convertBodyTo>
+			<to uri="jpa:com.sodifrance.stage.esb.servicemix.Article" />
+		</route>
+		
+		<route>
+			<from uri="direct:backup" />
+<!-- 			<unmarshal/> -->
+<!-- 			<unmarshal> -->
+<!--       			<jaxb prettyPrint="true" contextPath="com.sodifrance.stage.esb.servicemix.PossibleArticle"/> -->
+<!--     		</unmarshal> -->
+			<to uri="file://C:/output" />			
+		</route>
+	</camelContext>
+</beans>

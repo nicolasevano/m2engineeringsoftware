@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="cdUnicArticle" transports="https http" startOnLoad="true" trace="disable">
+    <target>
+        <inSequence>
+            <log>
+                <property xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" name="id" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/id"/>
+            </log>
+            <payloadFactory>
+                <format>
+                    <ns2:getCD xmlns:ns2="http://referential_cd.sodifrance.com/">
+                        <arg0 xmlns="">$1</arg0>
+                    </ns2:getCD>
+                </format>
+                <args>
+                    <arg xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/id"/>
+                </args>
+            </payloadFactory>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort/getCD"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <xquery key="cd-to-unic-article.xq">
+                <variable name="payload" type="ELEMENT"/>
+            </xquery>
+            <send/>
+        </outSequence>
+    </target>
+    <parameter name="getArticleConditional.id"/>
+</proxy>

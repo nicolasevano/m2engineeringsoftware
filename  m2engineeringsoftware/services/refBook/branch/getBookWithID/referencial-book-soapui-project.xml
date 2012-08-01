@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="referential-book" resourceRoot="" soapui-version="4.0.1.1" abortOnError="false" runType="SEQUENTIAL" activeEnvironment="Default" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="BookWSImplServiceSoapBinding" type="wsdl" bindingName="{http://referential_book.sodifrance.com/}BookWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort?wsdl"><con:part><con:url>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="BookWSImplService" targetNamespace="http://referential_book.sodifrance.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://referential_book.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://referential_book.sodifrance.com/" schemaLocation="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort?xsd=bookws_schema1.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="addBookResponse">
+    <wsdl:part element="tns:addBookResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteBook">
+    <wsdl:part element="tns:deleteBook" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllBookResponse">
+    <wsdl:part element="tns:getAllBookResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateBookResponse">
+    <wsdl:part element="tns:updateBookResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateBook">
+    <wsdl:part element="tns:updateBook" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteBookResponse">
+    <wsdl:part element="tns:deleteBookResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addBook">
+    <wsdl:part element="tns:addBook" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllBook">
+    <wsdl:part element="tns:getAllBook" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="BookWS">
+    <wsdl:operation name="getAllBook">
+      <wsdl:input message="tns:getAllBook" name="getAllBook"></wsdl:input>
+      <wsdl:output message="tns:getAllBookResponse" name="getAllBookResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <wsdl:input message="tns:deleteBook" name="deleteBook"></wsdl:input>
+      <wsdl:output message="tns:deleteBookResponse" name="deleteBookResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addBook">
+      <wsdl:input message="tns:addBook" name="addBook"></wsdl:input>
+      <wsdl:output message="tns:addBookResponse" name="addBookResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBook">
+      <wsdl:input message="tns:updateBook" name="updateBook"></wsdl:input>
+      <wsdl:output message="tns:updateBookResponse" name="updateBookResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BookWSImplServiceSoapBinding" type="tns:BookWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="getAllBook">
+      <soap:operation soapAction="urn:getAllBook" style="document"/>
+      <wsdl:input name="getAllBook">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllBookResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteBook">
+      <soap:operation soapAction="urn:deleteBook" style="document"/>
+      <wsdl:input name="deleteBook">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteBookResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addBook">
+      <soap:operation soapAction="urn:AddBook" style="document"/>
+      <wsdl:input name="addBook">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addBookResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateBook">
+      <soap:operation soapAction="urn:updateBook" style="document"/>
+      <wsdl:input name="updateBook">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateBookResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BookWSImplService">
+    <wsdl:port binding="tns:BookWSImplServiceSoapBinding" name="BookWSImplPort">
+      <soap:address location="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort?xsd=bookws_schema1.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="unqualified" targetNamespace="http://referential_book.sodifrance.com/" version="1.0" xmlns:tns="http://referential_book.sodifrance.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="addBook" type="tns:addBook"/>
+  <xs:element name="addBookResponse" type="tns:addBookResponse"/>
+  <xs:element name="deleteBook" type="tns:deleteBook"/>
+  <xs:element name="deleteBookResponse" type="tns:deleteBookResponse"/>
+  <xs:element name="getAllBook" type="tns:getAllBook"/>
+  <xs:element name="getAllBookResponse" type="tns:getAllBookResponse"/>
+  <xs:element name="updateBook" type="tns:updateBook"/>
+  <xs:element name="updateBookResponse" type="tns:updateBookResponse"/>
+  <xs:complexType name="getAllBook">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getAllBookResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:book"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="book">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="author" type="xs:string"/>
+      <xs:element minOccurs="0" name="description" type="xs:string"/>
+      <xs:element minOccurs="0" name="editor" type="xs:string"/>
+      <xs:element name="NBChapitre" type="xs:int"/>
+      <xs:element name="NBPage" type="xs:int"/>
+      <xs:element minOccurs="0" name="publishDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="releaseDate" type="xs:dateTime"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+      <xs:element name="version" type="xs:int"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteBook">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:book"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteBookResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addBook">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg3" type="xs:string"/>
+      <xs:element name="arg4" type="xs:int"/>
+      <xs:element name="arg5" type="xs:int"/>
+      <xs:element name="arg6" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg7" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg8" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addBookResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateBook">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:book"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateBookResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:AddBook" name="addBook" bindingOperationName="addBook" type="Request-Response" outputName="addBookResponse" inputName="addBook" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Derniers carnets : Scènes de la vie politique en 2012 et avant</arg0>
+         <!--Optional:-->
+         <arg1>Franz-Olivier Giesbert</arg1>
+         <!--Optional:-->
+         <arg2>Flammarion</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/05/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/05/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Le léopard</arg0>
+         <!--Optional:-->
+         <arg1>Jo Nesbo</arg1>
+         <!--Optional:-->
+         <arg2>Folio Policier</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/04/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/04/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+	 
+
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Journal de Stefan , T4</arg0>
+         <!--Optional:-->
+         <arg1>Lisa Jane Smith</arg1>
+         <!--Optional:-->
+         <arg2>Hachette Jeunesse 2012</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/05/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/05/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:deleteBook" name="deleteBook" bindingOperationName="deleteBook" type="Request-Response" outputName="deleteBookResponse" inputName="deleteBook" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+           <author>Franz-Olivier Giesbert</author>
+            <description>coming soon</description>
+            <editor>Flammarion</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-05-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-05-01T00:00:00+02:00</releaseDate>
+            <title>Derniers carnets : Scènes de la vie politique en 2012 et avant</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+            <author>Jo Nesbo</author>
+            <description>coming soon</description>
+            <editor>Folio Policier</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-04-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-04-01T00:00:00+02:00</releaseDate>
+            <title>Le léopard</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+           <author>Lisa Jane Smith</author>
+            <description>coming soon</description>
+            <editor>Hachette Jeunesse 2012</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-05-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-05-01T00:00:00+02:00</releaseDate>
+            <title>Journal de Stefan , T4</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:getAllBook" name="getAllBook" bindingOperationName="getAllBook" type="Request-Response" outputName="getAllBookResponse" inputName="getAllBook" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:getAllBook/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllBook"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:updateBook" name="updateBook" bindingOperationName="updateBook" type="Request-Response" outputName="updateBookResponse" inputName="updateBook" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:updateBook>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <author>?</author>
+            <!--Optional:-->
+            <description>?</description>
+            <!--Optional:-->
+            <editor>?</editor>
+            <NBChapitre>?</NBChapitre>
+            <NBPage>?</NBPage>
+            <!--Optional:-->
+            <publishDate>?</publishDate>
+            <!--Optional:-->
+            <releaseDate>?</releaseDate>
+            <!--Optional:-->
+            <title>?</title>
+            <version>?</version>
+         </arg0>
+      </ref:updateBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:updateBook"/></con:call></con:operation></con:interface><con:testSuite name="BookWSImplServiceSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addBook TestCase" searchProperties="true" id="ee098b2b-2aee-45e9-a130-a08cd73fa0a7"><con:settings/><con:testStep type="request" name="addBook - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>addBook</con:operation><con:request name="addBook - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Derniers carnets : Scènes de la vie politique en 2012 et avant</arg0>
+         <!--Optional:-->
+         <arg1>Franz-Olivier Giesbert</arg1>
+         <!--Optional:-->
+         <arg2>Flammarion</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/05/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/05/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+</soapenv:Envelope>
+]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="addBook - Request 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>addBook</con:operation><con:request name="addBook - Request 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Le léopard</arg0>
+         <!--Optional:-->
+         <arg1>Jo Nesbo</arg1>
+         <!--Optional:-->
+         <arg2>Folio Policier</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/04/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/04/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+	 
+
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="addBook - Request 3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>addBook</con:operation><con:request name="addBook - Request 3" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addBook>
+         <!--Optional:-->
+         <arg0>Journal de Stefan , T4</arg0>
+         <!--Optional:-->
+         <arg1>Lisa Jane Smith</arg1>
+         <!--Optional:-->
+         <arg2>Hachette Jeunesse 2012</arg2>
+         <!--Optional:-->
+         <arg3>coming soon</arg3>
+         <arg4>500</arg4>
+         <arg5>12</arg5>
+         <arg6>1</arg6>
+         <!--Optional:-->
+         <arg7>01/05/2012</arg7>
+         <!--Optional:-->
+         <arg8>01/05/2012</arg8>
+      </ref:addBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval><con:reportParameters/></con:loadTest><con:properties/><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="deleteBook TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="deleteBook - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+           <author>Franz-Olivier Giesbert</author>
+            <description>coming soon</description>
+            <editor>Flammarion</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-05-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-05-01T00:00:00+02:00</releaseDate>
+            <title>Derniers carnets : Scènes de la vie politique en 2012 et avant</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="deleteBook - Request 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - Request 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+            <author>Jo Nesbo</author>
+            <description>coming soon</description>
+            <editor>Folio Policier</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-04-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-04-01T00:00:00+02:00</releaseDate>
+            <title>Le léopard</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="deleteBook - Request 3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>deleteBook</con:operation><con:request name="deleteBook - Request 3" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteBook>
+         <!--Optional:-->
+         <arg0>
+           <author>Lisa Jane Smith</author>
+            <description>coming soon</description>
+            <editor>Hachette Jeunesse 2012</editor>
+            <NBChapitre>12</NBChapitre>
+            <NBPage>500</NBPage>
+            <publishDate>2012-05-01T00:00:00+02:00</publishDate>
+            <releaseDate>2012-05-01T00:00:00+02:00</releaseDate>
+            <title>Journal de Stefan , T4</title>
+            <version>1</version>
+         </arg0>
+      </ref:deleteBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval><con:reportParameters/></con:loadTest><con:properties/><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getAllBook TestCase" searchProperties="true" id="8dd91253-35ef-47a1-a971-bdb709f99cd8"><con:settings/><con:testStep type="request" name="getAllBook - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>getAllBook</con:operation><con:request name="getAllBook - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:getAllBook/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllBook"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval><con:reportParameters/></con:loadTest><con:properties/><con:reportParameters/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="updateBook TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="updateBook"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>BookWSImplServiceSoapBinding</con:interface><con:operation>updateBook</con:operation><con:request name="updateBook"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_book.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:updateBook>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <author>?</author>
+            <!--Optional:-->
+            <description>?</description>
+            <!--Optional:-->
+            <editor>?</editor>
+            <NBChapitre>?</NBChapitre>
+            <NBPage>?</NBPage>
+            <!--Optional:-->
+            <publishDate>?</publishDate>
+            <!--Optional:-->
+            <releaseDate>?</releaseDate>
+            <!--Optional:-->
+            <title>?</title>
+            <version>?</version>
+         </arg0>
+      </ref:updateBook>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig action="urn:updateBook"/></con:request></con:config></con:testStep><con:properties/><con:reportParameters/></con:testCase><con:properties/><con:reportParameters/></con:testSuite><con:properties/><con:wssContainer/><con:databaseConnectionContainer/><con:reporting><con:xmlTemplates/><con:parameters/></con:reporting><con:sensitiveInformation/></con:soapui-project>

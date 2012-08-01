@@ -1,0 +1,235 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.sodifrance.stage.esb.talend</groupId>
+	<artifactId>talendBatchConsumerCheckDelivery</artifactId>
+	<packaging>bundle</packaging>
+	<version>0.0.1</version>
+
+	<name>A Camel Batch Consumer jms queue check message delivery</name>
+	<url>http://www.sodifrance.com</url>
+
+	<properties>
+		<cxf-version>2.6.0</cxf-version>
+		<camel-version>2.9.2</camel-version>
+		<activeMQ-version>5.3.2</activeMQ-version>
+		<org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+	</properties>
+
+	<repositories>
+		<repository>
+			<id>com.springsource.repository.bundles.release</id>
+			<name>SpringSource Enterprise Bundle Repository - SpringSource Bundle
+				Releases
+			</name>
+			<url>http://repository.springsource.com/maven/bundles/release</url>
+		</repository>
+		<repository>
+			<id>com.springsource.repository.bundles.external</id>
+			<name>SpringSource Enterprise Bundle Repository - External Bundle
+				Releases
+			</name>
+			<url>http://repository.springsource.com/maven/bundles/external</url>
+		</repository>
+	</repositories>
+	<dependencies>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-core</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-blueprint</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-spring</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jms</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jpa</artifactId>
+			<version>${camel-version}</version>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-jaxb</artifactId>
+			<version>${camel-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.camel</groupId>
+			<artifactId>camel-stream</artifactId>
+			<version>${camel-version}</version>
+			<!-- use the same version as your Camel core version -->
+		</dependency>
+		<dependency>
+			<groupId>mysql</groupId>
+			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.20</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
+			<version>1.8.0.10</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.6.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-camel</artifactId>
+			<version>${activeMQ-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.activemq</groupId>
+			<artifactId>activemq-pool</artifactId>
+			<version>${activeMQ-version}</version>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.16</version>
+		</dependency>
+
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>1.0.0.GA</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa-all</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa-persistence-jdbc</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.openjpa</groupId>
+			<artifactId>openjpa-persistence</artifactId>
+			<version>2.0.0</version>
+		</dependency>
+		<dependency>
+			<groupId>c3p0</groupId>
+			<artifactId>c3p0</artifactId>
+			<version>0.8.4.5</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-orm</artifactId> -->
+		<!-- <version>${org.springframework.version}</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>org.apache.geronimo.specs</groupId> -->
+		<!-- <artifactId>geronimo-jpa_2.0_spec</artifactId> -->
+		<!-- <version>1.1</version> -->
+		<!-- </dependency> -->
+		<!-- <dependency> -->
+		<!-- <groupId>commons-dbcp</groupId> -->
+		<!-- <artifactId>commons-dbcp</artifactId> -->
+		<!-- <version>1.2</version> -->
+		<!-- </dependency> -->
+
+
+	</dependencies>
+
+
+	<build>
+		<defaultGoal>install</defaultGoal>
+
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>2.3.2</version>
+				<configuration>
+					<source>1.6</source>
+					<target>1.6</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.openjpa</groupId>
+				<artifactId>openjpa-maven-plugin</artifactId>
+				<version>2.2.0</version>
+				<executions>
+					<execution>
+						<id>enhancer</id>
+						<phase>process-classes</phase>
+						<goals>
+							<goal>enhance</goal>
+						</goals>
+					</execution>
+					<!-- <execution> -->
+					<!-- <id>test enhancer</id> -->
+					<!-- <phase>process-test-classes</phase> -->
+					<!-- <goals> -->
+					<!-- <goal>test-enhance</goal> -->
+					<!-- </goals> -->
+					<!-- </execution> -->
+				</executions>
+				<configuration>
+					<persistenceXmlFile>${project.basedir}/src/main/resources/META-INF/persistence.xml</persistenceXmlFile>
+
+					<includes>org/apache/camel/processor/idempotent/jpa/MessageProcessed.class,org/apache/camel/processor/interceptor/jpa/JpaTraceEventMessage.class,com/sodifrance/stage/esb/talend/Article.class</includes>
+					<addDefaultConstructor>true</addDefaultConstructor>
+					<enforcePropertyRestrictions>true</enforcePropertyRestrictions>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.openjpa</groupId>
+						<artifactId>openjpa</artifactId>
+						<version>2.0.0</version>
+					</dependency>
+				</dependencies>
+			</plugin>
+
+			<!-- to generate the MANIFEST-FILE of the bundle -->
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>2.3.4</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>batchConsumerCheckDelivery</Bundle-SymbolicName>
+						<Private-Package>com.sodifrance.stage.esb.talend.*,
+							com.mysql.jdbc.*,
+							org.hsqldb.*,
+						</Private-Package>
+						<Require-Bundle>org.springframework.beans</Require-Bundle>
+						<Import-Package>*,
+							org.jboss.resource.adapter.jdbc.vendor;resolution:=optional,
+							org.jboss.resource.adapter.jdbc;resolution:=optional,
+							com.mchange.v2.c3p0;resolution:=optional,
+							com.mysql.jdbc;resolution:=optional,
+							org.hsqldb;resolution:=optional,
+							sun.security.action;resolution:=optional</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+
+			<!-- allows the route to be ran via 'mvn camel:run' -->
+			<plugin>
+				<groupId>org.apache.camel</groupId>
+				<artifactId>camel-maven-plugin</artifactId>
+				<version>${camel-version}</version>
+			</plugin>
+		</plugins>
+
+	</build>
+</project>
