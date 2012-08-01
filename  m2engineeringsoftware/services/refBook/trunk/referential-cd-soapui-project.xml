@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<con:soapui-project name="referential-cd" resourceRoot="" soapui-version="4.0.1.1" abortOnError="false" runType="SEQUENTIAL" xmlns:con="http://eviware.com/soapui/config"><con:settings/><con:interface xsi:type="con:WsdlInterface" wsaVersion="NONE" name="CDWSImplServiceSoapBinding" type="wsdl" bindingName="{http://referential_cd.sodifrance.com/}CDWSImplServiceSoapBinding" soapVersion="1_1" anonymous="optional" definition="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort?wsdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:settings/><con:definitionCache type="TEXT" rootPart="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort?wsdl"><con:part><con:url>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort?wsdl</con:url><con:content><![CDATA[<wsdl:definitions name="CDWSImplService" targetNamespace="http://referential_cd.sodifrance.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://referential_cd.sodifrance.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <schema xmlns="http://www.w3.org/2001/XMLSchema">
+      <import namespace="http://referential_cd.sodifrance.com/" schemaLocation="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort?xsd=cdws_schema1.xsd"/>
+    </schema>
+  </wsdl:types>
+  <wsdl:message name="addCDResponse">
+    <wsdl:part element="tns:addCDResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllCD">
+    <wsdl:part element="tns:getAllCD" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCDResponse">
+    <wsdl:part element="tns:updateCDResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCD">
+    <wsdl:part element="tns:deleteCD" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="addCD">
+    <wsdl:part element="tns:addCD" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getAllCDResponse">
+    <wsdl:part element="tns:getAllCDResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="deleteCDResponse">
+    <wsdl:part element="tns:deleteCDResponse" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="updateCD">
+    <wsdl:part element="tns:updateCD" name="parameters"></wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="CDWS">
+    <wsdl:operation name="deleteCD">
+      <wsdl:input message="tns:deleteCD" name="deleteCD"></wsdl:input>
+      <wsdl:output message="tns:deleteCDResponse" name="deleteCDResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addCD">
+      <wsdl:input message="tns:addCD" name="addCD"></wsdl:input>
+      <wsdl:output message="tns:addCDResponse" name="addCDResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCD">
+      <wsdl:input message="tns:getAllCD" name="getAllCD"></wsdl:input>
+      <wsdl:output message="tns:getAllCDResponse" name="getAllCDResponse"></wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCD">
+      <wsdl:input message="tns:updateCD" name="updateCD"></wsdl:input>
+      <wsdl:output message="tns:updateCDResponse" name="updateCDResponse"></wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CDWSImplServiceSoapBinding" type="tns:CDWS">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addCD">
+      <soap:operation soapAction="urn:AddCD" style="document"/>
+      <wsdl:input name="addCD">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addCDResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteCD">
+      <soap:operation soapAction="urn:deleteCD" style="document"/>
+      <wsdl:input name="deleteCD">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteCDResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getAllCD">
+      <soap:operation soapAction="urn:getAllCD" style="document"/>
+      <wsdl:input name="getAllCD">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getAllCDResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateCD">
+      <soap:operation soapAction="urn:updateCD" style="document"/>
+      <wsdl:input name="updateCD">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateCDResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CDWSImplService">
+    <wsdl:port binding="tns:CDWSImplServiceSoapBinding" name="CDWSImplPort">
+      <soap:address location="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>]]></con:content><con:type>http://schemas.xmlsoap.org/wsdl/</con:type></con:part><con:part><con:url>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort?xsd=cdws_schema1.xsd</con:url><con:content><![CDATA[<xs:schema elementFormDefault="unqualified" targetNamespace="http://referential_cd.sodifrance.com/" version="1.0" xmlns:tns="http://referential_cd.sodifrance.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="addCD" type="tns:addCD"/>
+  <xs:element name="addCDResponse" type="tns:addCDResponse"/>
+  <xs:element name="deleteCD" type="tns:deleteCD"/>
+  <xs:element name="deleteCDResponse" type="tns:deleteCDResponse"/>
+  <xs:element name="getAllCD" type="tns:getAllCD"/>
+  <xs:element name="getAllCDResponse" type="tns:getAllCDResponse"/>
+  <xs:element name="updateCD" type="tns:updateCD"/>
+  <xs:element name="updateCDResponse" type="tns:updateCDResponse"/>
+  <xs:complexType name="deleteCD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:cd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="cd">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="artist" type="xs:string"/>
+      <xs:element minOccurs="0" name="editor" type="xs:string"/>
+      <xs:element name="numberOfTrack" type="xs:int"/>
+      <xs:element minOccurs="0" name="publishDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="releaseDate" type="xs:string"/>
+      <xs:element minOccurs="0" name="title" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="deleteCDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addCD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg1" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg2" type="xs:string"/>
+      <xs:element name="arg3" type="xs:int"/>
+      <xs:element minOccurs="0" name="arg4" type="xs:string"/>
+      <xs:element minOccurs="0" name="arg5" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="addCDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="getAllCD">
+    <xs:sequence/>
+  </xs:complexType>
+  <xs:complexType name="getAllCDResponse">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" minOccurs="0" name="return" type="tns:cd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateCD">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="tns:cd"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="updateCDResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>]]></con:content><con:type>http://www.w3.org/2001/XMLSchema</con:type></con:part></con:definitionCache><con:endpoints><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint></con:endpoints><con:operation isOneWay="false" action="urn:AddCD" name="addCD" bindingOperationName="addCD" type="Request-Response" outputName="addCDResponse" inputName="addCD" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>Little broken hearts</arg0>
+         <!--Optional:-->
+         <arg1>Norah Jones</arg1>
+         <!--Optional:-->
+         <arg2>Sony</arg2>
+         <arg3>12</arg3>
+         <!--Optional:-->
+         <arg4>30/04/2012</arg4>
+         <!--Optional:-->
+         <arg5>30/04/2012</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>21</arg0>
+         <!--Optional:-->
+         <arg1>ADELE</arg1>
+         <!--Optional:-->
+         <arg2>XL RECORDINGS</arg2>
+         <arg3>2</arg3>
+         <!--Optional:-->
+         <arg4>01/01/2011</arg4>
+         <!--Optional:-->
+         <arg5>01/01/2011</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>Making mirrors</arg0>
+         <!--Optional:-->
+         <arg1>Gotye</arg1>
+         <!--Optional:-->
+         <arg2>Sony</arg2>
+         <arg3>12</arg3>
+         <!--Optional:-->
+         <arg4>27/02/2012</arg4>
+         <!--Optional:-->
+         <arg5>27/02/2012</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:deleteCD" name="deleteCD" bindingOperationName="deleteCD" type="Request-Response" outputName="deleteCDResponse" inputName="deleteCD" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>Norah Jones</artist>
+            <editor>Sony</editor>
+            <numberOfTrack>12</numberOfTrack>
+            <publishDate>2012-04-30T00:00:00+02:00</publishDate>
+            <releaseDate>2012-04-30T00:00:00+02:00</releaseDate>
+            <title>Little broken hearts</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 2"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>ADELE</artist>
+            <editor>XL RECORDINGS</editor>
+            <numberOfTrack>2</numberOfTrack>
+            <publishDate>2011-01-01T00:00:00+01:00</publishDate>
+            <releaseDate>2011-01-01T00:00:00+01:00</releaseDate>
+            <title>21</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:call><con:call name="Request 3"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>Gotye</artist>
+            <editor>Sony</editor>
+            <numberOfTrack>12</numberOfTrack>
+            <publishDate>2012-02-27T00:00:00+01:00</publishDate>
+            <releaseDate>2012-02-27T00:00:00+01:00</releaseDate>
+            <title>Making mirrors</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:getAllCD" name="getAllCD" bindingOperationName="getAllCD" type="Request-Response" outputName="getAllCDResponse" inputName="getAllCD" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:getAllCD/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllCD"/><con:wsrmConfig version="1.2"/></con:call></con:operation><con:operation isOneWay="false" action="urn:updateCD" name="updateCD" bindingOperationName="updateCD" type="Request-Response" outputName="updateCDResponse" inputName="updateCD" receivesAttachments="false" sendsAttachments="false" anonymous="optional"><con:settings/><con:call name="Request 1"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:updateCD>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <artist>?</artist>
+            <!--Optional:-->
+            <editor>?</editor>
+            <numberOfTrack>?</numberOfTrack>
+            <!--Optional:-->
+            <publishDate>?</publishDate>
+            <!--Optional:-->
+            <releaseDate>?</releaseDate>
+            <!--Optional:-->
+            <title>?</title>
+         </arg0>
+      </ref:updateCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:updateCD"/></con:call></con:operation></con:interface><con:testSuite name="CDWSImplServiceSoapBinding TestSuite"><con:settings/><con:runType>SEQUENTIAL</con:runType><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="addCD TestCase" searchProperties="true" id="b7afc00c-cf80-4c84-99a6-71940f95c49d"><con:settings/><con:testStep type="request" name="addCD - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>addCD</con:operation><con:request name="addCD - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>Little broken hearts</arg0>
+         <!--Optional:-->
+         <arg1>Norah Jones</arg1>
+         <!--Optional:-->
+         <arg2>Sony</arg2>
+         <arg3>12</arg3>
+         <!--Optional:-->
+         <arg4>30/04/2012</arg4>
+         <!--Optional:-->
+         <arg5>30/04/2012</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="addCD - Request 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>addCD</con:operation><con:request name="addCD - Request 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>21</arg0>
+         <!--Optional:-->
+         <arg1>ADELE</arg1>
+         <!--Optional:-->
+         <arg2>XL RECORDINGS</arg2>
+         <arg3>2</arg3>
+         <!--Optional:-->
+         <arg4>01/01/2011</arg4>
+         <!--Optional:-->
+         <arg5>01/01/2011</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="addCD - Request 3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>addCD</con:operation><con:request name="addCD - Request 3" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:addCD>
+         <!--Optional:-->
+         <arg0>Making mirrors</arg0>
+         <!--Optional:-->
+         <arg1>Gotye</arg1>
+         <!--Optional:-->
+         <arg2>Sony</arg2>
+         <arg3>12</arg3>
+         <!--Optional:-->
+         <arg4>27/02/2012</arg4>
+         <!--Optional:-->
+         <arg5>27/02/2012</arg5>
+      </ref:addCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:AddCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="deleteCD TestCase" searchProperties="true" id="f87e0c32-6106-4fb7-aae8-17b1b55f7663"><con:settings/><con:testStep type="request" name="deleteCD - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>deleteCD</con:operation><con:request name="deleteCD - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>Norah Jones</artist>
+            <editor>Sony</editor>
+            <numberOfTrack>12</numberOfTrack>
+            <publishDate>2012-04-30T00:00:00+02:00</publishDate>
+            <releaseDate>2012-04-30T00:00:00+02:00</releaseDate>
+            <title>Little broken hearts</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="deleteCD - Request 2"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>deleteCD</con:operation><con:request name="deleteCD - Request 2" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>ADELE</artist>
+            <editor>XL RECORDINGS</editor>
+            <numberOfTrack>2</numberOfTrack>
+            <publishDate>2011-01-01T00:00:00+01:00</publishDate>
+            <releaseDate>2011-01-01T00:00:00+01:00</releaseDate>
+            <title>21</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:testStep type="request" name="deleteCD - Request 3"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>deleteCD</con:operation><con:request name="deleteCD - Request 3" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:deleteCD>
+         <!--Optional:-->
+         <arg0>
+            <artist>Gotye</artist>
+            <editor>Sony</editor>
+            <numberOfTrack>12</numberOfTrack>
+            <publishDate>2012-02-27T00:00:00+01:00</publishDate>
+            <releaseDate>2012-02-27T00:00:00+01:00</releaseDate>
+            <title>Making mirrors</title>
+         </arg0>
+      </ref:deleteCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:deleteCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="getAllCD TestCase" searchProperties="true" id="972aa6ad-93c5-4b6b-9ad0-a6fe23d60871"><con:settings/><con:testStep type="request" name="getAllCD - Request 1"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>getAllCD</con:operation><con:request name="getAllCD - Request 1" outgoingWss="" incomingWss="" timeout="" sslKeystore="" useWsAddressing="false" useWsReliableMessaging="false" wssPasswordType=""><con:settings><con:setting id="com.eviware.soapui.impl.wsdl.WsdlRequest@request-headers">&lt;xml-fragment/></con:setting></con:settings><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:getAllCD/>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:assertion type="SOAP Response" name="SOAP Response"/><con:jmsConfig JMSDeliveryMode="PERSISTENT"/><con:jmsPropertyConfig/><con:wsaConfig mustUnderstand="NONE" version="200508" action="urn:getAllCD"/><con:wsrmConfig version="1.2"/></con:request></con:config></con:testStep><con:loadTest name="LoadTest 1"><con:settings><con:setting id="HttpSettings@close-connections">false</con:setting></con:settings><con:threadCount>5</con:threadCount><con:startDelay>0</con:startDelay><con:sampleInterval>250</con:sampleInterval><con:calculateTPSOnTimePassed>true</con:calculateTPSOnTimePassed><con:resetStatisticsOnThreadCountChange>true</con:resetStatisticsOnThreadCountChange><con:historyLimit>-1</con:historyLimit><con:testLimit>60</con:testLimit><con:limitType>TIME</con:limitType><con:loadStrategy><con:type>Simple</con:type></con:loadStrategy><con:assertion type="Step Status" name="Step Status"/><con:maxAssertionErrors>100</con:maxAssertionErrors><con:cancelExcessiveThreads>true</con:cancelExcessiveThreads><con:strategyInterval>500</con:strategyInterval></con:loadTest><con:properties/></con:testCase><con:testCase failOnError="true" failTestCaseOnErrors="true" keepSession="false" maxResults="0" name="updateCD TestCase" searchProperties="true"><con:settings/><con:testStep type="request" name="updateCD"><con:settings/><con:config xsi:type="con:RequestStep" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><con:interface>CDWSImplServiceSoapBinding</con:interface><con:operation>updateCD</con:operation><con:request name="updateCD"><con:settings/><con:encoding>UTF-8</con:encoding><con:endpoint>http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort</con:endpoint><con:request><![CDATA[<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ref="http://referential_cd.sodifrance.com/">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <ref:updateCD>
+         <!--Optional:-->
+         <arg0>
+            <!--Optional:-->
+            <artist>?</artist>
+            <!--Optional:-->
+            <editor>?</editor>
+            <numberOfTrack>?</numberOfTrack>
+            <!--Optional:-->
+            <publishDate>?</publishDate>
+            <!--Optional:-->
+            <releaseDate>?</releaseDate>
+            <!--Optional:-->
+            <title>?</title>
+         </arg0>
+      </ref:updateCD>
+   </soapenv:Body>
+</soapenv:Envelope>]]></con:request><con:wsaConfig action="urn:updateCD"/></con:request></con:config></con:testStep><con:properties/></con:testCase><con:properties/></con:testSuite><con:properties/><con:wssContainer/><con:sensitiveInformation/></con:soapui-project>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#Conversion.jsp" PATH="/Conversion.jsp"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Conversion.jsp:0" NAME="item"
+   PATH="/Conversion.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="OK::#Conversion.jsp" NAME="output"
+    PATH="/Conversion.jsp" TARGET="rules:#Conversion.jsp" TITLE="OK" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

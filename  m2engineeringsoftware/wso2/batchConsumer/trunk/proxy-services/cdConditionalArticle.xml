@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="cdConditionalArticle" transports="https http" startOnLoad="true" trace="disable">
+    <target>
+        <inSequence>
+            <payloadFactory>
+                <format>
+                    <ns2:getAllCD xmlns:ns2="http://referential_cd.sodifrance.com/"/>
+                </format>
+            </payloadFactory>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:8080/referential-cd/services/1.0.0/CDWSImplPort/getAllCD"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <xquery key="cd-to-article-conditional.xq">
+                <variable name="payload" type="ELEMENT"/>
+            </xquery>
+            <send/>
+        </outSequence>
+    </target>
+</proxy>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#alea.jsp" PATH="/alea.jsp" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#alea.jsp:0" NAME="item" PATH="/alea.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="finir::#fin.jsp" NAME="output"
+    PATH="/fin.jsp" TARGET="rules:#fin.jsp" TITLE="finir" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="continuer::#alea.jsp" NAME="output1"
+    PATH="/alea.jsp" TARGET="rules:#alea.jsp" TITLE="continuer" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#fin.jsp" PATH="/fin.jsp" SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

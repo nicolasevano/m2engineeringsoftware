@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#Command.jsp" PATH="/Command.jsp"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Command.jsp:0" NAME="item"
+   PATH="/Command.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="commander::#Approuver.jsp" NAME="output"
+    PATH="/Approuver.jsp" TARGET="rules:#Approuver.jsp"
+    TITLE="commander" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="annuler::#Command.jsp" NAME="output1"
+    PATH="/Command.jsp" TARGET="rules:#Command.jsp" TITLE="annuler" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#Approuver.jsp" PATH="/Approuver.jsp"
+  SHAPE="256,145,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#Approuver.jsp:0" NAME="item"
+   PATH="/Approuver.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="OK::#Command.jsp" NAME="output"
+    PATH="/Command.jsp" TARGET="rules:#Command.jsp" TITLE="OK" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

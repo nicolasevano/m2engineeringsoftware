@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="bookConditionalArticle" transports="https http" startOnLoad="true" trace="disable">
+    <target>
+        <inSequence>
+            <payloadFactory>
+                <format>
+                    <ns2:getAllBook xmlns:ns2="http://referential_book.sodifrance.com/"/>
+                </format>
+            </payloadFactory>
+            <send>
+                <endpoint>
+                    <address uri="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort/getAllBook"/>
+                </endpoint>
+            </send>
+        </inSequence>
+        <outSequence>
+            <xquery key="book-to-article-conditional.xq">
+                <variable name="payload" type="ELEMENT"/>
+            </xquery>
+            <send/>
+        </outSequence>
+    </target>
+</proxy>

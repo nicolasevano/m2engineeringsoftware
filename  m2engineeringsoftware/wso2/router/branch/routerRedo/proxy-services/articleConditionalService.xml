@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="articleConditionalService" transports="http" startOnLoad="true" trace="enable" statistics="enable">
+    <target>
+        <endpoint>
+            <address uri="http://localhost:8280/services/articleConditionalService"/>
+        </endpoint>
+        <inSequence>
+            <log>
+                <property name="string" value="get a message"/>
+            </log>
+            <log>
+                <property xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" name="envelope" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/wantedkind"/>
+            </log>
+            <router>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/wantedkind" match="cd">
+                    <target sequence="conf:/repository/synapse/default/sequences/cdUnicArticle"/>
+                </route>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/wantedkind" match="book">
+                    <target sequence="conf:/repository/synapse/default/sequences/bookUnicArticle"/>
+                </route>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getArticleConditional/wantedkind" match="all">
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/unicArticle"/>
+                        </endpoint>
+                    </target>
+                </route>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getAllArticleConditional/wantedkind" match="cd">
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/cdConditionalArticle"/>
+                        </endpoint>
+                    </target>
+                </route>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getAllArticleConditional/wantedkind" match="book">
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/bookConditionalArticle"/>
+                        </endpoint>
+                    </target>
+                </route>
+                <route xmlns:con="http://conditional.wso2.esb.stage.sodifrance.com/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" expression="/soapenv:Envelope/soapenv:Body/con:getAllArticleConditional/wantedkind" match="all">
+                    <target>
+                        <endpoint>
+                            <address uri="http://localhost:8280/services/allArticleConditional"/>
+                        </endpoint>
+                    </target>
+                </route>
+            </router>
+        </inSequence>
+        <outSequence>
+            <send/>
+        </outSequence>
+    </target>
+    <publishWSDL uri="file:repository/resources/wsdl/serviceConditional.wsdl"/>
+    <policy key="conf:/repository/axis2/service-groups/articleConditionalService/services/articleConditionalService/policies/WSO2CachingPolicy"/>
+</proxy>

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://ws.apache.org/ns/synapse">
+    <proxy name="bookArticle" transports="https http" startOnLoad="true" trace="enable" statistics="enable">
+        <target>
+            <inSequence>
+                <payloadFactory>
+                    <format>
+                        <ns2:getAllBook xmlns:ns2="http://referential_book.sodifrance.com/"/>
+                    </format>
+                </payloadFactory>
+                <send>
+                    <endpoint>
+                        <address uri="http://localhost:8080/referential-book/services/1.0.0/BookWSImplPort/getAllBook"/>
+                    </endpoint>
+                </send>
+            </inSequence>
+            <outSequence>
+                <xquery key="book-to-article.xq">
+                    <variable name="payload" type="ELEMENT"/>
+                </xquery>
+                <send/>
+            </outSequence>
+        </target>
+    </proxy>
+    <localEntry key="book-to-article-conditional.xq">
+        <x>
+declare namespace ns2="http://referential_book.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleConditionalResponse&gt;{for $book in $payload/ns2:getAllBookResponse/return return &lt;return&gt;
+                &lt;author&gt;{$book/author/text()}&lt;/author&gt;
+                &lt;kind&gt;book&lt;/kind&gt;
+                &lt;editor&gt;{$book/editor/text()}&lt;/editor&gt;
+                &lt;meta&gt;chapitre: {$book/NBChapitre/text()}; nb page: {$book/NBPage/text()}; description: {$book/description/text()}&lt;/meta&gt;
+                &lt;title&gt;{$book/title/text()}&lt;/title&gt;
+                &lt;publishDate&gt;{$book/publishDate/text()}&lt;/publishDate&gt;
+                &lt;releaseDate&gt;{$book/releaseDate/text()}&lt;/releaseDate&gt;
+&lt;/return&gt;}&lt;/getAllArticleConditionalResponse&gt;</x>
+    </localEntry>
+    <localEntry key="book-to-unic-article.xq">
+        <x>
+declare namespace ns2="http://referential_book.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getArticleConditionalResponse&gt;{for $book in $payload/ns2:getBookResponse/return return &lt;return&gt;
+                &lt;author&gt;{$book/author/text()}&lt;/author&gt;
+                &lt;kind&gt;book&lt;/kind&gt;
+                &lt;editor&gt;{$book/editor/text()}&lt;/editor&gt;
+                &lt;meta&gt;chapitre: {$book/NBChapitre/text()}; nb page: {$book/NBPage/text()}; description: {$book/description/text()}&lt;/meta&gt;
+                &lt;title&gt;{$book/title/text()}&lt;/title&gt;
+                &lt;publishDate&gt;{$book/publishDate/text()}&lt;/publishDate&gt;
+                &lt;releaseDate&gt;{$book/releaseDate/text()}&lt;/releaseDate&gt;
+&lt;/return&gt;}&lt;/getArticleConditionalResponse&gt;</x>
+    </localEntry>
+    <localEntry key="cd-to-unic-article.xq">
+        <x>
+	
+declare namespace ns2="http://referential_cd.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getArticleConditionalResponse&gt;{for $cd in $payload/ns2:getCDResponse/return return &lt;return&gt;
+						&lt;author&gt;{$cd/artist/text()}&lt;/author&gt;
+						&lt;kind&gt;cd&lt;/kind&gt;
+						&lt;editor&gt;{$cd/editor/text()}&lt;/editor&gt;
+						&lt;meta&gt;number of track: {$cd/numberOfTrack/text()}&lt;/meta&gt;
+						&lt;title&gt;{$cd/title/text()}&lt;/title&gt;
+						&lt;publishDate&gt;{$cd/publishDate/text()}&lt;/publishDate&gt;
+						&lt;releaseDate&gt;{$cd/releaseDate/text()}&lt;/releaseDate&gt;
+					&lt;/return&gt;
+}&lt;/getArticleConditionalResponse&gt;
+	
+        </x>
+    </localEntry>
+    <localEntry key="cd-to-article-conditional.xq">
+        <x>
+	
+declare namespace ns2="http://referential_cd.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleConditionalResponse&gt;{for $cd in $payload/ns2:getAllCDResponse/return return &lt;return&gt;
+						&lt;author&gt;{$cd/artist/text()}&lt;/author&gt;
+						&lt;kind&gt;cd&lt;/kind&gt;
+						&lt;editor&gt;{$cd/editor/text()}&lt;/editor&gt;
+						&lt;meta&gt;number of track: {$cd/numberOfTrack/text()}&lt;/meta&gt;
+						&lt;title&gt;{$cd/title/text()}&lt;/title&gt;
+						&lt;publishDate&gt;{$cd/publishDate/text()}&lt;/publishDate&gt;
+						&lt;releaseDate&gt;{$cd/releaseDate/text()}&lt;/releaseDate&gt;
+					&lt;/return&gt;
+}&lt;/getAllArticleConditionalResponse&gt;
+	
+        </x>
+    </localEntry>
+</definitions>

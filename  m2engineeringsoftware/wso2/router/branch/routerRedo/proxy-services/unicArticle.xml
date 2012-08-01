@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse" name="unicArticle" transports="http" startOnLoad="true" trace="disable">
+    <target>
+        <inSequence>
+            <clone>
+                <target>
+                    <endpoint>
+                        <address uri="http://localhost:8280/services/cdUnicArticle"/>
+                    </endpoint>
+                </target>
+                <target>
+                    <endpoint>
+                        <address uri="http://localhost:8280/services/bookUnicArticle"/>
+                    </endpoint>
+                </target>
+            </clone>
+        </inSequence>
+        <outSequence>
+            <aggregate>
+                <completeCondition>
+                    <messageCount min="2" max="2"/>
+                </completeCondition>
+                <onComplete expression="//getArticleConditionalResponse//return">
+                    <send/>
+                </onComplete>
+            </aggregate>
+        </outSequence>
+    </target>
+</proxy>

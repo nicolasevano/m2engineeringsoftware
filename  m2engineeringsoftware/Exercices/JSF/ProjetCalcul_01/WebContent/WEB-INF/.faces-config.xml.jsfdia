@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#calcul.jsp" PATH="/calcul.jsp"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#calcul.jsp:0" NAME="item" PATH="/calcul.jsp" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="plus::#plus.jsp" NAME="output"
+    PATH="/plus.jsp" TARGET="rules:#plus.jsp" TITLE="plus" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="moins::#moins.jsp" NAME="output1"
+    PATH="/moins.jsp" TARGET="rules:#moins.jsp" TITLE="moins" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#moins.jsp" PATH="/moins.jsp"
+  SHAPE="256,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#plus.jsp" PATH="/plus.jsp"
+  SHAPE="256,33,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>

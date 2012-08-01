@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Licensed to the Apache Software Foundation (ASF) under one or more contributor 
+	license agreements. See the NOTICE file distributed with this work for additional 
+	information regarding copyright ownership. The ASF licenses this file to 
+	You under the Apache License, Version 2.0 (the "License"); you may not use 
+	this file except in compliance with the License. You may obtain a copy of 
+	the License at http://www.apache.org/licenses/LICENSE-2.0 Unless required 
+	by applicable law or agreed to in writing, software distributed under the 
+	License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS 
+	OF ANY KIND, either express or implied. See the License for the specific 
+	language governing permissions and limitations under the License. -->
+
+<wsdl:definitions name="ArticleConditionalWSImplService"
+	targetNamespace="http://conditional.wso2.esb.stage.sodifrance.com/"
+	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://conditional.wso2.esb.stage.sodifrance.com/"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+	<wsdl:types>
+		<schema xmlns="http://www.w3.org/2001/XMLSchema">
+			<import namespace="http://conditional.wso2.esb.stage.sodifrance.com/"
+				schemaLocation="articlewsConditional_schema1.xsd" />
+		</schema>
+	</wsdl:types>
+	<wsdl:message name="getAllArticleConditionalResponse">
+		<wsdl:part name="parameters" element="tns:getAllArticleConditionalResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getAllArticleConditional">
+		<wsdl:part name="parameters" element="tns:getAllArticleConditional">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getArticleConditionalResponse">
+		<wsdl:part name="parameters" element="tns:getArticleConditionalResponse">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:message name="getArticleConditional">
+		<wsdl:part name="parameters" element="tns:getArticleConditional">
+		</wsdl:part>
+	</wsdl:message>
+	<wsdl:portType name="ArticleConditionalWS">
+		<wsdl:operation name="getAllArticleConditional">
+			<wsdl:input name="getAllArticleConditional" message="tns:getAllArticleConditional">
+			</wsdl:input>
+			<wsdl:output name="getAllArticleConditionalResponse"
+				message="tns:getAllArticleConditionalResponse">
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getArticleConditional">
+			<wsdl:input name="getArticleConditional" message="tns:getArticleConditional">
+			</wsdl:input>
+			<wsdl:output name="getArticleConditionalResponse"
+				message="tns:getArticleConditionalResponse">
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:portType>
+	<wsdl:binding name="ArticleConditionalWSImplServiceSoapBinding"
+		type="tns:ArticleConditionalWS">
+		<soap:binding style="document"
+			transport="http://schemas.xmlsoap.org/soap/http" />
+		<wsdl:operation name="getAllArticleConditional">
+			<soap:operation soapAction="urn:getAllArticleConditional"
+				style="document" />
+			<wsdl:input name="getAllArticleConditional">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getAllArticleConditionalResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="getArticleConditional">
+			<soap:operation soapAction="urn:getArticleConditional"
+				style="document" />
+			<wsdl:input name="getArticleConditional">
+				<soap:body use="literal" />
+			</wsdl:input>
+			<wsdl:output name="getArticleConditionalResponse">
+				<soap:body use="literal" />
+			</wsdl:output>
+		</wsdl:operation>
+	</wsdl:binding>
+	<wsdl:service name="ArticleConditionalWSImplService">
+		<wsdl:port name="ArticleConditionalWSImplPort"
+			binding="tns:ArticleConditionalWSImplServiceSoapBinding">
+			<soap:address location="http://localhost:8280/ArticleConditionalWSImplPort" />
+		</wsdl:port>
+	</wsdl:service>
+</wsdl:definitions>

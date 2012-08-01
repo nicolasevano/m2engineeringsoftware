@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<localEntry xmlns="http://ws.apache.org/ns/synapse" key="book-to-article.xq">
+    <x>
+declare namespace ns2="http://referential_book.sodifrance.com/";
+declare namespace soap="http://schemas.xmlsoap.org/soap/envelope/";
+declare namespace soapenv="http://www.w3.org/2003/05/soap-envelope";
+declare variable $payload as document-node() external;
+&lt;getAllArticleResponse&gt;{for $book in $payload/ns2:getAllBookResponse/return return &lt;return&gt;
+                &lt;author&gt;{$book/author/text()}&lt;/author&gt;
+                &lt;kind&gt;book&lt;/kind&gt;
+                &lt;editor&gt;{$book/editor/text()}&lt;/editor&gt;
+                &lt;meta&gt;chapitre: {$book/NBChapitre/text()}; nb page: {$book/NBPage/text()}; description: {$book/description/text()}&lt;/meta&gt;
+                &lt;title&gt;{$book/title/text()}&lt;/title&gt;
+                &lt;publishDate&gt;{$book/publishDate/text()}&lt;/publishDate&gt;
+                &lt;releaseDate&gt;{$book/releaseDate/text()}&lt;/releaseDate&gt;
+&lt;/return&gt;}&lt;/getAllArticleResponse&gt;</x>
+</localEntry>
