@@ -7,6 +7,7 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -159,7 +160,8 @@ public class Book {
 	public void setNBChapitre(int nBChapitre) {
 		NBChapitre = nBChapitre;
 	}
-
+	
+	@XmlJavaTypeAdapter(DateXmlFormater.class)
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
@@ -189,14 +191,17 @@ public class Book {
 		}
 	}
 	
+	@XmlJavaTypeAdapter(DateXmlFormater.class)
 	public Date getPublishDate() {
 		return publishDate;
 	}
-
+	
+	@DateTimeFormat( pattern="dd/MM/yyyy" )
 	public void setPublishDate(Date publishDate) {
 		this.publishDate = publishDate;
 	}
 
+	@DateTimeFormat( pattern="dd/MM/yyyy" )
 	public String getPublishDateStr(){
 		SimpleDateFormat formatter = new SimpleDateFormat( "dd/MM/yyyy" );
 		return formatter.format( this.publishDate );
