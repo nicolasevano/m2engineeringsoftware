@@ -9,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Pattern;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -131,7 +132,8 @@ public class CD implements Serializable{
 	public void setNumberOfTrack(int numberOfTrack) {
 		this.numberOfTrack = numberOfTrack;
 	}
-
+	
+	@XmlJavaTypeAdapter(DateXmlFormater.class)
 	public Date getReleaseDate() {
 		return releaseDate;
 	}
@@ -164,7 +166,8 @@ public class CD implements Serializable{
 	public Date getPublishDate() {
 		return publishDate;
 	}
-
+	
+	@XmlJavaTypeAdapter(DateXmlFormater.class)
 	public void setPublishDate( Date publishDate ) {
 		this.publishDate = publishDate;
 	}
