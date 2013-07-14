@@ -1,5 +1,6 @@
 package com.sodifrance.referential_book;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -47,7 +48,9 @@ public class BookWSImpl implements BookWS {
 			result = OKResult;
 			
 		} else {
+			
 			result = NOKResult;
+			
 		}
 		return result;
 	}
@@ -65,6 +68,7 @@ public class BookWSImpl implements BookWS {
 		} else {
 			
 			result = NOKResult;
+			
 		}
 		return result;
 	}
@@ -72,7 +76,9 @@ public class BookWSImpl implements BookWS {
 	@Override
 	public List<Book> getAllBook() {
 		// TODO Auto-generated method stub
-		return articleDao.getAllArticles();
+		List<Book> result = new ArrayList<Book>();
+		result.addAll( articleDao.getAllArticles() );
+		return result;
 	}
 	
 	@Override
