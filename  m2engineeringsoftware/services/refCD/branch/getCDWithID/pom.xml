@@ -19,6 +19,12 @@
 			<url>http://m2.objectdb.com</url>
 		</repository>
 	</repositories>
+	<pluginRepositories>
+		<pluginRepository>
+			<id>eviware</id>
+			<url>http://www.eviware.com/repository/maven2/</url>
+		</pluginRepository>
+	</pluginRepositories>
 	<dependencies>
 		<dependency>
 			<groupId>org.apache.cxf</groupId>
@@ -118,6 +124,12 @@
 					<scanIntervalSeconds>10</scanIntervalSeconds>
 					<stopKey>foo</stopKey>
 					<stopPort>9999</stopPort>
+					<connectors>
+						<connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+							<port>8083</port>
+							<maxIdleTime>60000</maxIdleTime>
+						</connector>
+					</connectors>
 				</configuration>
 				<executions>
 					<execution>
@@ -147,6 +159,61 @@
 				<configuration>
 					<webXml>src\main\webapp\WEB-INF\web.xml</webXml>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>eviware</groupId>
+				<artifactId>maven-soapui-plugin</artifactId>
+				<version>3.6.1</version>
+				<executions>
+					<execution>
+						<id>referential-cd</id>
+						<goals>
+							<goal>test</goal>
+						</goals>
+						<phase>integration-test</phase>
+					</execution>
+				</executions>
+				<configuration>
+					<projectFile>${basedir}/referential-cd-soapui-project.xml</projectFile>
+					<!-- <host>localhost:7001/referential-book/services/1.0.0/BookWSImplPort</host> -->
+					<host>http://localhost:8083</host>
+					<endpoint>http://localhost:8083/referential-cd-enrich/services/1.0.0/CDWSImplPort</endpoint>
+					<outputFolder>${project.build.directory}/surefire-reports</outputFolder>
+					<junitReport>true</junitReport>
+					<printReport>true</printReport>
+				</configuration>
+				<dependencies>
+					<dependency>
+						<groupId>org.apache.xmlbeans</groupId>
+						<artifactId>xmlbeans-xmlpublic</artifactId>
+						<version>2.4.0</version>
+					</dependency>
+					<dependency>
+						<groupId>xmlbeans</groupId>
+						<artifactId>xbean_xpath</artifactId>
+						<version>2.4.0</version>
+					</dependency>
+					<dependency>
+						<groupId>xmlbeans</groupId>
+						<artifactId>xmlpublic</artifactId>
+						<version>2.4.0</version>
+					</dependency>
+					<dependency>
+						<groupId>xmlbeans</groupId>
+						<artifactId>jsr173</artifactId>
+						<version>xmlbeans-2.4.0</version>
+					</dependency>
+					<dependency>
+						<groupId>xmlbeans</groupId>
+						<artifactId>xbean</artifactId>
+						<version>fixed-2.4.0</version>
+					</dependency>
+					<dependency>
+						<groupId>eviware</groupId>
+						<artifactId>maven-soapui-plugin</artifactId>
+						<version>3.6.1</version>
+					</dependency>
+				</dependencies>
 			</plugin>
 		</plugins>
 		<finalName>referential-cd</finalName>
